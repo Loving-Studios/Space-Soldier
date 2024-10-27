@@ -101,6 +101,7 @@ public:
 	// L08: TODO 2: Add Physics module
 	std::shared_ptr<Physics> physics;
 	bool FPSswitch30;
+	std::string CheckVsync(bool valuevsync);
 
 
 private: 
@@ -126,8 +127,10 @@ private:
 	//Maximun frame duration in miliseconds.
 	int maxFrameDuration = 16;
 
-	std::string gameTitle = "Platformer Game";
+	std::string gameTitle = "Space Soldier";
 
 	//L05 TODO 2: Declare a xml_document to load the config file
 	pugi::xml_document configFile;
+
+
 };

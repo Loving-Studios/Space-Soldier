@@ -234,7 +234,7 @@ void Engine::FinishUpdate()
     ss << gameTitle << "    FPS: " << framesPerSecond
         << "    Av.FPS: " << std::fixed << std::setprecision(2) << averageFps
         << "    Last-frame MS: " << std::fixed << std::setprecision(3) << dt
-        /*<< "    Vsync: on"  << render.get()->UsingVSYNC*/;
+        << "    Vsync: " << CheckVsync(Engine::GetInstance().render.get()->UsingVSYNC);
         /* << configParameters.child("vsync").attribute("value").as_bool()*/
 
     std::string titleStr = ss.str();
@@ -310,4 +310,13 @@ bool Engine::LoadConfig()
     return ret;
 }
 
-
+std::string Engine::CheckVsync(bool valuevsync) {
+    if (valuevsync == true)
+    {
+        return "On";
+    }
+    else
+    {
+		return "Off";
+    }
+}
