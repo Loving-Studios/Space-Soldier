@@ -21,4 +21,5 @@ Video Game Development Project CITM
 
 *Implemented Features*
 
-Hemos añadido una canción en bucle de fondo para el Background music, también hemos cambiado el ruido que suena cuando el jugador interactúa con el ítem.
+- Hemos añadido una canción en bucle para el Background music
+- Hemos cambiado el ruido que suena cuando el jugador interactúa con el ítem.
