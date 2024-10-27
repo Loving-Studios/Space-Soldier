@@ -234,7 +234,7 @@ void Engine::FinishUpdate()
     ss << gameTitle << "    FPS: " << framesPerSecond
         << "    Av.FPS: " << std::fixed << std::setprecision(2) << averageFps
         << "    Last-frame MS: " << std::fixed << std::setprecision(3) << dt
-        << "    Vsync: on" /* << render.get()->UsingVSYNC*/;
+        /*<< "    Vsync: on"  << render.get()->UsingVSYNC*/;
         /* << configParameters.child("vsync").attribute("value").as_bool()*/
 
     std::string titleStr = ss.str();
