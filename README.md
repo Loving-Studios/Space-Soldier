@@ -1,7 +1,7 @@
 # Space-Soldier
 Video Game Development Project CITM
 
-*Controles:*
+### *Controles:*
 - A mover hacia la izquierda
 - D mover hacia la derecha
 - Space para saltar
@@ -18,7 +18,7 @@ Video Game Development Project CITM
 
 -Para el HelpMenu Hemos decidido hacer una imagen con los controles la cual al pulsar la tecla H muestra por pantalla arriba a la izquierda, en la cual se puede ver tanto los controles de movimiento del personaje como todas las teclas del debugMode. Si se vuelve a pulsar la tecla H la imagen del HelpMenu se vuelve a esconder.
 
-*Implemented Features*
+### *Implemented Features* 
 
 - Hemos añadido una canción en bucle para el Background music
 - Hemos cambiado el ruido que suena cuando el jugador interactúa con el ítem.
