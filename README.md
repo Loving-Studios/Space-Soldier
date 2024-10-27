@@ -22,7 +22,7 @@ Video Game Development Project CITM
 
 - Hemos añadido una canción en bucle para el Background music
 - Hemos cambiado el ruido que suena cuando el jugador interactúa con el ítem.
-- Para el salto hemos hecho dos animaciones ya que si saltaba mientras se movia hacia la izquierda, aunque se movia hacia la izquierda saltaba mirando hacia la derecha.
-- hemos dejado implementadas en el codigo y la textura la animacion de agacharse, aunque no esta implementada en el juego.
-- Para los collieders hemos implementado una capa de objetos a nuestro mapa, en la que marcamos las partes con las que intercatua el jugador.
-- Para las animaciones del personaje hemos juntado todas las imagenes de todas las animaciones del personaje y las hemos junatdo en un solo fichero para por un lado solo llamar a un archivo por codigo y por otro para tener menos archivos en el proyecto, ya que en un futuro se tendran que implementar enemigos, lo cual añadira más archivos al proyecto.
+- Para el salto hemos hecho dos animaciones, ya que si saltaba mientras se movía hacia la izquierda, aunque se movía hacia la izquierda saltaba mirando hacia la derecha.
+- Hemos dejado implementadas en el código y la textura la animación de agacharse, aunque no está implementada en el juego.
+- Para los collieders hemos implementado una capa de objetos a nuestro mapa, en la que marcamos las partes con las que interactúa el jugador.
+- Para las animaciones del personaje hemos juntado todas las imágenes de todas las animaciones del personaje y las hemos juntado en un solo fichero para, por un lado, solo llamar a un archivo por código y por otro para tener menos archivos en el proyecto, ya que en un futuro se tendrán que implementar enemigos, lo cual añadirá más archivos al proyecto.
