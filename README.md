@@ -18,8 +18,11 @@ Video Game Development Project CITM
 
 -Para el HelpMenu Hemos decidido hacer una imagen con los controles la cual al pulsar la tecla H muestra por pantalla arriba a la izquierda, en la cual se puede ver tanto los controles de movimiento del personaje como todas las teclas del debugMode. Si se vuelve a pulsar la tecla H la imagen del HelpMenu se vuelve a esconder.
 
-
 *Implemented Features*
 
 - Hemos añadido una canción en bucle para el Background music
 - Hemos cambiado el ruido que suena cuando el jugador interactúa con el ítem.
+- Para el salto hemos hecho dos animaciones ya que si saltaba mientras se movia hacia la izquierda, aunque se movia hacia la izquierda saltaba mirando hacia la derecha.
+- hemos dejado implementadas en el codigo y la textura la animacion de agacharse, aunque no esta implementada en el juego.
+- Para los collieders hemos implementado una capa de objetos a nuestro mapa, en la que marcamos las partes con las que intercatua el jugador.
+- Para las animaciones del personaje hemos juntado todas las imagenes de todas las animaciones del personaje y las hemos junatdo en un solo fichero para por un lado solo llamar a un archivo por codigo y por otro para tener menos archivos en el proyecto, ya que en un futuro se tendran que implementar enemigos, lo cual añadira más archivos al proyecto.
