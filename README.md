@@ -22,6 +22,7 @@ by Pablo Sanjose & Víctor González
 ### *Implemented Features* 
 
 - Hemos añadido una canción en bucle para el Background music
+- Se ha implementado una función para que cuando el personaje caiga en Y al vacío vuelva al inicio del mapa junto a la cámara.
 - Hemos cambiado el ruido que suena cuando el jugador interactúa con el ítem.
 - Para el salto hemos hecho dos animaciones, ya que si saltaba mientras se movía hacia la izquierda, aunque se movía hacia la izquierda saltaba mirando hacia la derecha.
 - Hemos dejado implementada la textura en el código de lo que será en un futuro la animación de agacharse, aunque de momento no está implementada en el juego.
