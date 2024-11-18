@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="224" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="51">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="224" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="97">
  <tileset firstgid="1" name="lunar1b_tileset_visual" tilewidth="32" tileheight="32" tilecount="308" columns="22">
-  <image source="lunar1b_tileset_visual.png" width="704" height="448"/>
+  <image source="../../../../../Downloads/DESARROLLO/DESARROLLO/Mapita/lunar1b_tileset_visual.png" width="704" height="448"/>
   <wangsets>
    <wangset name="lunar" type="corner" tile="26">
     <wangcolor name="" color="#ff0000" tile="26" probability="1"/>
@@ -22,7 +22,7 @@
   </wangsets>
  </tileset>
  <tileset firstgid="309" name="MapMetadata" tilewidth="32" tileheight="32" tilecount="2" columns="2">
-  <image source="MapMetadata.png" width="67" height="34"/>
+  <image source="../../../../../Downloads/DESARROLLO/DESARROLLO/Mapita/MapMetadata.png" width="67" height="34"/>
  </tileset>
  <layer id="1" name="Fondo Negro" width="224" height="24">
   <properties>

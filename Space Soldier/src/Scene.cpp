@@ -15,7 +15,7 @@
 
 Scene::Scene() : Module()
 {
-	name = "scene";
+	name = "scene1";
 	img = nullptr;
 }
 
@@ -78,6 +78,12 @@ bool Scene::Update(float dt)
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_H) == KEY_DOWN) {
 		helpMenuVisible = !helpMenuVisible;
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+		name = "scene1";
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
+		name = "scene2";
 	}
 
 	/*

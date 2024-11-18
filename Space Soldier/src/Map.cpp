@@ -20,7 +20,7 @@ Map::~Map()
 // Called before render is available
 bool Map::Awake()
 {
-    name = "map";
+    name = "map1";
     LOG("Loading Map Parser");
 
     return true;
