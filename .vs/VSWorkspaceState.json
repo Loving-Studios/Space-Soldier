@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Space Soldier"
+    "\\Space Soldier",
+    "\\Space Soldier\\src"
   ],
-  "SelectedNode": "\\Space Soldier\\config.xml",
+  "SelectedNode": "\\Space Soldier\\src\\PlatformGame.cpp",
   "PreviewInSolutionExplorer": false
 }
