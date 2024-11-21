@@ -85,7 +85,7 @@
     </entities>
   </scene1>
   <scene2>
-	<map path="Assets/Maps/" name="MapTemplate.tmx"/>
+	<map path="Assets/Maps/" name="MapTemplateLevel2.tmx"/>
 		<entities>
 			<player x="490" y="450" w="48" h ="32" texture="Assets/Textures/player/PlayerCanvas.png">
 				<animations>
