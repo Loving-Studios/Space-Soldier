@@ -32,6 +32,12 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	// Called in PostUpdate
+	bool SaveState();
+
+	// Called in PostUpdate
+	bool LoadState();
+
 	bool helpMenuVisible = false;
 	SDL_Texture* helpMenuTexture = nullptr;
 

@@ -63,6 +63,16 @@ bool Scene::PreUpdate()
 	return true;
 }
 
+bool Scene::SaveState()
+{
+	return true;
+}
+
+bool Scene::LoadState()
+{
+	return true;
+}
+
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
@@ -110,6 +120,12 @@ bool Scene::PostUpdate()
 
 	if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		ret = false;
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
+		SaveState();
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) {
+		LoadState();
+	}
 
 	if (helpMenuVisible && helpMenuTexture != nullptr) {
 		int width, height;
