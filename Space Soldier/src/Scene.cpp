@@ -65,11 +65,24 @@ bool Scene::PreUpdate()
 
 bool Scene::SaveState()
 {
+	//Coger posicion player
+	float playerPosX = player->position.getX();
+	float playerPosY = player->position.getY();
+	GuardarPosicion = Vector2D(playerPosX, playerPosY);
+	//guardarla en el xml
+
 	return true;
 }
 
 bool Scene::LoadState()
 {
+	//coger posicion del xml
+
+	//darsela al player
+	//L04: TODO 3b: Instantiate the player using the entity manager
+	player = (Player*)Engine::GetInstance().entityManager->CreateEntity(EntityType::PLAYER);
+	player->SetParameters(configParameters.child("entities").child("player"));
+
 	return true;
 }
 

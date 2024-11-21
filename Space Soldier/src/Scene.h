@@ -41,6 +41,8 @@ public:
 	bool helpMenuVisible = false;
 	SDL_Texture* helpMenuTexture = nullptr;
 
+	Vector2D GuardarPosicion;
+
 private:
 	SDL_Texture* img;
 
