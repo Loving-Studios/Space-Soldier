@@ -33,10 +33,10 @@ public:
 	bool CleanUp();
 
 	// Called in PostUpdate
-	bool SaveState();
+	void SaveState();
 
 	// Called in PostUpdate
-	bool LoadState();
+	void LoadState();
 
 	bool helpMenuVisible = false;
 	SDL_Texture* helpMenuTexture = nullptr;
@@ -48,4 +48,5 @@ private:
 
 	//L03: TODO 3b: Declare a Player attribute
 	Player* player;
+	pugi::xml_document configFile;
 };

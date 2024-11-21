@@ -63,27 +63,45 @@ bool Scene::PreUpdate()
 	return true;
 }
 
-bool Scene::SaveState()
-{
-	//Coger posicion player
-	float playerPosX = player->position.getX();
-	float playerPosY = player->position.getY();
-	GuardarPosicion = Vector2D(playerPosX, playerPosY);
-	//guardarla en el xml
+void Scene::SaveState()
+{	
+	pugi::xml_document saveFile;
+	pugi::xml_parse_result result = saveFile.load_file("config.xml");
 
-	return true;
+	if (result == NULL) {
+		LOG("error loading config.xml");
+		return;
+	}
+
+	Vector2D playerPos = player->GetPosition();//arreglar
+	saveFile.child("config").child("scene").child("entities").child("player").attribute("x").set_value(playerPos.getX());
+	saveFile.child("config").child("scene").child("entities").child("player").attribute("y").set_value(playerPos.getY());
+
+	saveFile.save_file("config.xml");
+
 }
 
-bool Scene::LoadState()
+void Scene::LoadState()
 {
 	//coger posicion del xml
+	pugi::xml_document loadFile;
+	pugi::xml_parse_result result = loadFile.load_file("config.xml");
 
+	if (result == NULL) {
+		LOG("error loading config.xml");
+		return;
+	}
+
+	Vector2D posPlayer;
+	posPlayer.setX(loadFile.child("config").child("scene").child("player").attribute("x").as_int());
+	posPlayer.setY(loadFile.child("config").child("scene").child("player").attribute("y").as_int());
+
+	player -> SetPosition(posPlayer);//arreglar
 	//darsela al player
 	//L04: TODO 3b: Instantiate the player using the entity manager
 	player = (Player*)Engine::GetInstance().entityManager->CreateEntity(EntityType::PLAYER);
 	player->SetParameters(configParameters.child("entities").child("player"));
 
-	return true;
 }
 
 // Called each loop iteration
@@ -102,27 +120,6 @@ bool Scene::Update(float dt)
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_H) == KEY_DOWN) {
 		helpMenuVisible = !helpMenuVisible;
 	}
-	//if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
-	//	name = "scene1";
-	//}
-	//if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
-	//	name = "scene2";
-	//}
-
-	/*
-	* MOVER CAMARA MANUALMENTE
-	if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		Engine::GetInstance().render.get()->camera.y -= ceil(camSpeed * dt);
-
-	if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		Engine::GetInstance().render.get()->camera.y += ceil(camSpeed * dt);
-
-	if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		Engine::GetInstance().render.get()->camera.x -= ceil(camSpeed * dt);
-
-	if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		Engine::GetInstance().render.get()->camera.x += ceil(camSpeed * dt);
-		*/
 	return true;
 }
 
