@@ -70,7 +70,8 @@ bool Scene::SaveState()
 	float playerPosY = player->position.getY();
 	GuardarPosicion = Vector2D(playerPosX, playerPosY);
 	//guardarla en el xml
-
+	parameters.child("Posicion_guardada").attribute("X").set(playerPosX);
+	parameters.child("Posicion_guardada").attribute("Y").set(playerPosY);
 	return true;
 }
 
