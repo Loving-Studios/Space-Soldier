@@ -63,24 +63,6 @@ bool Scene::PreUpdate()
 	return true;
 }
 
-void Scene::SaveState()
-{	
-	pugi::xml_document saveFile;
-	pugi::xml_parse_result result = saveFile.load_file("config.xml");
-
-	if (result == NULL) {
-		LOG("error loading config.xml");
-		return;
-	}
-
-	Vector2D playerPos = player->GetPosition();//arreglar
-	saveFile.child("config").child("scene").child("entities").child("player").attribute("x").set_value(playerPos.getX());
-	saveFile.child("config").child("scene").child("entities").child("player").attribute("y").set_value(playerPos.getY());
-
-	saveFile.save_file("config.xml");
-
-}
-
 void Scene::LoadState()
 {
 	//coger posicion del xml
@@ -88,19 +70,46 @@ void Scene::LoadState()
 	pugi::xml_parse_result result = loadFile.load_file("config.xml");
 
 	if (result == NULL) {
-		LOG("error loading config.xml");
+		LOG("error loading config.xml", result.description());
 		return;
 	}
 
-	Vector2D posPlayer;
-	posPlayer.setX(loadFile.child("config").child("scene").child("player").attribute("x").as_int());
-	posPlayer.setY(loadFile.child("config").child("scene").child("player").attribute("y").as_int());
+	pugi::xml_node sceneNode = loadFile.child("config").child("scene1");
 
-	player -> SetPosition(posPlayer);//arreglar
-	//darsela al player
-	//L04: TODO 3b: Instantiate the player using the entity manager
-	player = (Player*)Engine::GetInstance().entityManager->CreateEntity(EntityType::PLAYER);
-	player->SetParameters(configParameters.child("entities").child("player"));
+	//Read XML and restore information
+
+	//Player position
+	Vector2D playerPos = Vector2D(sceneNode.child("entities").child("player").attribute("x").as_int(),
+								sceneNode.child("entities").child("player").attribute("y").as_int());
+	player->SetPosition(playerPos);
+
+	//enemies
+	// ...
+}
+
+void Scene::SaveState()
+{	
+	pugi::xml_document loadFile;
+	pugi::xml_parse_result result = loadFile.load_file("config.xml");
+
+	if (result == NULL) {
+		LOG("error loading config.xml", result.description());
+		return;
+	}
+
+	pugi::xml_node sceneNode = loadFile.child("config").child("scene1");
+
+	//Save info to XML 
+
+	//Player position
+	sceneNode.child("entities").child("player").attribute("x").set_value(player->GetPosition().getX());
+	sceneNode.child("entities").child("player").attribute("y").set_value(player->GetPosition().getY());
+
+	//enemies
+	// ...
+
+	//Saves the modifications to the XML
+	loadFile.save_file("config.xml");
 
 }
 
