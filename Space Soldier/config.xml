@@ -17,9 +17,7 @@
 	<scene1>
 		<map path="Assets/Maps/" name="MapTemplate.tmx" />
 		<entities>
-			<!--Posición original del jugador en el juego, ya que la borra al guardar-->
-			<!--<player x="490" y="450" w="48" h="32" texture="Assets/Textures/player/PlayerCanvas.png">-->
-			<player x="490" y="450" w="48" h="32" texture="Assets/Textures/player/PlayerCanvas.png">
+			<player x="1255" y="487" w="48" h="32" texture="Assets/Textures/player/PlayerCanvas.png">
 				<Posicion_guardada X="" Y="" />
 				<animations>
 					<idle loop="true" speed="0.2">

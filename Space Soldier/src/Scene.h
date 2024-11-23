@@ -38,6 +38,9 @@ public:
 	// Called in PostUpdate
 	void LoadState();
 
+	//Called in PostUpdate
+	void GotoStart();
+
 	bool helpMenuVisible = false;
 	SDL_Texture* helpMenuTexture = nullptr;
 

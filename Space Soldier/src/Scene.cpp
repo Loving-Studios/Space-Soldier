@@ -73,7 +73,9 @@ void Scene::LoadState()
 		LOG("error loading config.xml", result.description());
 		return;
 	}
-
+	/*HACER CODIGO PARA DETECTAR EN QUE ESCENA ESTAS Y SUSTITUIRLO POR scene1 ES DECIR METER UNA VARIABLE
+	sceneplaying = name
+	*/
 	pugi::xml_node sceneNode = loadFile.child("config").child("scene1");
 
 	//Read XML and restore information
@@ -96,7 +98,9 @@ void Scene::SaveState()
 		LOG("error loading config.xml", result.description());
 		return;
 	}
-
+	/*HACER CODIGO PARA DETECTAR EN QUE ESCENA ESTAS Y SUSTITUIRLO POR scene1 ES DECIR METER UNA VARIABLE
+	sceneplaying = name
+	*/
 	pugi::xml_node sceneNode = loadFile.child("config").child("scene1");
 
 	//Save info to XML 
@@ -111,6 +115,47 @@ void Scene::SaveState()
 	//Saves the modifications to the XML
 	loadFile.save_file("config.xml");
 
+}
+
+void Scene::GotoStart()
+{
+	pugi::xml_document loadFile;
+	pugi::xml_parse_result result = loadFile.load_file("config.xml");
+
+	if (result == NULL) {
+		LOG("error loading config.xml", result.description());
+		return;
+	}
+	/* HACER CODIGO PARA DETECTAR EN QUE ESCENA ESTAS Y SUSTITUIRLO POR scene1 ES DECIR METER UNA VARIABLE
+	sceneplaying = name
+	*/
+
+	pugi::xml_node sceneNode = loadFile.child("config").child("scene1");
+
+	//Save info to XML
+
+	//Player position
+	Vector2D playerPos = Vector2D(490,450);
+	player->SetPosition(playerPos);
+	/*
+	if (name == "scene1")
+	{
+	//Player position
+	Vector2D playerPos = Vector2D(490,450);
+	player->SetPosition(playerPos);
+	}
+	else if (name == "scene2")
+	{
+	//Player position
+	//CAMBIAR VALORES A LOS QUE SE QUIERA HACER SPAWNEAR AL PLAYER EN EL LEVEL2
+	//Player position
+	Vector2D playerPos = Vector2D(490,450);
+	player->SetPosition(playerPos);
+	}*/
+
+	//Saves the modifications to the XML
+	loadFile.save_file("config.xml");
+	
 }
 
 // Called each loop iteration
@@ -144,6 +189,9 @@ bool Scene::PostUpdate()
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) {
 		LoadState();
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+		GotoStart();
 	}
 
 	if (helpMenuVisible && helpMenuTexture != nullptr) {
