@@ -2,6 +2,7 @@
 
 #include "Module.h"
 #include "Player.h"
+#include "Enemy.h"
 
 struct SDL_Texture;
 
@@ -41,6 +42,8 @@ public:
 	//Called in PostUpdate
 	void GotoStart();
 
+	Vector2D GetPlayerPosition();
+
 	bool helpMenuVisible = false;
 	SDL_Texture* helpMenuTexture = nullptr;
 
@@ -48,8 +51,9 @@ public:
 
 private:
 	SDL_Texture* img;
-
+	
 	//L03: TODO 3b: Declare a Player attribute
 	Player* player;
 	pugi::xml_document configFile;
+	std::vector<Enemy*> enemyList;
 };

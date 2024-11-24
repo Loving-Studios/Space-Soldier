@@ -17,7 +17,7 @@
 	<scene1>
 		<map path="Assets/Maps/" name="MapTemplate.tmx" />
 		<entities>
-			<player x="1255" y="487" w="48" h="32" texture="Assets/Textures/player/PlayerCanvas.png">
+			<player x="490" y="520" w="48" h="32" texture="Assets/Textures/player/PlayerCanvas.png">
 				<Posicion_guardada X="" Y="" />
 				<animations>
 					<idle loop="true" speed="0.2">
@@ -78,6 +78,15 @@
 					</crouch>
 				</animations>
 			</player>
+			<enemies>
+				<enemy name="Paco" x="250" y="350" w="48" h="48" texture="Assets/Textures/Guardian.png" gravity="true">
+					<Posicion_guardada X="" Y="" />
+					<idle loop="true" speed="0.2">
+						<frame x="0" y="0" w="48" h="48" />
+						<frame x="48" y="0" w="48" h="48" />
+					</idle>
+				</enemy>
+			</enemies>
 		</entities>
 	</scene1>
 	<scene2>

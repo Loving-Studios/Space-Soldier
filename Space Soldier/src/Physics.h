@@ -26,6 +26,7 @@ enum class ColliderType {
 	PLAYER, 
 	ITEM,
 	PLATFORM, 
+	ENEMY,
 	UNKNOWN
 	// ..
 };
@@ -77,9 +78,12 @@ public:
 	void BeginContact(b2Contact* contact);
 	void EndContact(b2Contact* contact);
 
+	bool IsDebug() const { return debug; }
+
 private:
 
 	// Debug mode
+	bool debug;
 	bool showColliders;
 	bool FPSswitch30;
 

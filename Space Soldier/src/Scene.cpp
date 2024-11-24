@@ -36,6 +36,14 @@ bool Scene::Awake()
 	//L08 Create a new item using the entity manager and set the position to (200, 672) to test
 	Item* item = (Item*) Engine::GetInstance().entityManager->CreateEntity(EntityType::ITEM);
 	item->position = Vector2D(200, 672);
+
+	for (pugi::xml_node enemyNode = configParameters.child("entities").child("enemies").child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
+	{
+		Enemy* enemy = (Enemy*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY);
+		enemy->SetParameters(enemyNode);
+		enemyList.push_back(enemy);
+	}
+
 	return ret;
 }
 
@@ -175,6 +183,11 @@ bool Scene::Update(float dt)
 		helpMenuVisible = !helpMenuVisible;
 	}
 	return true;
+}
+
+Vector2D Scene::GetPlayerPosition()
+{
+	return player->GetPosition();
 }
 
 // Called each loop iteration

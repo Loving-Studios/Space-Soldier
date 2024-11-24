@@ -47,8 +47,36 @@ Vector2D Vector2D::operator/(float scalar) const {
     return Vector2D(x / scalar, y / scalar);
 }
 
+bool Vector2D::operator==(const Vector2D& other) const {
+    return x == other.x && y == other.y;
+}
+
+bool Vector2D::operator!=(const Vector2D& other) const {
+    return x != other.x || y != other.y;
+}
+
+bool Vector2D::operator<(const Vector2D& other) const {
+    if (x != other.x) {
+        return x < other.x;
+    }
+    return y < other.y;
+}
+
+
 // Output stream operator
 std::ostream& operator<<(std::ostream& os, const Vector2D& vec) {
     os << "(" << vec.x << ", " << vec.y << ")";
     return os;
+}
+
+float Vector2D::distanceMahattan(const Vector2D& other) const {
+    return std::abs(x - other.x) + std::abs(y - other.y);
+}
+
+float Vector2D::distanceEuclidean(const Vector2D& other) const {
+    return std::sqrt(std::pow(x - other.x, 2) + std::pow(y - other.y, 2));
+}
+
+float Vector2D::distanceSquared(const Vector2D& other) const {
+    return std::pow(x - other.x, 2) + std::pow(y - other.y, 2);
 }

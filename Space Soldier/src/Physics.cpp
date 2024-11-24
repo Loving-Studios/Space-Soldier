@@ -16,6 +16,7 @@ Physics::Physics() : Module()
 	world = NULL;
 	showColliders = false;
 	FPSswitch30 = false;
+	debug = true;
 }
 
 // Destructor

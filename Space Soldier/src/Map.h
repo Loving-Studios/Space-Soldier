@@ -123,6 +123,27 @@ public:
     // L09: TODO 6: Load a group of properties 
     bool LoadProperties(pugi::xml_node& node, Properties& properties);
 
+    Vector2D WorldToMap(int x, int y);
+
+    int GetWidth() {
+        return mapData.width;
+    }
+
+    int GetHeight() {
+        return mapData.height;
+    }
+
+    int GetTileWidth() {
+        return mapData.tileWidth;
+    }
+
+    int GetTileHeight() {
+        return mapData.tileHeight;
+    }
+
+    //NavigationLayer
+    MapLayer* GetNavigationLayer();
+
 public: 
     std::string mapFileName;
     std::string mapPath;
