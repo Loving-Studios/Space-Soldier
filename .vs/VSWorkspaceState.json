@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Space Soldier"
+    "\\Space Soldier",
+    "\\Space Soldier\\src"
   ],
-  "SelectedNode": "\\Space Soldier",
+  "SelectedNode": "\\Space Soldier\\src\\Audio.cpp",
   "PreviewInSolutionExplorer": false
 }
