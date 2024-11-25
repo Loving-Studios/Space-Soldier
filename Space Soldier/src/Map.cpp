@@ -223,13 +223,18 @@ bool Map::Load(std::string path, std::string fileName)
                 width = tileNode.attribute("width").as_float();
                 height = tileNode.attribute("height").as_float();
 
-                // Debugging para verificar los valores
-                std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
+                //// Debugging para verificar los valores
+                //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
 
                 // Dibujar rectángulo con las coordenadas y dimensiones obtenidas
                 PhysBody* rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);
-                rect->ctype = ColliderType::PLATFORM;
-
+                if (layerNode.attribute("name").as_string() == "Colisione")
+                {
+                    rect->ctype = ColliderType::PLATFORM;
+                }
+                else if (layerNode.attribute("name").as_string() == "Checkpoint") {
+                    rect->ctype = ColliderType::PLATFORM;
+                }
             }
         }
         /*

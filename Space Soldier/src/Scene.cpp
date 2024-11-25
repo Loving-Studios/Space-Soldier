@@ -53,7 +53,6 @@ bool Scene::Start()
 	//L06 TODO 3: Call the function to load the map. 
 	Engine::GetInstance().map->Load(configParameters.child("map").attribute("path").as_string(), configParameters.child("map").attribute("name").as_string());
 
-
 	//Musica de fondo
 	Engine::GetInstance().audio.get()->PlayMusic("Assets/Audio/Fx/CelestialDrift.ogg", 0);
 	// Configura el volumen al 5%
@@ -68,6 +67,11 @@ bool Scene::Start()
 // Called each loop iteration
 bool Scene::PreUpdate()
 {
+	if (once == false) {
+
+		GotoStart();
+		once = true;
+	}
 	return true;
 }
 
@@ -127,18 +131,18 @@ void Scene::SaveState()
 
 void Scene::GotoStart()
 {
-	pugi::xml_document loadFile;
-	pugi::xml_parse_result result = loadFile.load_file("config.xml");
+	//pugi::xml_document loadFile;
+	//pugi::xml_parse_result result = loadFile.load_file("config.xml");
 
-	if (result == NULL) {
-		LOG("error loading config.xml", result.description());
-		return;
-	}
-	/* HACER CODIGO PARA DETECTAR EN QUE ESCENA ESTAS Y SUSTITUIRLO POR scene1 ES DECIR METER UNA VARIABLE
-	sceneplaying = name
-	*/
+	//if (result == NULL) {
+	//	LOG("error loading config.xml", result.description());
+	//	return;
+	//}
+	///* HACER CODIGO PARA DETECTAR EN QUE ESCENA ESTAS Y SUSTITUIRLO POR scene1 ES DECIR METER UNA VARIABLE
+	//sceneplaying = name
+	//*/
 
-	pugi::xml_node sceneNode = loadFile.child("config").child("scene1");
+	//pugi::xml_node sceneNode = loadFile.child("config").child("scene1");
 
 	//Save info to XML
 
@@ -162,7 +166,7 @@ void Scene::GotoStart()
 	}*/
 
 	//Saves the modifications to the XML
-	loadFile.save_file("config.xml");
+	//loadFile.save_file("config.xml");
 	
 }
 

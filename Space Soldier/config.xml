@@ -17,7 +17,7 @@
 	<scene1>
 		<map path="Assets/Maps/" name="MapTemplate.tmx" />
 		<entities>
-			<player x="490" y="520" w="48" h="32" texture="Assets/Textures/player/PlayerCanvas.png">
+			<player x="888" y="340" w="48" h="32" texture="Assets/Textures/player/PlayerCanvas.png">
 				<animations>
 					<idle loop="true" speed="0.2">
 						<frame x="0" y="0" w="48" h="48" />
@@ -78,7 +78,7 @@
 				</animations>
 			</player>
 			<enemies>
-				<enemy name="Paco" x="250" y="350" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true">
+				<enemy name="Paco" x="870" y="400" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
