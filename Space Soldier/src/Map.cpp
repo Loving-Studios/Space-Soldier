@@ -228,13 +228,13 @@ bool Map::Load(std::string path, std::string fileName)
 
                 // Dibujar rectángulo con las coordenadas y dimensiones obtenidas
                 PhysBody* rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);
-                if (layerNode.attribute("name").as_string() == "Colisione")
-                {
+                //if (layerNode.attribute("name").as_string() == "Colisione")
+                //{
                     rect->ctype = ColliderType::PLATFORM;
-                }
-                else if (layerNode.attribute("name").as_string() == "Checkpoint") {
-                    rect->ctype = ColliderType::PLATFORM;
-                }
+                //}
+                //else if (layerNode.attribute("name").as_string() == "Checkpoint") {
+                //    rect->ctype = ColliderType::CHECKPOINT;
+                //}
             }
         }
         /*
