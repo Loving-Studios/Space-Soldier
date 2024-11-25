@@ -56,4 +56,5 @@ private:
 	Player* player;
 	pugi::xml_document configFile;
 	std::vector<Enemy*> enemyList;
+	bool once = false;
 };

@@ -40,6 +40,7 @@ public:
 
 private:
 
+    bool showPath;
     SDL_Texture* texture;
     const char* texturePath;
     int texW, texH;
