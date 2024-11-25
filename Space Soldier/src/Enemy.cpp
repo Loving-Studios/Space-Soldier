@@ -100,9 +100,9 @@ bool Enemy::Update(float dt)
 		pathfinding->PropagateAStar(SQUARED);
 	}
 
-	if (!patrullando && (int)position.getX() < 200) {
+	if (!patrullando && (int)position.getX() < 860) {
 		movimiento = 1;
-	}else if (!patrullando && (int)position.getX() > 300) {
+	}else if (!patrullando && (int)position.getX() > 900) {
 		movimiento = 2;
 	}
 
@@ -110,11 +110,11 @@ bool Enemy::Update(float dt)
 		switch (movimiento)
 		{
 		case 1:
-			velocity.x = 0.2 * 10;
+			velocity.x = 0.2 * 8;
 			currentAnimation = &moveR;
 			break;
 		case 2:
-			velocity.x = -0.2 * 10;
+			velocity.x = -0.2 * 8;
 			currentAnimation = &moveL;
 			break;
 		default:
