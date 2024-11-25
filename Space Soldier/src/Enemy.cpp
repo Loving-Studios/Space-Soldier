@@ -30,9 +30,18 @@ bool Enemy::Start() {
 	position.setY(parameters.attribute("y").as_int());
 	texW = parameters.attribute("w").as_int();
 	texH = parameters.attribute("h").as_int();
+	movimiento = 1;
+	patrullando = false;
 
 	//Load animations
 	idle.LoadAnimations(parameters.child("animations").child("idle"));
+	jumpR.LoadAnimations(parameters.child("animations").child("jumpR"));
+	jumpL.LoadAnimations(parameters.child("animations").child("jumpL"));
+	moveR.LoadAnimations(parameters.child("animations").child("moveR"));
+	moveL.LoadAnimations(parameters.child("animations").child("moveL"));
+	deathR.LoadAnimations(parameters.child("animations").child("deathR"));
+	deathL.LoadAnimations(parameters.child("animations").child("deathL"));
+	crouch.LoadAnimations(parameters.child("animations").child("crouch"));
 	currentAnimation = &idle;
 
 	//Add a physics to an item - initialize the physics body
@@ -53,6 +62,8 @@ bool Enemy::Start() {
 
 bool Enemy::Update(float dt)
 {
+
+	b2Vec2 velocity = b2Vec2(0, pbody->body->GetLinearVelocity().y);
 	// Pathfinding testing inputs
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_R) == KEY_DOWN) {
 		Vector2D pos = GetPosition();
@@ -106,6 +117,30 @@ bool Enemy::Update(float dt)
 		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
 		pathfinding->PropagateAStar(SQUARED);
 	}
+
+	if (!patrullando && (int)position.getX() < 200) {
+		movimiento = 1;
+	}else if (!patrullando && (int)position.getX() > 300) {
+		movimiento = 2;
+	}
+
+	if (!patrullando) {
+		switch (movimiento)
+		{
+		case 1:
+			velocity.x = 0.2 * 10;
+			currentAnimation = &moveR;
+			break;
+		case 2:
+			velocity.x = -0.2 * 10;
+			currentAnimation = &moveL;
+			break;
+		default:
+			break;
+		}
+	}
+
+	pbody->body->SetLinearVelocity(velocity);
 
 	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics.  
 	b2Transform pbodyPos = pbody->body->GetTransform();

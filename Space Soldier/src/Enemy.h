@@ -22,6 +22,9 @@ public:
 
     bool CleanUp();
 
+    bool patrullando = true;
+    int movimiento = 0;
+
     void SetParameters(pugi::xml_node parameters) {
         this->parameters = parameters;
     }
@@ -32,6 +35,7 @@ public:
 
     void ResetPath();
 
+
 public:
 
 private:
@@ -41,7 +45,7 @@ private:
     int texW, texH;
     pugi::xml_node parameters;
     Animation* currentAnimation = nullptr;
-    Animation idle;
+    Animation idle, jumpR, jumpL, moveR, moveL, deathR, deathL, crouch;
     PhysBody* pbody;
     Pathfinding* pathfinding;
 };
