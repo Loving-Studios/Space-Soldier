@@ -11,7 +11,7 @@
 
 Enemy::Enemy() : Entity(EntityType::ENEMY)
 {
-	showPath = false;
+	showPath = true;
 }
 
 Enemy::~Enemy() {
@@ -30,7 +30,7 @@ bool Enemy::Start() {
 	position.setY(parameters.attribute("y").as_int());
 	texW = parameters.attribute("w").as_int();
 	texH = parameters.attribute("h").as_int();
-	movimiento = 1;
+	movimiento = 2;
 	patrullando = false;
 
 	//Load animations
@@ -95,10 +95,21 @@ bool Enemy::Update(float dt)
 		pathfinding->PropagateAStar(SQUARED);
 	}
 
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_M) == KEY_REPEAT &&
-		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
+	/*if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_M) == KEY_REPEAT &&
+		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {*/
 		pathfinding->PropagateAStar(SQUARED);
-	}
+	//}
+		if(encontrado == true) {//una vez encontrado el player 
+			patrullando = true;
+			if (position.getX() < ultimaTile){//comparar si la posicion del enemigo es más pequeña que la proxima posicion, moverse hacia esa posicion
+				velocity.x = 0.2 * 8;
+				currentAnimation = &moveR;
+			}
+			else if (position.getX() > ultimaTile) {//comparar si la posicion del enemigo es más grande que la proxima posicion, moverse hacia esa posicion
+				velocity.x = -0.2 * 8;
+				currentAnimation = &moveL;
+			}
+		}
 
 	if (!patrullando && (int)position.getX() < 860) {
 		movimiento = 1;
@@ -110,11 +121,11 @@ bool Enemy::Update(float dt)
 		switch (movimiento)
 		{
 		case 1:
-			velocity.x = 0.2 * 8;
+			velocity.x = 0.2 * 5;
 			currentAnimation = &moveR;
 			break;
 		case 2:
-			velocity.x = -0.2 * 8;
+			velocity.x = -0.2 * 5;
 			currentAnimation = &moveL;
 			break;
 		default:

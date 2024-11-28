@@ -22,7 +22,7 @@ public:
 
     bool CleanUp();
 
-    bool patrullando = true;
+    bool patrullando = true, encontrado = false;
     int movimiento = 0;
 
     void SetParameters(pugi::xml_node parameters) {
@@ -43,7 +43,7 @@ private:
     bool showPath;
     SDL_Texture* texture;
     const char* texturePath;
-    int texW, texH;
+    int texW, texH, ultimaTile;
     pugi::xml_node parameters;
     Animation* currentAnimation = nullptr;
     Animation idle, jumpR, jumpL, moveR, moveL, deathR, deathL, crouch;
