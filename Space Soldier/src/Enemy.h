@@ -22,7 +22,7 @@ public:
 
     bool CleanUp();
 
-    bool patrullando = true, encontrado = false;
+    bool patrullando = true, encontrado = false, Tocado = false;
     int movimiento = 0;
 
     void SetParameters(pugi::xml_node parameters) {
@@ -34,6 +34,8 @@ public:
     Vector2D GetPosition();
 
     void ResetPath();
+
+    void OnCollision(PhysBody* physA, PhysBody* physB);
 
 
 public:

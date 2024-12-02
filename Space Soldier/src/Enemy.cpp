@@ -32,6 +32,7 @@ bool Enemy::Start() {
 	texH = parameters.attribute("h").as_int();
 	movimiento = 2;
 	patrullando = false;
+	Tocado = false; 
 
 	//Load animations
 	idle.LoadAnimations(parameters.child("animations").child("idle"));
@@ -46,6 +47,8 @@ bool Enemy::Start() {
 
 	//Add a physics to an item - initialize the physics body
 	pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX() + texH / 2, (int)position.getY() + texH / 2, texH / 2, bodyType::DYNAMIC);
+
+	pbody->listener = this;
 
 	//Assign collider type
 	pbody->ctype = ColliderType::ENEMY;
@@ -71,7 +74,11 @@ bool Enemy::Update(float dt)
 		pathfinding->ResetPath(tilePos);
 	}
 
-	// L13: TODO 3:	Add the key inputs to propagate the A* algorithm with different heuristics (Manhattan, Euclidean, Squared)
+	// L13: TODO 3:	Add the key inputs to propagate the A* algorithm with different heuristics (Manhattan, Euclidean, Squared) 
+
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
+		encontrado = !encontrado;
+	}
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_B) == KEY_DOWN) {
 		pathfinding->PropagateAStar(MANHATTAN);
@@ -104,17 +111,30 @@ bool Enemy::Update(float dt)
 			if (position.getX() < ultimaTile){//comparar si la posicion del enemigo es más pequeña que la proxima posicion, moverse hacia esa posicion
 				velocity.x = 0.2 * 8;
 				currentAnimation = &moveR;
+				ResetPath();
 			}
 			else if (position.getX() > ultimaTile) {//comparar si la posicion del enemigo es más grande que la proxima posicion, moverse hacia esa posicion
 				velocity.x = -0.2 * 8;
 				currentAnimation = &moveL;
+				ResetPath();
 			}
 		}
 
-	if (!patrullando && (int)position.getX() < 860) {
-		movimiento = 1;
-	}else if (!patrullando && (int)position.getX() > 900) {
-		movimiento = 2;
+	if (!patrullando && (int)position.getX() < 0) {
+		if (Tocado == true) {
+			movimiento = 1;
+		 }
+		else {
+			movimiento = 2;
+		}
+		
+	}else if (!patrullando && (int)position.getX() >= 900) {
+		if (Tocado == true) {
+			movimiento = 2;
+		}
+		else {
+			movimiento = 1;
+		}
 	}
 
 	if (!patrullando) {
@@ -153,6 +173,42 @@ bool Enemy::Update(float dt)
 		pathfinding->DrawPath();
 	}
 	return true;
+}
+void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
+	switch (physB->ctype)
+	{
+	case ColliderType::PLATFORM:
+		LOG("Enemy Collision PLATFORM");
+		Tocado = true;
+		break;
+	case ColliderType::PLAYER:
+		LOG("Enemy Collision Player");
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Enemy Collision UNKNOWN");
+		break;
+	default:
+		break;
+	}
+}
+
+void Player::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
+{
+	switch (physB->ctype)
+	{
+	case ColliderType::PLATFORM:
+		LOG("End Enemy Collision PLATFORM");
+		Tocado = false;
+		break;
+	case ColliderType::ITEM:
+		LOG("End Enemy Collision PLAYER");
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("End Enemy Collision UNKNOWN");
+		break;
+	default:
+		break;
+	}
 }
 
 bool Enemy::CleanUp()
