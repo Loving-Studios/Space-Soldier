@@ -34,6 +34,7 @@ bool Enemy::Start() {
 	patrullando = false;
 	Tocado = false;
 	jump = false;
+	encontrado = false;
 
 	//Load animations
 	idle.LoadAnimations(parameters.child("animations").child("idle"));
@@ -121,7 +122,7 @@ bool Enemy::Update(float dt)
 			}
 		}
 
-	if (!patrullando && (int)position.getX() < 800) {
+	if (!patrullando && (int)position.getX() <= 700) {
 			
 		movimiento = 1;
 		
@@ -136,25 +137,32 @@ bool Enemy::Update(float dt)
 		{
 		case 1:
 			if (Tocado == true) {
-				if (jump = true) {
-
-				}
-				else {
+				if (jump == true) {
+					velocity.y = 20;
+					//velocity.x =  10;
+					currentAnimation = &moveR;
+				}else {
 					velocity.x = 0.2 * 5;
 					currentAnimation = &moveR;
 				}
 				
+			}else {
+				movimiento = 2;
 			}
 			break;
 			
 		case 2:
 			if (Tocado == true) {
-				if (jump = true) {
+				if (jump == true) {
+					velocity.y = -1* 20 ;
+					//velocity.x = -1 * 10;
+					currentAnimation = &moveL;
+				}else {
 					velocity.x = -0.2 * 5;
 					currentAnimation = &moveL;
-				}
-				
-				
+				}				
+			}else {
+				movimiento = 1;
 			}
 			break;
 		default:
@@ -193,10 +201,11 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLAYER:
 		LOG("Enemy Collision Player");
 		break;
-	/*case ColliderType::JUMP:
+	case ColliderType::JUMP:
 		LOG("Enemy Collision JUMP");
+		//Tocado = true;
 		jump = true;
-		break;*/
+		break;
 	case ColliderType::UNKNOWN:
 		LOG("Enemy Collision UNKNOWN");
 		break;
@@ -215,11 +224,12 @@ void Enemy::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 		break;
 	case ColliderType::JUMP:
 		LOG("End Enemy Collision JUMP");
+		//Tocado = false;
 		jump = false;
 		break;
-	/*case ColliderType::PLAYER:
+	case ColliderType::PLAYER:
 		LOG("End Enemy Collision Player");
-		break;*/
+		break;
 	case ColliderType::ITEM:
 		LOG("End Enemy Collision PLAYER");
 		break;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="224" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="105">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="224" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="122">
  <properties>
   <property name="Navigation" type="bool" value="true"/>
  </properties>
@@ -10848,7 +10848,10 @@
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
-  <object id="104" x="864" y="448.333" width="63.6667" height="30.6667"/>
+  <object id="118" x="831.5" y="481.25" width="39.5" height="27"/>
+  <object id="119" x="864" y="449.75" width="15.75" height="32"/>
+  <object id="120" x="920.25" y="448.75" width="7" height="34.25"/>
+  <object id="121" x="921.5" y="480" width="38" height="32.5"/>
  </objectgroup>
  <layer id="13" name="Navigation" width="224" height="24" visible="0">
   <properties>
