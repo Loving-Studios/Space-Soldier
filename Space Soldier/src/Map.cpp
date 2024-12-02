@@ -232,7 +232,9 @@ bool Map::Load(std::string path, std::string fileName)
                 {
                     rect->ctype = ColliderType::CHECKPOINT;
                 }
-                else {
+                else if (layerNode.attribute("name").as_string() == "Jump") {
+                    rect->ctype = ColliderType::JUMP;
+                }else {
                     rect->ctype = ColliderType::PLATFORM;
                 }
             }

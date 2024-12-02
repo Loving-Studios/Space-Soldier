@@ -32,7 +32,8 @@ bool Enemy::Start() {
 	texH = parameters.attribute("h").as_int();
 	movimiento = 2;
 	patrullando = false;
-	Tocado = false; 
+	Tocado = false;
+	jump = false;
 
 	//Load animations
 	idle.LoadAnimations(parameters.child("animations").child("idle"));
@@ -120,33 +121,41 @@ bool Enemy::Update(float dt)
 			}
 		}
 
-	if (!patrullando && (int)position.getX() < 0) {
-		if (Tocado == true) {
-			movimiento = 1;
-		 }
-		else {
-			movimiento = 2;
-		}
+	if (!patrullando && (int)position.getX() < 800) {
+			
+		movimiento = 1;
 		
-	}else if (!patrullando && (int)position.getX() >= 900) {
-		if (Tocado == true) {
-			movimiento = 2;
-		}
-		else {
-			movimiento = 1;
-		}
+	}else if (!patrullando && Tocado == true && (int)position.getX() >= 900) {
+			
+		movimiento = 2;
+
 	}
 
 	if (!patrullando) {
 		switch (movimiento)
 		{
 		case 1:
-			velocity.x = 0.2 * 5;
-			currentAnimation = &moveR;
+			if (Tocado == true) {
+				if (jump = true) {
+
+				}
+				else {
+					velocity.x = 0.2 * 5;
+					currentAnimation = &moveR;
+				}
+				
+			}
 			break;
+			
 		case 2:
-			velocity.x = -0.2 * 5;
-			currentAnimation = &moveL;
+			if (Tocado == true) {
+				if (jump = true) {
+					velocity.x = -0.2 * 5;
+					currentAnimation = &moveL;
+				}
+				
+				
+			}
 			break;
 		default:
 			break;
@@ -184,6 +193,10 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLAYER:
 		LOG("Enemy Collision Player");
 		break;
+	/*case ColliderType::JUMP:
+		LOG("Enemy Collision JUMP");
+		jump = true;
+		break;*/
 	case ColliderType::UNKNOWN:
 		LOG("Enemy Collision UNKNOWN");
 		break;
@@ -192,7 +205,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-void Player::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
+void Enemy::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 {
 	switch (physB->ctype)
 	{
@@ -200,6 +213,13 @@ void Player::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 		LOG("End Enemy Collision PLATFORM");
 		Tocado = false;
 		break;
+	case ColliderType::JUMP:
+		LOG("End Enemy Collision JUMP");
+		jump = false;
+		break;
+	/*case ColliderType::PLAYER:
+		LOG("End Enemy Collision Player");
+		break;*/
 	case ColliderType::ITEM:
 		LOG("End Enemy Collision PLAYER");
 		break;
