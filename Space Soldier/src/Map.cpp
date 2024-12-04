@@ -180,40 +180,12 @@ bool Map::Load(std::string path, std::string fileName)
             mapData.layers.push_back(mapLayer);
         }
 
-        /*
-        ANTIGUA FORMA DE CREAR EL MAPA SEGUN PEDRO
-        // L08 TODO 3: Create colliders
-        // L08 TODO 7: Assign collider type
-        // Later you can create a function here to load and create the colliders from the map
-
-        //Iterate the layer and create colliders
-        for (const auto& mapLayer : mapData.layers) {
-            if (mapLayer->name == "Collisions") {
-                for (int i = 0; i < mapData.width; i++) {
-                    for (int j = 0; j < mapData.height; j++) {
-                        int gid = mapLayer->Get(i, j);
-                        if (gid == 49) {
-                            Vector2D mapCoord = MapToWorld(i, j);
-                            PhysBody* c1 = Engine::GetInstance().physics.get()->CreateRectangle(mapCoord.getX()+ mapData.tileWidth/2, mapCoord.getY()+ mapData.tileHeight/2, mapData.tileWidth, mapData.tileHeight, STATIC);
-                            c1->ctype = ColliderType::PLATFORM;
-                        }
-                    }
-                }
-            }
-        }
-
-        ret = true;
-        */
-        // L08 TODO 3: Create colliders
-// L08 TODO 7: Assign collider type
-// Later you can create a function here to load and create the colliders from the map
-//
-// Inicializa las variables en cada iteración con los valores del XML
         float x = 0.0f;
         float y = 0.0f;
         float width = 0.0f;
         float height = 0.0f;
         for (pugi::xml_node layerNode = mapFileXML.child("map").child("objectgroup"); layerNode != NULL; layerNode = layerNode.next_sibling("objectgroup")) {
+            std::string layerName = layerNode.attribute("name").as_string();
             for (pugi::xml_node tileNode = layerNode.child("object"); tileNode != NULL; tileNode = tileNode.next_sibling("object")) {
 
 
@@ -223,32 +195,23 @@ bool Map::Load(std::string path, std::string fileName)
                 width = tileNode.attribute("width").as_float();
                 height = tileNode.attribute("height").as_float();
 
-                //// Debugging para verificar los valores
-                //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
-
-                // Dibujar rectángulo con las coordenadas y dimensiones obtenidas
-                PhysBody* rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);
-                if (layerNode.attribute("name").as_string() == "Checkpoint")
+                PhysBody* rect = nullptr;
+                if (layerName == "Checkpoint")
                 {
+                    PhysBody* rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::CHECKPOINT;
+                    std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
+                    std::cout << "CREATED SENSOR" << std::endl;
                 }
-                else if (layerNode.attribute("name").as_string() == "Jump") {
+                else if (layerName == "Jump") {
+                    PhysBody* rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::JUMP;
                 }else {
+                    PhysBody* rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::PLATFORM;
                 }
             }
         }
-        /*
-        PhysBody* c1 = Engine::GetInstance().physics.get()->CreateRectangle(224 + 128, 544 + 32, 2560, 32, STATIC);
-        c1->ctype = ColliderType::PLATFORM;
-
-        PhysBody* c2 = Engine::GetInstance().physics.get()->CreateRectangle(352 + 64, 384 + 32, 128, 32, STATIC);
-        c2->ctype = ColliderType::PLATFORM;
-
-        PhysBody* c3 = Engine::GetInstance().physics.get()->CreateRectangle(256, 704 + 32, 576, 32, STATIC);
-        c3->ctype = ColliderType::PLATFORM;
-        */
         ret = true;
 
         // L06: TODO 5: LOG all the data loaded iterate all tilesetsand LOG everything

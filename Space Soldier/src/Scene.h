@@ -12,6 +12,9 @@ public:
 
 	Scene();
 
+	int saveFxId;
+	int loadFxId;
+
 	// Destructor
 	virtual ~Scene();
 

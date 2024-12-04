@@ -55,6 +55,8 @@ bool Scene::Start()
 
 	//Musica de fondo
 	Engine::GetInstance().audio.get()->PlayMusic("Assets/Audio/Fx/CelestialDrift.ogg", 0);
+	saveFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Save.wav");
+	loadFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Load.wav");
 	// Configura el volumen al 5%
 	Mix_VolumeMusic(static_cast<int>(128 * 0.05));
 
@@ -131,45 +133,10 @@ void Scene::SaveState()
 
 void Scene::GotoStart()
 {
-	//pugi::xml_document loadFile;
-	//pugi::xml_parse_result result = loadFile.load_file("config.xml");
-
-	//if (result == NULL) {
-	//	LOG("error loading config.xml", result.description());
-	//	return;
-	//}
-	///* HACER CODIGO PARA DETECTAR EN QUE ESCENA ESTAS Y SUSTITUIRLO POR scene1 ES DECIR METER UNA VARIABLE
-	//sceneplaying = name
-	//*/
-
-	//pugi::xml_node sceneNode = loadFile.child("config").child("scene1");
-
-	//Save info to XML
-
 	//Player position
 	Vector2D playerPos = Vector2D(490,450);
 	player->SetPosition(playerPos);
-	/*
-	if (name == "scene1")
-	{
-	//Player position
-	Vector2D playerPos = Vector2D(490,450);
-	player->SetPosition(playerPos);
-	}
-	else if (name == "scene2")
-	{
-	//Player position
-	//CAMBIAR VALORES A LOS QUE SE QUIERA HACER SPAWNEAR AL PLAYER EN EL LEVEL2
-	//Player position
-	Vector2D playerPos = Vector2D(490,450);
-	player->SetPosition(playerPos);
-	}*/
-
-	//Saves the modifications to the XML
-	//loadFile.save_file("config.xml");
-	
 }
-
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
@@ -203,12 +170,15 @@ bool Scene::PostUpdate()
 		ret = false;
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
 		SaveState();
+		Engine::GetInstance().audio.get()->PlayFx(saveFxId);
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) {
 		LoadState();
+		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
 		GotoStart();
+		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
 	}
 
 	if (helpMenuVisible && helpMenuTexture != nullptr) {

@@ -65,9 +65,11 @@ bool Player::Start() {
 	// L08 TODO 7: Assign collider type
 	pbody->ctype = ColliderType::PLAYER;
 
-	//initialize audio effect
-	//pickCoinFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
 	pickCoinFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Faro.wav");
+	deathFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Death.wav");
+	saveFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Save.wav");
+	loadFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Load.wav");
+	killMonsterFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/KillMonster.wav");
 	return true;
 }
 
@@ -79,6 +81,7 @@ bool Player::Update(float dt)
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
 	{
 		death = !death;
+		Engine::GetInstance().audio.get()->PlayFx(deathFxId);
 	}
 	// Cambia el estado de GodMode al presionar F10
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
@@ -156,7 +159,10 @@ bool Player::Update(float dt)
 
 	if (position.getY() > 800) {
 		// Reinicio posición del player cuando cae más de 800px
-		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(490), PIXEL_TO_METERS(450)), 0);
+		//Volver al inicio
+		//pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(490), PIXEL_TO_METERS(450)), 0);
+		Engine::GetInstance().scene.get()->LoadState();
+		Engine::GetInstance().audio.get()->PlayFx(deathFxId);
 	}
 
 	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
@@ -183,6 +189,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");
+		Engine::GetInstance().audio.get()->PlayFx(pickCoinFxId);
+		break;
+	case ColliderType::CHECKPOINT:
+		LOG("Collision CHECKPOINT");
+		Engine::GetInstance().scene.get()->SaveState();
+		Engine::GetInstance().audio.get()->PlayFx(saveFxId);
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
@@ -199,9 +211,11 @@ void Player::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 	case ColliderType::PLATFORM:
 		LOG("End Collision PLATFORM");
 		break;
+	case ColliderType::CHECKPOINT:
+		LOG("End Collision CHECKPOINT");
+		break;
 	case ColliderType::ITEM:
 		LOG("End Collision ITEM");
-		Engine::GetInstance().audio.get()->PlayFx(pickCoinFxId);
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("End Collision UNKNOWN");

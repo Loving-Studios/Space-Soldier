@@ -164,6 +164,7 @@ PhysBody* Physics::CreateRectangleSensor(int x, int y, int width, int height, bo
 	PhysBody* pbody = new PhysBody();
 	pbody->body = b;
 	//b->SetUserData(pbody);
+	b->GetUserData().pointer = (uintptr_t)pbody;
 	pbody->width = width;
 	pbody->height = height;
 
