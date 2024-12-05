@@ -1,10 +1,6 @@
 {
   "Version": 1,
-<<<<<<< HEAD
-  "WorkspaceRootPath": "C:\\Users\\pablosa2\\Desktop\\Space-Soldier\\",
-=======
-  "WorkspaceRootPath": "C:\\Users\\victorga4\\source\\repos\\Loving-Studios\\Space-Soldier\\",
->>>>>>> 285e9df5cbd03022a0351b16dc8e99aceff8cdd4
+  "WorkspaceRootPath": "C:\\Users\\pablo\\Desktop\\Space-Soldier\\",
   "Documents": [],
   "DocumentGroupContainers": [
     {
@@ -21,11 +17,11 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             }
           ]
         },

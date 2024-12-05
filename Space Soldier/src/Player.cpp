@@ -162,7 +162,7 @@ bool Player::Update(float dt)
 		//Volver al inicio
 		//pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(490), PIXEL_TO_METERS(450)), 0);
 		Engine::GetInstance().scene.get()->LoadState();
-		Engine::GetInstance().audio.get()->PlayFx(deathFxId);
+		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
 	}
 
 	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
