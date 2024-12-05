@@ -166,16 +166,29 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLATFORM:
 		LOG("Enemy Collision PLATFORM");
 		break;
-	case ColliderType::PLAYER:
-		LOG("Enemy Collision Player");
+	case ColliderType::PLAYER: {
+		// Obtén la posición del Player
+		Vector2D playerPos = ((Player*)physB->listener)->GetPosition();
+
+		if (playerPos.getY() < position.getY()) {
+			// El Player colisiona desde arriba
+			LOG("Enemy killed by Player from above");
+			currentAnimation = &deathR; // Hacer código para cambiar a deathL
+			//
+		}
+		else {
+			// El Player colisiona por el lado o desde abajo
+			LOG("Player killed by Enemy");
+			((Player*)physB->listener)->Die(); // Llama al método Die del Player
+		}
 		break;
+	}
 	case ColliderType::JUMP:
 		LOG("Enemy Collision JUMP");
 		jump = true;
 		break;
 	case ColliderType::FIN:
 		LOG("Enemy Collision Giro");
-		//Tocado = true;
 		Giro = true;
 		break;
 	case ColliderType::UNKNOWN:

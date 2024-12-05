@@ -225,6 +225,13 @@ void Player::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 	}
 }
 
+void Player::Die() {
+	LOG("Player dies");
+	death = true;
+	currentAnimation = (position.getX() < 0) ? &deathL : &deathR; // Ajustar dirección
+	// Lógica adicional para reiniciar o mostrar pantalla de fin de juego
+}
+
 void Player::SetPosition(Vector2D pos) {
 	pos.setX(pos.getX() + texW / 2);
 	pos.setY(pos.getY() + texH / 2);

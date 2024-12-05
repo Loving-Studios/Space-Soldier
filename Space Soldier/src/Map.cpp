@@ -5,6 +5,8 @@
 #include "Map.h"
 #include "Log.h"
 #include "Physics.h"
+#include <unordered_map>
+#include <string>
 
 #include <math.h>
 
@@ -179,15 +181,27 @@ bool Map::Load(std::string path, std::string fileName)
             //add the layer to the map
             mapData.layers.push_back(mapLayer);
         }
+        // Define un mapa para convertir nombres de capas en enteros
+        std::unordered_map<std::string, int> layerNameToId = {
+            {"Checkpoint", 1},
+            {"Jump", 2},
+            {"SeAcabo", 3}
+        };
 
         float x = 0.0f;
         float y = 0.0f;
         float width = 0.0f;
         float height = 0.0f;
-        for (pugi::xml_node layerNode = mapFileXML.child("map").child("objectgroup"); layerNode != NULL; layerNode = layerNode.next_sibling("objectgroup")) {
-            std::string layerName = layerNode.attribute("name").as_string();
-            for (pugi::xml_node tileNode = layerNode.child("object"); tileNode != NULL; tileNode = tileNode.next_sibling("object")) {
 
+        for (pugi::xml_node layerNode = mapFileXML.child("map").child("objectgroup");
+            layerNode != NULL;
+            layerNode = layerNode.next_sibling("objectgroup")) {
+
+            std::string layerName = layerNode.attribute("name").as_string();
+
+            for (pugi::xml_node tileNode = layerNode.child("object");
+                tileNode != NULL;
+                tileNode = tileNode.next_sibling("object")) {
 
                 // Asigna los valores correctos desde el XML
                 x = tileNode.attribute("x").as_float();
@@ -196,25 +210,31 @@ bool Map::Load(std::string path, std::string fileName)
                 height = tileNode.attribute("height").as_float();
 
                 PhysBody* rect = nullptr;
-                if (layerName == "Checkpoint")
-                {
-                    PhysBody* rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
+                auto it = layerNameToId.find(layerName);
+                int layerId = (it != layerNameToId.end()) ? it->second : 0; // Valor por defecto: 0 para plataformas
+
+                switch (layerId) {
+                case 1: // Checkpoint
+                    rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::CHECKPOINT;
-                    std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
-                    std::cout << "CREATED SENSOR" << std::endl;
-                }
-                else if (layerName == "Jump") {
-                    PhysBody* rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
+                    break;
+
+                case 2: // Jump
+                    rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::JUMP;
-                }
-                else if (layerName == "SeAcabo") {
-                    PhysBody* rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
+                    break;
+
+                case 3: // SeAcabo
+                    rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
+                    rect->ctype = ColliderType::FIN;
                     std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
                     std::cout << "CREATED FIN" << std::endl;
-                    rect->ctype = ColliderType::FIN;
-                }else {
-                    PhysBody* rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);
+                    break;
+
+                default: // Plataformas
+                    rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::PLATFORM;
+                    break;
                 }
             }
         }
