@@ -126,7 +126,7 @@ bool Enemy::Update(float dt)
 			
 		movimiento = 1;
 		
-	}else if (!patrullando && Tocado == true && (int)position.getX() >= 900) {
+	}else if (!patrullando && Tocado == true && (int)position.getX() >= 1100) {
 			
 		movimiento = 2;
 
@@ -138,31 +138,32 @@ bool Enemy::Update(float dt)
 		case 1:
 			if (Tocado == true) {
 				if (jump == true) {
-					velocity.y = 20;
-					//velocity.x =  10;
-					currentAnimation = &moveR;
-				}else {
-					velocity.x = 0.2 * 5;
+					velocity.y = -2;
+					velocity.x = 15;
 					currentAnimation = &moveR;
 				}
+				velocity.x = 0.2 * 5;
+				currentAnimation = &moveR;
 				
-			}else {
-				movimiento = 2;
+			}else{
+				velocity.x = 0.2 * 3;
+				currentAnimation = &moveR;
 			}
 			break;
 			
 		case 2:
 			if (Tocado == true) {
 				if (jump == true) {
-					velocity.y = -1* 20 ;
-					//velocity.x = -1 * 10;
+					velocity.y = -2 ;
+					velocity.x = -1 * 15;
 					currentAnimation = &moveL;
-				}else {
-					velocity.x = -0.2 * 5;
-					currentAnimation = &moveL;
-				}				
-			}else {
-				movimiento = 1;
+				}
+				velocity.x = -0.2 * 3;
+				currentAnimation = &moveL;
+								
+			}else{
+				velocity.x = -0.2 * 5;
+				currentAnimation = &moveL;
 			}
 			break;
 		default:
