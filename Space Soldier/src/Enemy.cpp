@@ -34,6 +34,7 @@ bool Enemy::Start() {
 	patrullando = false;
 	Tocado = false;
 	jump = false;
+	Giro = false;
 	encontrado = false;
 
 	//Load animations
@@ -122,14 +123,16 @@ bool Enemy::Update(float dt)
 			}
 		}
 
-	if (!patrullando && (int)position.getX() <= 700) {
+	if (!patrullando && Tocado == true && Giro == true) {
 			
-		movimiento = 1;
-		
-	}else if (!patrullando && Tocado == true && (int)position.getX() >= 1100) {
-			
-		movimiento = 2;
+		if (movimiento = 2) {
+			movimiento = 1;
+		}
+		else {
+			movimiento = 2;
+		}
 
+		
 	}
 
 	if (!patrullando) {
@@ -207,6 +210,11 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		//Tocado = true;
 		jump = true;
 		break;
+	case ColliderType::FIN:
+		LOG("Enemy Collision Giro");
+		//Tocado = true;
+		Giro = true;
+		break;
 	case ColliderType::UNKNOWN:
 		LOG("Enemy Collision UNKNOWN");
 		break;
@@ -231,8 +239,10 @@ void Enemy::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 	case ColliderType::PLAYER:
 		LOG("End Enemy Collision Player");
 		break;
-	case ColliderType::ITEM:
-		LOG("End Enemy Collision PLAYER");
+	case ColliderType::FIN:
+		LOG("Enemy Collision Giro");
+		//Tocado = true;
+		Giro = false;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("End Enemy Collision UNKNOWN");

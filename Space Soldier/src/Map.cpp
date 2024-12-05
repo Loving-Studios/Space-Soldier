@@ -206,6 +206,10 @@ bool Map::Load(std::string path, std::string fileName)
                 else if (layerName == "Jump") {
                     PhysBody* rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::JUMP;
+                }
+                else if (layerName == "SeAcabo") {
+                    PhysBody* rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
+                    rect->ctype = ColliderType::FIN;
                 }else {
                     PhysBody* rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::PLATFORM;
