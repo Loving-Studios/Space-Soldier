@@ -49,7 +49,7 @@ public:
 
 private:
 
-    bool showPath;
+    bool showPath, Giro;
     SDL_Texture* texture;
     const char* texturePath;
     int texW, texH, ultimaTile;

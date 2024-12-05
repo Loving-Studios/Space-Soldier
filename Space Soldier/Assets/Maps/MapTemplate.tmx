@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="224" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="122">
+=======
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="224" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="127">
+>>>>>>> 285e9df5cbd03022a0351b16dc8e99aceff8cdd4
  <properties>
   <property name="Navigation" type="bool" value="true"/>
  </properties>
@@ -10848,10 +10852,13 @@
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
-  <object id="118" x="831.5" y="481.25" width="39.5" height="27"/>
-  <object id="119" x="864" y="449.75" width="15.75" height="32"/>
-  <object id="120" x="920.25" y="448.75" width="7" height="34.25"/>
-  <object id="121" x="921.5" y="480" width="38" height="32.5"/>
+  <object id="119" x="855.182" y="449.333" width="19.5682" height="32"/>
+  <object id="122" x="855.216" y="449.313" width="19.5682" height="32"/>
+  <object id="123" x="918.511" y="449.448" width="19.5682" height="32"/>
+ </objectgroup>
+ <objectgroup id="17" name="SeAcabo">
+  <object id="125" x="734.333" y="470.667"/>
+  <object id="126" x="1045.33" y="469.667"/>
  </objectgroup>
  <layer id="13" name="Navigation" width="224" height="24" visible="0">
   <properties>

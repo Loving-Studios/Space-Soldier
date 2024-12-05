@@ -34,6 +34,7 @@ bool Enemy::Start() {
 	patrullando = false;
 	Tocado = false;
 	jump = false;
+	Giro = false;
 	encontrado = false;
 
 	//Load animations
@@ -122,14 +123,16 @@ bool Enemy::Update(float dt)
 			}
 		}
 
-	if (!patrullando && (int)position.getX() <= 700) {
+	if (!patrullando && Tocado == true && Giro == true) {
 			
-		movimiento = 1;
-		
-	}else if (!patrullando && Tocado == true && (int)position.getX() >= 900) {
-			
-		movimiento = 2;
+		if (movimiento = 2) {
+			movimiento = 1;
+		}
+		else {
+			movimiento = 2;
+		}
 
+		
 	}
 
 	if (!patrullando) {
@@ -138,31 +141,32 @@ bool Enemy::Update(float dt)
 		case 1:
 			if (Tocado == true) {
 				if (jump == true) {
-					velocity.y = 20;
-					//velocity.x =  10;
-					currentAnimation = &moveR;
-				}else {
-					velocity.x = 0.2 * 5;
+					velocity.y = -2;
+					velocity.x = 15;
 					currentAnimation = &moveR;
 				}
+				velocity.x = 0.2 * 5;
+				currentAnimation = &moveR;
 				
-			}else {
-				movimiento = 2;
+			}else{
+				velocity.x = 0.2 * 3;
+				currentAnimation = &moveR;
 			}
 			break;
 			
 		case 2:
 			if (Tocado == true) {
 				if (jump == true) {
-					velocity.y = -1* 20 ;
-					//velocity.x = -1 * 10;
+					velocity.y = -2 ;
+					velocity.x = -1 * 15;
 					currentAnimation = &moveL;
-				}else {
-					velocity.x = -0.2 * 5;
-					currentAnimation = &moveL;
-				}				
-			}else {
-				movimiento = 1;
+				}
+				velocity.x = -0.2 * 3;
+				currentAnimation = &moveL;
+								
+			}else{
+				velocity.x = -0.2 * 5;
+				currentAnimation = &moveL;
 			}
 			break;
 		default:
@@ -225,6 +229,11 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		//Tocado = true;
 		jump = true;
 		break;
+	case ColliderType::FIN:
+		LOG("Enemy Collision Giro");
+		//Tocado = true;
+		Giro = true;
+		break;
 	case ColliderType::UNKNOWN:
 		LOG("Enemy Collision UNKNOWN");
 		break;
@@ -249,8 +258,10 @@ void Enemy::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 	case ColliderType::PLAYER:
 		LOG("End Enemy Collision Player");
 		break;
-	case ColliderType::ITEM:
-		LOG("End Enemy Collision PLAYER");
+	case ColliderType::FIN:
+		LOG("Enemy Collision Giro");
+		//Tocado = true;
+		Giro = false;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("End Enemy Collision UNKNOWN");
