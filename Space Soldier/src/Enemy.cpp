@@ -9,7 +9,7 @@
 #include "Physics.h"
 #include "Map.h"
 
-Enemy::Enemy() : Entity(EntityType::ENEMY)
+Enemy::Enemy() : Entity(EntityType::ENEMY), isDead(false)
 {
 	showPath = true;
 }
@@ -67,6 +67,17 @@ bool Enemy::Start() {
 
 bool Enemy::Update(float dt)
 {
+	if (isDead) {
+		currentAnimation->Update();
+		Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
+
+		// Si está marcado para eliminación, elimina el cuerpo físico
+		if (pendingToDelete && pbody != nullptr) {
+			Engine::GetInstance().physics->DestroyBody(pbody->body);
+			pbody = nullptr;
+		}
+		return true; // Salir temprano si el enemigo está muerto
+	}
 
 	b2Vec2 velocity = b2Vec2(0, pbody->body->GetLinearVelocity().y);
 	// Pathfinding testing inputs
@@ -161,25 +172,26 @@ bool Enemy::Update(float dt)
 	return true;
 }
 void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
+	if (isDead) return;
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
 		LOG("Enemy Collision PLATFORM");
 		break;
 	case ColliderType::PLAYER: {
-		// Obtén la posición del Player
 		Vector2D playerPos = ((Player*)physB->listener)->GetPosition();
 
 		if (playerPos.getY() < position.getY()) {
-			// El Player colisiona desde arriba
 			LOG("Enemy killed by Player from above");
-			currentAnimation = &deathR; // Hacer código para cambiar a deathL
-			//
+			isDead = true;
+			currentAnimation = &deathR; // Cambia a deathL si corresponde
+
+			// Marca para eliminar el cuerpo físico
+			pendingToDelete = true;
 		}
 		else {
-			// El Player colisiona por el lado o desde abajo
 			LOG("Player killed by Enemy");
-			((Player*)physB->listener)->Die(); // Llama al método Die del Player
+			((Player*)physB->listener)->Die();
 		}
 		break;
 	}

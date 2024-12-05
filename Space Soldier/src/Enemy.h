@@ -44,6 +44,8 @@ public:
 
 private:
 
+    bool isDead = false;
+    bool pendingToDelete = false;
     bool showPath, Giro;
     SDL_Texture* texture;
     const char* texturePath;

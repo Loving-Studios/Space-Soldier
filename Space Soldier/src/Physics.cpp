@@ -414,6 +414,13 @@ bool PhysBody::Contains(int x, int y) const
 	return false;
 }
 
+void Physics::DestroyBody(b2Body* body) {
+	if (world != nullptr && body != nullptr) {
+		world->DestroyBody(body); // Llama al método de Box2D para eliminar el cuerpo
+	}
+}
+
+
 int PhysBody::RayCast(int x1, int y1, int x2, int y2, float& normal_x, float& normal_y) const
 {
 	int ret = -1;

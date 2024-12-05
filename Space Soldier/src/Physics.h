@@ -81,6 +81,7 @@ public:
 	void BeginContact(b2Contact* contact);
 	void EndContact(b2Contact* contact);
 
+	void DestroyBody(b2Body* body);
 	bool IsDebug() const { return debug; }
 
 private:
