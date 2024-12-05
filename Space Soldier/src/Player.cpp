@@ -182,7 +182,7 @@ bool Player::CleanUp()
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
-	case ColliderType::PLATFORM:
+	case ColliderType::PLATFORM: 
 		LOG("Collision PLATFORM");
 		// Resetea isJumping solo si no está en GodMode
 		if (!GodMode) isJumping = false;
