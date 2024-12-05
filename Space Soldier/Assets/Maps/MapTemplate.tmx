@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="224" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="122">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="224" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="122">
  <properties>
   <property name="Navigation" type="bool" value="true"/>
  </properties>
@@ -16241,8 +16241,7 @@
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
-  <object id="98" x="3520" y="0" width="32" height="768"/>
-  <object id="99" x="3592" y="-67"/>
-  <object id="100" x="1024" y="0" width="32" height="768"/>
+  <object id="98" x="4192" y="0" width="32" height="768"/>
+  <object id="100" x="2144" y="0" width="32" height="768"/>
  </objectgroup>
 </map>

@@ -198,9 +198,28 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Enemy Collision PLATFORM");
 		Tocado = true;
 		break;
-	case ColliderType::PLAYER:
+	case ColliderType::PLAYER: {
 		LOG("Enemy Collision Player");
+		// Definir un nuevo ámbito para inicializar el puntero "player"
+		Player* player = static_cast<Player*>(physB->listener);
+		if (player) {
+			Vector2D playerPos = player->GetPosition();
+			Vector2D enemyPos = GetPosition();
+
+			// Verifica si el jugador golpea al enemigo desde arriba
+			if (playerPos.getY() + player->texH <= enemyPos.getY()) {
+				LOG("Enemy defeated by player!");
+				currentAnimation = &deathR; // Cambia según la dirección
+				// Marca al enemigo para eliminación
+				this->MarkForDeletion();
+			}
+			else {
+				LOG("Player killed by enemy!");
+				player->KillPlayer(); // Maneja la muerte del jugador
+			}
+		}
 		break;
+	}
 	case ColliderType::JUMP:
 		LOG("Enemy Collision JUMP");
 		//Tocado = true;
@@ -239,6 +258,11 @@ void Enemy::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 	default:
 		break;
 	}
+}
+
+void Enemy::MarkForDeletion() {
+	pendingToDelete = true;
+	LOG("Enemy marked for deletion");
 }
 
 bool Enemy::CleanUp()

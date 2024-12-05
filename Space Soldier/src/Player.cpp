@@ -225,6 +225,16 @@ void Player::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 	}
 }
 
+void Player::KillPlayer() {
+	LOG("Player killed!");
+	// Detener el movimiento del jugador
+	pbody->body->SetLinearVelocity(b2Vec2(0, 0));
+	// Reproducir animación de muerte
+	currentAnimation = &deathR; // o deathL
+	// Reinicia la posición o carga un estado guardado
+	Engine::GetInstance().scene->LoadState();
+}
+
 void Player::SetPosition(Vector2D pos) {
 	pos.setX(pos.getX() + texW / 2);
 	pos.setY(pos.getY() + texH / 2);

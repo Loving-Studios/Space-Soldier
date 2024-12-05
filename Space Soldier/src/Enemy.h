@@ -23,6 +23,7 @@ public:
     bool CleanUp();
 
     bool patrullando = true, encontrado = false, Tocado = false, jump = false;
+    
     int movimiento = 0;
 
     void SetParameters(pugi::xml_node parameters) {
@@ -38,6 +39,10 @@ public:
     void OnCollision(PhysBody* physA, PhysBody* physB);
 
     void OnCollisionEnd(PhysBody* physA, PhysBody* physB);
+
+    void MarkForDeletion();
+
+    bool pendingToDelete = false;
 
 
 public:

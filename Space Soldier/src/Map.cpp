@@ -200,8 +200,8 @@ bool Map::Load(std::string path, std::string fileName)
                 {
                     PhysBody* rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::CHECKPOINT;
-                    std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
-                    std::cout << "CREATED SENSOR" << std::endl;
+                    //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
+                    //std::cout << "CREATED SENSOR" << std::endl;
                 }
                 else if (layerName == "Jump") {
                     PhysBody* rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);
