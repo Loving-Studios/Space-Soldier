@@ -32,7 +32,6 @@ bool Enemy::Start() {
 	texH = parameters.attribute("h").as_int();
 	movimiento = 2;
 	patrullando = false;
-	Tocado = false;
 	jump = false;
 	Giro = false;
 	encontrado = false;
@@ -83,28 +82,6 @@ bool Enemy::Update(float dt)
 		encontrado = !encontrado;
 	}
 
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_B) == KEY_DOWN) {
-		pathfinding->PropagateAStar(MANHATTAN);
-	}
-
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_B) == KEY_REPEAT &&
-		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-		pathfinding->PropagateAStar(MANHATTAN);
-	}
-
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_N) == KEY_DOWN) {
-		pathfinding->PropagateAStar(EUCLIDEAN);
-	}
-
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_N) == KEY_REPEAT &&
-		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-		pathfinding->PropagateAStar(EUCLIDEAN);
-	}
-
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
-		pathfinding->PropagateAStar(SQUARED);
-	}
-
 	/*if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_M) == KEY_REPEAT &&
 		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {*/
 		pathfinding->PropagateAStar(SQUARED);
@@ -123,7 +100,7 @@ bool Enemy::Update(float dt)
 			}
 		}
 
-	if (!patrullando && Tocado == true && Giro == true) {
+	if (!patrullando && Giro == true) {
 			
 		if (movimiento = 2) {
 			movimiento = 1;
@@ -133,41 +110,29 @@ bool Enemy::Update(float dt)
 		}
 
 		
-	}
+	} 
 
 	if (!patrullando) {
 		switch (movimiento)
 		{
 		case 1:
-			if (Tocado == true) {
-				if (jump == true) {
-					velocity.y = -2;
-					velocity.x = 15;
-					currentAnimation = &moveR;
-				}
-				velocity.x = 0.2 * 5;
-				currentAnimation = &moveR;
-				
-			}else{
-				velocity.x = 0.2 * 3;
+			if (jump == true) {
+				velocity.y = -2;
+				velocity.x = 15;
 				currentAnimation = &moveR;
 			}
+			velocity.x = 0.2 * 5;
+			currentAnimation = &moveR;
 			break;
 			
 		case 2:
-			if (Tocado == true) {
-				if (jump == true) {
-					velocity.y = -2 ;
-					velocity.x = -1 * 15;
-					currentAnimation = &moveL;
-				}
-				velocity.x = -0.2 * 3;
-				currentAnimation = &moveL;
-								
-			}else{
-				velocity.x = -0.2 * 5;
+			if (jump == true) {
+				velocity.y = -2 ;
+				velocity.x = -1 * 15;
 				currentAnimation = &moveL;
 			}
+			velocity.x = -0.2 * 3;
+			currentAnimation = &moveL;
 			break;
 		default:
 			break;
@@ -200,33 +165,12 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLATFORM:
 		LOG("Enemy Collision PLATFORM");
-		Tocado = true;
 		break;
-	case ColliderType::PLAYER: {
+	case ColliderType::PLAYER:
 		LOG("Enemy Collision Player");
-		// Definir un nuevo ámbito para inicializar el puntero "player"
-		Player* player = static_cast<Player*>(physB->listener);
-		if (player) {
-			Vector2D playerPos = player->GetPosition();
-			Vector2D enemyPos = GetPosition();
-
-			// Verifica si el jugador golpea al enemigo desde arriba
-			if (playerPos.getY() + player->texH <= enemyPos.getY()) {
-				LOG("Enemy defeated by player!");
-				currentAnimation = &deathR; // Cambia según la dirección
-				// Marca al enemigo para eliminación
-				this->MarkForDeletion();
-			}
-			else {
-				LOG("Player killed by enemy!");
-				player->KillPlayer(); // Maneja la muerte del jugador
-			}
-		}
 		break;
-	}
 	case ColliderType::JUMP:
 		LOG("Enemy Collision JUMP");
-		//Tocado = true;
 		jump = true;
 		break;
 	case ColliderType::FIN:
@@ -248,11 +192,9 @@ void Enemy::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 	{
 	case ColliderType::PLATFORM:
 		LOG("End Enemy Collision PLATFORM");
-		Tocado = false;
 		break;
 	case ColliderType::JUMP:
 		LOG("End Enemy Collision JUMP");
-		//Tocado = false;
 		jump = false;
 		break;
 	case ColliderType::PLAYER:
@@ -260,7 +202,6 @@ void Enemy::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 		break;
 	case ColliderType::FIN:
 		LOG("Enemy Collision Giro");
-		//Tocado = true;
 		Giro = false;
 		break;
 	case ColliderType::UNKNOWN:
@@ -269,11 +210,6 @@ void Enemy::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 	default:
 		break;
 	}
-}
-
-void Enemy::MarkForDeletion() {
-	pendingToDelete = true;
-	LOG("Enemy marked for deletion");
 }
 
 bool Enemy::CleanUp()

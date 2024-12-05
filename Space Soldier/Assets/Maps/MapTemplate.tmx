@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="224" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="17" nextobjectid="122">
-=======
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="224" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="127">
->>>>>>> 285e9df5cbd03022a0351b16dc8e99aceff8cdd4
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="224" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="18" nextobjectid="134">
  <properties>
   <property name="Navigation" type="bool" value="true"/>
  </properties>
@@ -10857,8 +10853,11 @@
   <object id="123" x="918.511" y="449.448" width="19.5682" height="32"/>
  </objectgroup>
  <objectgroup id="17" name="SeAcabo">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <object id="125" x="734.333" y="470.667"/>
-  <object id="126" x="1045.33" y="469.667"/>
+  <object id="130" x="1054.58" y="471.583"/>
  </objectgroup>
  <layer id="13" name="Navigation" width="224" height="24" visible="0">
   <properties>
@@ -16248,7 +16247,7 @@
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
-  <object id="98" x="4192" y="0" width="32" height="768"/>
-  <object id="100" x="2144" y="0" width="32" height="768"/>
+  <object id="98" x="3520" y="0" width="32" height="768"/>
+  <object id="99" x="3592" y="-67"/>
  </objectgroup>
 </map>
