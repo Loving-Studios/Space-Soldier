@@ -11,7 +11,7 @@
 
 Enemy::Enemy() : Entity(EntityType::ENEMY), isDead(false)
 {
-	showPath = true;
+	showPath = false;
 }
 
 Enemy::~Enemy() {
@@ -93,10 +93,8 @@ bool Enemy::Update(float dt)
 		encontrado = !encontrado;
 	}
 
-	/*if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_M) == KEY_REPEAT &&
-		Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {*/
 		pathfinding->PropagateAStar(SQUARED);
-	//}
+
 		if(encontrado == true) {//una vez encontrado el player 
 			patrullando = true;
 			if (position.getX() < ultimaTile){//comparar si la posicion del enemigo es más pequeña que la proxima posicion, moverse hacia esa posicion
@@ -111,16 +109,26 @@ bool Enemy::Update(float dt)
 			}
 		}
 
-	if (!patrullando && Giro == true) {
-			
-		if (movimiento = 2) {
+	if (!patrullando && Giro) {
+		/*switch (movimiento)
+		{
+		case 1:
+			movimiento = 2;
+			break;
+		case 2:
 			movimiento = 1;
+			break;
+		default:
+			break;
+		}*/
+		if (movimiento == 2) {//si se mete en un switch se vuelve loco
+			movimiento = 1;
+			Giro = false;
 		}
 		else {
 			movimiento = 2;
-		}
-
-		
+			Giro = false;
+		}	
 	} 
 
 	if (!patrullando) {
@@ -224,10 +232,6 @@ void Enemy::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 		break;
 	case ColliderType::PLAYER:
 		LOG("End Enemy Collision Player");
-		break;
-	case ColliderType::FIN:
-		LOG("Enemy Collision Giro");
-		Giro = false;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("End Enemy Collision UNKNOWN");

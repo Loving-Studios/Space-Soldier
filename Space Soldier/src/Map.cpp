@@ -230,7 +230,6 @@ bool Map::Load(std::string path, std::string fileName)
                     std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
                     std::cout << "CREATED FIN" << std::endl;
                     break;
-
                 default: // Plataformas
                     rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::PLATFORM;
