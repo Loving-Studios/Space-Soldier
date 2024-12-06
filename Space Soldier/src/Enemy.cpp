@@ -62,6 +62,10 @@ bool Enemy::Start() {
 	pathfinding = new Pathfinding();
 	ResetPath();
 
+
+
+	
+
 	return true;
 }
 
@@ -108,7 +112,58 @@ bool Enemy::Update(float dt)
 				ResetPath();
 			}
 		}
+if (parameters.attribute("type").as_string() == "volador") {
+	if (!patrullando && Giro) {
+		/*switch (movimiento)
+		{
+		case 1:
+			movimiento = 2;
+			break;
+		case 2:
+			movimiento = 1;
+			break;
+		default:
+			break;
+		}*/
+		if (movimiento == 2) {//si se mete en un switch se vuelve loco
+			movimiento = 1;
+			Giro = false;
+		}
+		else {
+			movimiento = 2;
+			Giro = false;
+		}
+	}
+	if (!patrullando) {
+		switch (movimiento)
+		{
+		case 1:
+			/*if (jump == true) {
+				velocity.y = -2;
+				velocity.x = 15;
+				currentAnimation = &moveR;
+			}*/
+			velocity.x = 0.2 * 5;
+			velocity.y = -5;
+			currentAnimation = &moveR;
+			break;
 
+		case 2:
+			/*if (jump == true) {
+				velocity.y = -2;
+				velocity.x = -1 * 15;
+				currentAnimation = &moveL;
+			}*/
+			velocity.x = -0.2 * 3;
+			velocity.y = -5;
+			currentAnimation = &moveL;
+			break;
+		default:
+			break;
+		}
+	}
+}
+	if (parameters.attribute("type").as_string() == "terrestre") {
 	if (!patrullando && Giro) {
 		/*switch (movimiento)
 		{
@@ -157,7 +212,7 @@ bool Enemy::Update(float dt)
 			break;
 		}
 	}
-
+}
 	pbody->body->SetLinearVelocity(velocity);
 
 	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics.  

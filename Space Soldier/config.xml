@@ -17,7 +17,7 @@
 	<scene1>
 		<map path="Assets/Maps/" name="MapTemplate.tmx" />
 		<entities>
-			<player x="3158" y="551" w="48" h="32" texture="Assets/Textures/player/PlayerCanvas.png">
+			<player x="4633" y="551" w="48" h="32" texture="Assets/Textures/player/PlayerCanvas.png">
 				<animations>
 					<idle loop="true" speed="0.2">
 						<frame x="0" y="0" w="48" h="48" />
@@ -78,7 +78,7 @@
 				</animations>
 			</player>
 			<enemies>
-				<enemy name="Paco" x="870" y="400" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true">
+				<enemy name="Paco" x="870" y="400" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -138,7 +138,7 @@
 						</crouch>
 					</animations>
 				</enemy>
-				<enemy name="Manolo" x="1806" y="472" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true">
+				<enemy name="Manolo" x="1806" y="472" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -198,7 +198,7 @@
 						</crouch>
 					</animations>
 				</enemy>
-				<enemy name="Rocoso" x="3216" y="564" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="true">
+				<enemy name="Rocoso" x="3216" y="564" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
