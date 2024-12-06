@@ -31,9 +31,11 @@ bool Enemy::Start() {
 	texW = parameters.attribute("w").as_int();
 	texH = parameters.attribute("h").as_int();
 	movimiento = 2;
+	lados = 2;
 	patrullando = false;
 	jump = false;
 	Giro = false;
+	Lado = false;
 	encontrado = false;
 
 	//Load animations
@@ -61,6 +63,15 @@ bool Enemy::Start() {
 	// Initialize pathfinding
 	pathfinding = new Pathfinding();
 	ResetPath();
+
+	std::string typeStr = parameters.attribute("type").as_string();
+
+	if (typeStr == "terrestre") {
+		type = EnemyType::TERRESTRE;
+	}
+	else if (typeStr == "volador") {
+		type = EnemyType::VOLADOR;
+	}
 
 
 
@@ -112,19 +123,8 @@ bool Enemy::Update(float dt)
 				ResetPath();
 			}
 		}
-if (parameters.attribute("type").as_string() == "volador") {
+if (type == EnemyType::VOLADOR) {
 	if (!patrullando && Giro) {
-		/*switch (movimiento)
-		{
-		case 1:
-			movimiento = 2;
-			break;
-		case 2:
-			movimiento = 1;
-			break;
-		default:
-			break;
-		}*/
 		if (movimiento == 2) {//si se mete en un switch se vuelve loco
 			movimiento = 1;
 			Giro = false;
@@ -134,28 +134,40 @@ if (parameters.attribute("type").as_string() == "volador") {
 			Giro = false;
 		}
 	}
+	if (!patrullando && Lado) {
+		if (lados == 2) {//si se mete en un switch se vuelve loco
+			lados = 1;
+			Lado = false;
+		}
+		else {
+			lados = 2;
+			Lado = false;
+		}
+	}
 	if (!patrullando) {
 		switch (movimiento)
 		{
 		case 1:
-			/*if (jump == true) {
-				velocity.y = -2;
-				velocity.x = 15;
-				currentAnimation = &moveR;
-			}*/
-			velocity.x = 0.2 * 5;
+			//velocity.x = 0.2 * 5;
 			velocity.y = -5;
 			currentAnimation = &moveR;
 			break;
-
 		case 2:
-			/*if (jump == true) {
-				velocity.y = -2;
-				velocity.x = -1 * 15;
-				currentAnimation = &moveL;
-			}*/
+			//velocity.x = -0.2 * 3;
+			velocity.y = 5;
+			currentAnimation = &moveL;
+			break;
+		default:
+			break;
+		}
+		switch (lados)
+		{
+		case 1:
+			velocity.x = 0.2 * 5;
+			currentAnimation = &moveR;
+			break;
+		case 2:
 			velocity.x = -0.2 * 3;
-			velocity.y = -5;
 			currentAnimation = &moveL;
 			break;
 		default:
@@ -163,7 +175,7 @@ if (parameters.attribute("type").as_string() == "volador") {
 		}
 	}
 }
-	if (parameters.attribute("type").as_string() == "terrestre") {
+	if (type == EnemyType::TERRESTRE) {
 	if (!patrullando && Giro) {
 		/*switch (movimiento)
 		{
@@ -265,6 +277,10 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::FIN:
 		LOG("Enemy Collision Giro");
 		Giro = true;
+		break;
+	case ColliderType::LADOS:
+		LOG("Enemy volador Giro");
+		Lado = true;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Enemy Collision UNKNOWN");

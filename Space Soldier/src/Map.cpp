@@ -185,7 +185,8 @@ bool Map::Load(std::string path, std::string fileName)
         std::unordered_map<std::string, int> layerNameToId = {
             {"Checkpoint", 1},
             {"Jump", 2},
-            {"SeAcabo", 3}
+            {"SeAcabo", 3},
+            {"lados", 4}
         };
 
         float x = 0.0f;
@@ -229,6 +230,12 @@ bool Map::Load(std::string path, std::string fileName)
                     rect->ctype = ColliderType::FIN;
                     std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
                     std::cout << "CREATED FIN" << std::endl;
+                    break;
+                case 4: // SeAcabo
+                    rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
+                    rect->ctype = ColliderType::LADOS;
+                    std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
+                    std::cout << "CREATED LADOS" << std::endl;
                     break;
                 default: // Plataformas
                     rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);

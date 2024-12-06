@@ -7,12 +7,15 @@
 
 struct SDL_Texture;
 
+enum class EnemyType { TERRESTRE, VOLADOR };
+
 class Enemy : public Entity
 {
 public:
 
     Enemy();
     virtual ~Enemy();
+    EnemyType type;
 
     bool Awake();
 
@@ -22,8 +25,8 @@ public:
 
     bool CleanUp();
 
-    bool patrullando = true, encontrado = false, jump = false;
-    int movimiento = 0;
+    bool patrullando = true, encontrado = false, jump = false, Lado = false;
+    int movimiento = 0, lados = 0;
 
     void SetParameters(pugi::xml_node parameters) {
         this->parameters = parameters;
