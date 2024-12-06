@@ -148,13 +148,11 @@ if (type == EnemyType::VOLADOR) {
 		switch (movimiento)
 		{
 		case 1:
-			//velocity.x = 0.2 * 5;
-			velocity.y = -5;
+			velocity.y = -2;
 			currentAnimation = &moveR;
 			break;
 		case 2:
-			//velocity.x = -0.2 * 3;
-			velocity.y = 5;
+			velocity.y = 2;
 			currentAnimation = &moveL;
 			break;
 		default:
@@ -177,17 +175,6 @@ if (type == EnemyType::VOLADOR) {
 }
 	if (type == EnemyType::TERRESTRE) {
 	if (!patrullando && Giro) {
-		/*switch (movimiento)
-		{
-		case 1:
-			movimiento = 2;
-			break;
-		case 2:
-			movimiento = 1;
-			break;
-		default:
-			break;
-		}*/
 		if (movimiento == 2) {//si se mete en un switch se vuelve loco
 			movimiento = 1;
 			Giro = false;
@@ -203,7 +190,7 @@ if (type == EnemyType::VOLADOR) {
 		{
 		case 1:
 			if (jump == true) {
-				velocity.y = -2;
+				velocity.y = -4;
 				velocity.x = 15;
 				currentAnimation = &moveR;
 			}
@@ -213,11 +200,11 @@ if (type == EnemyType::VOLADOR) {
 			
 		case 2:
 			if (jump == true) {
-				velocity.y = -2 ;
+				velocity.y = -4;
 				velocity.x = -1 * 15;
 				currentAnimation = &moveL;
 			}
-			velocity.x = -0.2 * 3;
+			velocity.x = -0.2 * 5;
 			currentAnimation = &moveL;
 			break;
 		default:

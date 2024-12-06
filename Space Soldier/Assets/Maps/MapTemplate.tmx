@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="224" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="149">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="224" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="155">
  <properties>
   <property name="Navigation" type="bool" value="true"/>
  </properties>
@@ -10862,11 +10862,16 @@
   <object id="139" x="1611" y="471"/>
   <object id="140" x="2198" y="407.333"/>
   <object id="145" x="3001" y="566" width="461" height="26"/>
-  <object id="146" x="3018" y="173" width="465" height="28"/>
+  <object id="146" x="3011" y="384" width="465" height="28"/>
+  <object id="149" x="5148" y="12" width="360" height="50"/>
+  <object id="150" x="5107" y="630" width="360" height="64"/>
  </objectgroup>
  <objectgroup id="19" name="lados">
   <object id="147" x="3042" y="201" width="25" height="388"/>
   <object id="148" x="3429" y="202" width="25" height="382"/>
+  <object id="151" x="5196" y="43" width="26" height="616"/>
+  <object id="152" x="5303" y="58" width="48" height="590"/>
+  <object id="154" x="5262" y="327" width="1"/>
  </objectgroup>
  <layer id="13" name="Navigation" width="224" height="24" visible="0">
   <properties>
