@@ -42,6 +42,10 @@ public:
 
     void OnCollisionEnd(PhysBody* physA, PhysBody* physB);
 
+    int killMonsterFxId;
+    int deathFxId;
+
+    bool muerto;
 
 public:
 

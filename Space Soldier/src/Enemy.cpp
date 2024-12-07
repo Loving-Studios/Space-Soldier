@@ -37,6 +37,7 @@ bool Enemy::Start() {
 	Giro = false;
 	Lado = false;
 	encontrado = false;
+	muerto = true;
 
 	//Load animations
 	idle.LoadAnimations(parameters.child("animations").child("idle"));
@@ -73,6 +74,8 @@ bool Enemy::Start() {
 		type = EnemyType::VOLADOR;
 	}
 
+	deathFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Death.wav");
+	killMonsterFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/KillMonster.wav");
 
 
 	
@@ -247,6 +250,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 			LOG("Enemy killed by Player from above");
 			isDead = true;
 			currentAnimation = &deathR; // Cambia a deathL si corresponde
+			Engine::GetInstance().audio.get()->PlayFx(killMonsterFxId);
 
 			// Marca para eliminar el cuerpo físico
 			pendingToDelete = true;
@@ -254,6 +258,10 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		else {
 			LOG("Player killed by Enemy");
 			((Player*)physB->listener)->Die();
+			if (muerto == true) {
+				Engine::GetInstance().audio.get()->PlayFx(deathFxId);
+				muerto = !muerto;
+			}
 		}
 		break;
 	}

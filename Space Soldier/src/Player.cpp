@@ -33,7 +33,7 @@ bool Player::Start() {
 	position.setY(parameters.attribute("y").as_int());
 	texW = parameters.attribute("w").as_int();
 	texH = parameters.attribute("h").as_int();
-
+	muerto = false;
 	//Load animations
 
 	idle.LoadAnimations(parameters.child("animations").child("idle"));
@@ -46,16 +46,6 @@ bool Player::Start() {
 	crouch.LoadAnimations(parameters.child("animations").child("crouch"));
 	currentAnimation = &idle;
 
-	/*
-	switch (position)
-	{
-	case:
-
-	default:
-		break;
-	}
-	*/
-
 	// L08 TODO 5: Add physics to the player - initialize physics body
 	pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX(), (int)position.getY(), texW / 2, bodyType::DYNAMIC);
 
@@ -63,13 +53,14 @@ bool Player::Start() {
 	pbody->listener = this;
 
 	// L08 TODO 7: Assign collider type
-	pbody->ctype = ColliderType::PLAYER;
+	pbody->ctype = ColliderType::PLAYER; 
 
 	pickCoinFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Faro.wav");
-	deathFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Death.wav");
 	saveFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Save.wav");
-	loadFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Load.wav");
-	killMonsterFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/KillMonster.wav");
+	loadFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Load.wav"); 
+	deathFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Death.wav");
+	jumpFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Jump.wav");
+	walkFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Walking.wav");
 	return true;
 }
 
@@ -80,8 +71,12 @@ bool Player::Update(float dt)
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
 	{
+		
 		death = !death;
-		Engine::GetInstance().audio.get()->PlayFx(deathFxId);
+		muerto = !muerto;
+		if (muerto == true) {
+			Engine::GetInstance().audio.get()->PlayFx(deathFxId);
+		}
 	}
 	// Cambia el estado de GodMode al presionar F10
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
@@ -98,13 +93,13 @@ bool Player::Update(float dt)
 	if (death == false)
 	{
 		currentAnimation = &idle;
-		//momento = 0;
 
 		// Move left
 		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			velocity.x = -0.2 * 16;
 			if (!isJumping) {
 				currentAnimation = &moveL;
+				
 			}
 		}
 
@@ -113,6 +108,7 @@ bool Player::Update(float dt)
 			velocity.x = 0.2 * 16;
 			if (!isJumping) {
 				currentAnimation = &moveR;
+				
 			}
 		}
 
@@ -120,14 +116,15 @@ bool Player::Update(float dt)
 		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && (GodMode || !isJumping)) {
 			// Apply an initial upward force
 			pbody->body->ApplyLinearImpulseToCenter(b2Vec2(0, -jumpForce), true);
+			Engine::GetInstance().audio.get()->PlayFx(jumpFxId);
 			if (!GodMode) isJumping = true;  // En modo normal, se activa el flag de salto
+			
 		}
 
 		// If the player is jumpling, we don't want to apply gravity, we use the current velocity prduced by the jump
 		if (isJumping == true)
 		{
 			velocity.y = pbody->body->GetLinearVelocity().y;
-
 			// Compruebo si se está moviendo hacia la izquierda mientras saltas
 			if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 				currentAnimation = &jumpL;
@@ -141,12 +138,10 @@ bool Player::Update(float dt)
 		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
 			currentAnimation = &deathL;
-			//momento += 1;
 		}
 		else
 		{
 			currentAnimation = &deathR;
-			//momento += 1;
 		}
 	}
 
@@ -160,7 +155,6 @@ bool Player::Update(float dt)
 	if (position.getY() > 800) {
 		// Reinicio posición del player cuando cae más de 800px
 		//Volver al inicio
-		//pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(490), PIXEL_TO_METERS(450)), 0);
 		Engine::GetInstance().scene.get()->LoadState();
 		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
 	}
@@ -186,6 +180,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision PLATFORM");
 		// Resetea isJumping solo si no está en GodMode
 		if (!GodMode) isJumping = false;
+		Engine::GetInstance().audio.get()->PlayFx(walkFxId);
 		break;
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");

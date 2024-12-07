@@ -47,10 +47,12 @@ public:
 
 	//Audio fx
 	int pickCoinFxId;
-	int deathFxId;
 	int saveFxId;
 	int loadFxId;
-	int killMonsterFxId;
+	int deathFxId;
+	int jumpFxId;
+	int walkFxId;
+	bool muerto;
 
 
 	// L08 TODO 5: Add physics to the player - declare a Physics body
