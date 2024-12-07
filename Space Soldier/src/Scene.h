@@ -14,6 +14,7 @@ public:
 
 	int saveFxId;
 	int loadFxId;
+	int PopOut;
 
 	// Destructor
 	virtual ~Scene();

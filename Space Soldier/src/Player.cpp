@@ -60,7 +60,7 @@ bool Player::Start() {
 	loadFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Load.wav"); 
 	deathFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Death.wav");
 	jumpFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Jump.wav");
-	walkFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Walking.wav");
+	//walkFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Walking.wav");
 	return true;
 }
 
@@ -180,7 +180,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision PLATFORM");
 		// Resetea isJumping solo si no está en GodMode
 		if (!GodMode) isJumping = false;
-		Engine::GetInstance().audio.get()->PlayFx(walkFxId);
+		//Engine::GetInstance().audio.get()->PlayFx(walkFxId);
 		break;
 	case ColliderType::ITEM:
 		LOG("Collision ITEM");

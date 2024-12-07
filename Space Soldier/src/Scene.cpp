@@ -57,6 +57,7 @@ bool Scene::Start()
 	Engine::GetInstance().audio.get()->PlayMusic("Assets/Audio/Fx/CelestialDrift.ogg", 0);
 	saveFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Save.wav");
 	loadFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Load.wav");
+	PopOut = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/PopOut.wav");
 	// Configura el volumen al 5%
 	Mix_VolumeMusic(static_cast<int>(128 * 0.05));
 
@@ -152,6 +153,7 @@ bool Scene::Update(float dt)
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_H) == KEY_DOWN) {
 		helpMenuVisible = !helpMenuVisible;
+		Engine::GetInstance().audio.get()->PlayFx(PopOut);
 	}
 	return true;
 }
@@ -177,6 +179,16 @@ bool Scene::PostUpdate()
 		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
+		//Proximamente aquí hará que te mandé al inicio del primer nivel
+		GotoStart();
+		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
+		//Proximamente aquí hará que te mandé al inicio del segundo nivel
+		GotoStart();
+		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
+	}
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
 		GotoStart();
 		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
 	}
