@@ -105,13 +105,12 @@ bool Enemy::Update(float dt)
 		pathfinding->ResetPath(tilePos);
 	}
 
-	// L13: TODO 3:	Add the key inputs to propagate the A* algorithm with different heuristics (Manhattan, Euclidean, Squared) 
-
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
 		encontrado = !encontrado;
 	}
-
-		pathfinding->PropagateAStar(SQUARED);
+		while (pathfinding->pathTiles.empty()) {
+			pathfinding->PropagateAStar(SQUARED);
+		}
 
 		if(encontrado == true) {//una vez encontrado el player 
 			patrullando = true;
@@ -228,14 +227,20 @@ if (type == EnemyType::VOLADOR) {
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 		showPath = !showPath;
 
+	Vector2D currentPos = GetPosition();
+	Vector2D tilePos = Engine::GetInstance().map.get()->WorldToMap(currentPos.getX(), currentPos.getY());
 
 	if (showPath)
 	{
 		// Draw pathfinding 
 		pathfinding->DrawPath();
 	}
+
+	pathfinding->ResetPath(tilePos);
+
 	return true;
 }
+
 void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	if (isDead) return;
 	switch (physB->ctype)
