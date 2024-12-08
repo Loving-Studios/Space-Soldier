@@ -127,66 +127,83 @@ bool Enemy::Update(float dt)
 
 		if(distance <= 5) {//una vez encontrado el player 
 			patrullando = true;
-			if (enemyTilePos.getX() < playerTilePos.getX() && suelo == true){//comparar si la posicion del enemigo es más pequeña que la proxima posicion, moverse hacia esa posicion
+			/*if (enemyTilePos.getX() < playerTilePos.getX() && suelo == true) {//comparar si la posicion del enemigo es más pequeña que la proxima posicion, moverse hacia esa posicion
 				velocity.x = 0.2 * 5;//derecha
 				currentAnimation = &moveR;
-				//ResetPath();
+					//ResetPath();
 			}
 			else if (enemyTilePos.getX() > playerTilePos.getX() && suelo == true) {//comparar si la posicion del enemigo es más grande que la proxima posicion, moverse hacia esa posicion
 				velocity.x = -0.2 * 5;//izquierda
 				currentAnimation = &moveL;
-				//ResetPath();
-			}
+					//ResetPath();
+			}*/
 		}else{ patrullando = false; }
-if (type == EnemyType::VOLADOR) {
-	if (!patrullando && Giro) {
-		if (movimiento == 2) {//si se mete en un switch se vuelve loco
-			movimiento = 1;
-			Giro = false;
+		if (type == EnemyType::VOLADOR) {
+			if (!patrullando && Giro) {//Subir y bajar duranmte el modo patrullar
+				if (movimiento == 2) {//si se mete en un switch se vuelve loco
+					movimiento = 1;
+					Giro = false;
+				}
+				else {
+					movimiento = 2;
+					Giro = false;
+				}
+			}
+			if (!patrullando && Lado) { //Girar de derecha a izquierda en el modo patrullar
+				if (lados == 2) {//si se mete en un switch se vuelve loco
+					lados = 1;
+					Lado = false;
+				}
+				else {
+					lados = 2;
+					Lado = false;
+				}
+			}
+			if (patrullando){
+				if (enemyTilePos.getY() < playerTilePos.getY()) {//mirar si la posicion del player es más alta que la del enemigo
+					velocity.y = 2;  // Abajo
+					currentAnimation = &moveR;  // Cambiar si tienes animaciones específicas
+				}
+				else if (enemyTilePos.getY() > playerTilePos.getY()) {//mirar si la posicion del player es más baja que la del enemigo
+					velocity.y = -2;  // Arriba
+					currentAnimation = &moveL;  // Cambiar si tienes animaciones específicas
+				}
+				if (enemyTilePos.getX() < playerTilePos.getX()) {//mirar si la posicion del player es más alta que la del enemigo
+					velocity.x = 0.2 * 5;  // derecha
+					currentAnimation = &moveR;  // Cambiar si tienes animaciones específicas
+				}
+				else if (enemyTilePos.getX() > playerTilePos.getX()) {//mirar si la posicion del player es más baja que la del enemigo
+					velocity.x = -0.2 * 5; // Izquierda
+					currentAnimation = &moveL;  // Cambiar si tienes animaciones específicas
+				}
+			}else{
+				switch (movimiento)//movimiento enemigo volador en modo patrullar
+				{
+					case 1://arriba
+						velocity.y = -2;
+						currentAnimation = &moveR;
+					break;
+					case 2://abajo
+						velocity.y = 2;
+						currentAnimation = &moveL;
+					break;
+					default:
+					break;
+				}
+				switch (lados)
+				{
+					case 1://Derecha
+						velocity.x = 0.2 * 5;
+						currentAnimation = &moveR;
+					break;
+					case 2://Izquierda
+						velocity.x = -0.2 * 5;
+						currentAnimation = &moveL;
+					break;
+					default:
+					break;
+				}
 		}
-		else {
-			movimiento = 2;
-			Giro = false;
-		}
-	}
-	if (!patrullando && Lado) {
-		if (lados == 2) {//si se mete en un switch se vuelve loco
-			lados = 1;
-			Lado = false;
-		}
-		else {
-			lados = 2;
-			Lado = false;
-		}
-	}
-	if (!patrullando) {
-		switch (movimiento)
-		{
-		case 1:
-			velocity.y = -2;
-			currentAnimation = &moveR;
-			break;
-		case 2:
-			velocity.y = 2;
-			currentAnimation = &moveL;
-			break;
-		default:
-			break;
-		}
-		switch (lados)
-		{
-		case 1:
-			velocity.x = 0.2 * 5;
-			currentAnimation = &moveR;
-			break;
-		case 2:
-			velocity.x = -0.2 * 3;
-			currentAnimation = &moveL;
-			break;
-		default:
-			break;
-		}
-	}
 }
 	if (type == EnemyType::TERRESTRE) {
 	if (!patrullando && Giro) {
@@ -200,11 +217,26 @@ if (type == EnemyType::VOLADOR) {
 		}	
 	} 
 
-	if (!patrullando) {
+	if (patrullando) {
+		if (enemyTilePos.getX() < playerTilePos.getX()) {
+			velocity.x = 0.2 * 5;  // Derecha
+			if (jump == true) {//saltar cuando el terreno se eleve
+				velocity.y = -4;
+			}
+			currentAnimation = &moveR;
+		}
+		else if (enemyTilePos.getX() > playerTilePos.getX()) {
+			velocity.x = -0.2 * 5;  // Izquierda
+			if (jump == true) {//saltar cuando el terreno se eleve
+				velocity.y = -4;
+			}
+			currentAnimation = &moveL;
+		}
+	}else{
 		switch (movimiento)
 		{
 		case 1:
-			if (jump == true) {
+			if (jump == true) {//saltar cuando el terreno se eleve
 				velocity.y = -4;
 				velocity.x = 15;
 				currentAnimation = &moveR;
@@ -214,7 +246,7 @@ if (type == EnemyType::VOLADOR) {
 			break;
 			
 		case 2:
-			if (jump == true) {
+			if (jump == true) {//saltar cuando el terreno se eleve
 				velocity.y = -4;
 				velocity.x = -1 * 15;
 				currentAnimation = &moveL;
@@ -272,7 +304,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 			// Marca para eliminar el cuerpo físico
 			pendingToDelete = true;
 		}
-		else {
+		else{
 			LOG("Player killed by Enemy");
 			((Player*)physB->listener)->Die();
 			if (muerto == true) {
