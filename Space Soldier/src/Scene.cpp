@@ -102,9 +102,37 @@ void Scene::LoadState()
 
 	//enemies
 	//mirar si esta vivo o no
-	for (pugi::xml_node enemyNode = configParameters.child("entities").child("enemies").child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
+	for (Enemy* enemy : enemyList)
 	{
-		sceneNode.child("entities").child("enemies").child("enemy").attribute("Alive").set_value();
+		if (!enemy) {
+			LOG("Error: Puntero enemigo nulo en enemyList.");
+			continue;
+		}
+		pugi::xml_node enemyNode = sceneNode.child("entities").child("enemies").find_child_by_attribute("name", enemy->GetName().c_str());
+		
+		if (!enemyNode) {
+			LOG("Error: Nodo para enemigo %s no encontrado.", enemy->GetName().c_str());
+			continue;
+		}
+
+		bool vivo = enemyNode.attribute("Alive").as_bool();
+		float x = enemyNode.attribute("x").as_float(-1.0f); // Valor por defecto en caso de error
+		float y = enemyNode.attribute("y").as_float(-1.0f);
+		//Vector2D enemyPos(enemyNode.attribute("x").as_float(), enemyNode.attribute("y").as_float());
+
+		if (x < 0 || y < 0) {
+			LOG("Error: Atributos inválidos para enemigo %s.", enemy->GetName().c_str());
+			continue;
+		}
+		Vector2D enemyPos(x, y);
+		enemy->SetPosition(enemyPos);
+		enemy->VIVO(vivo);
+
+		LOG("Cargando enemigo: %s, Posición: (%f, %f), Vivo: %s",
+			enemy->GetName().c_str(),
+			enemyPos.getX(),
+			enemyPos.getY(),
+			vivo ? "true" : "false");
 	}
 }
 
@@ -130,9 +158,22 @@ void Scene::SaveState()
 
 	//enemies
 	//guardar si esta vivo o no
-	for (pugi::xml_node enemyNode = configParameters.child("entities").child("enemies").child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
-	{
-		sceneNode.child("entities").child("enemies").child("enemy").attribute("Alive").set_value();
+	for (Enemy* enemy : enemyList)
+	{	
+		if (!enemy) {
+			LOG("Error: Puntero enemigo nulo en enemyList.");
+			continue;
+		}
+		pugi::xml_node enemyNode = sceneNode.child("entities").child("enemies").find_child_by_attribute("name", enemy->GetName().c_str());
+
+		if (!enemyNode) {
+			LOG("Error: Nodo para enemigo %s no encontrado.", enemy->GetName().c_str());
+			continue;
+		}
+
+		enemyNode.attribute("x").set_value(enemy->GetPosition().getX());
+		enemyNode.attribute("y").set_value(enemy->GetPosition().getY());
+		enemyNode.attribute("Alive").set_value(enemy->SetVIVO());
 	}
 	
 
@@ -146,6 +187,8 @@ void Scene::GotoStart()
 	//Player position
 	Vector2D playerPos = Vector2D(490,450);
 	player->SetPosition(playerPos);
+	//bool A = true;
+	//enemy->VIVO(A);
 }
 // Called each loop iteration
 bool Scene::Update(float dt)

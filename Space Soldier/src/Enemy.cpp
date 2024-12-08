@@ -36,8 +36,10 @@ bool Enemy::Start() {
 	jump = false;
 	Giro = false;
 	Lado = false;
-	//encontrado = false;
 	muerto = true;
+	Estavivo = true;
+
+	name = parameters.attribute("name").as_string();
 
 	//Load animations
 	idle.LoadAnimations(parameters.child("animations").child("idle"));
@@ -77,14 +79,13 @@ bool Enemy::Start() {
 	deathFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Death.wav");
 	killMonsterFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/KillMonster.wav");
 
-
-	
-
 	return true;
 }
 
 bool Enemy::Update(float dt)
 {
+	if (Estavivo == true) { isDead = false; }
+	else { isDead = true; }
 	if (isDead) {
 		currentAnimation->Update();
 		Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
@@ -127,16 +128,6 @@ bool Enemy::Update(float dt)
 
 		if(distance <= 5) {//una vez encontrado el player 
 			patrullando = true;
-			/*if (enemyTilePos.getX() < playerTilePos.getX() && suelo == true) {//comparar si la posicion del enemigo es más pequeña que la proxima posicion, moverse hacia esa posicion
-				velocity.x = 0.2 * 5;//derecha
-				currentAnimation = &moveR;
-					//ResetPath();
-			}
-			else if (enemyTilePos.getX() > playerTilePos.getX() && suelo == true) {//comparar si la posicion del enemigo es más grande que la proxima posicion, moverse hacia esa posicion
-				velocity.x = -0.2 * 5;//izquierda
-				currentAnimation = &moveL;
-					//ResetPath();
-			}*/
 		}else{ patrullando = false; }
 		if (type == EnemyType::VOLADOR) {
 			if (!patrullando && Giro) {//Subir y bajar duranmte el modo patrullar
@@ -297,10 +288,10 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 		if (playerPos.getY() < position.getY()) {
 			LOG("Enemy killed by Player from above");
+			Estavivo = false;
 			isDead = true;
 			currentAnimation = &deathR; // Cambia a deathL si corresponde
 			Engine::GetInstance().audio.get()->PlayFx(killMonsterFxId);
-			//sobreescribir atributo Alive
 			// Marca para eliminar el cuerpo físico
 			pendingToDelete = true;
 		}
@@ -373,6 +364,14 @@ Vector2D Enemy::GetPosition() {
 	b2Vec2 bodyPos = pbody->body->GetTransform().p;
 	Vector2D pos = Vector2D(METERS_TO_PIXELS(bodyPos.x), METERS_TO_PIXELS(bodyPos.y));
 	return pos;
+}
+
+void Enemy::VIVO(bool v) { //llega desde scene si el enemigo esta vivo o no, para mantener los muertos muertos despues de cargar y revivir los que murieron despues del guardado
+	Estavivo = v;
+}
+bool Enemy::SetVIVO() { //Le manda al scene si el enemigo esta vivo o no
+	
+	return Estavivo;
 }
 
 void Enemy::ResetPath() {

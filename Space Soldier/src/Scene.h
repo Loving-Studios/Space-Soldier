@@ -58,6 +58,7 @@ private:
 	
 	//L03: TODO 3b: Declare a Player attribute
 	Player* player;
+	Enemy* enemy;
 	pugi::xml_document configFile;
 	std::vector<Enemy*> enemyList;
 	bool once = false;

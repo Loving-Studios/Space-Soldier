@@ -35,6 +35,10 @@ public:
     void SetPosition(Vector2D pos);
 
     Vector2D GetPosition();
+    
+    void VIVO (bool v);
+    bool SetVIVO();
+    std::string GetName() const { return name; }
 
     void ResetPath();
 
@@ -51,10 +55,11 @@ public:
 
 private:
 
-    bool isDead = false;
+    bool isDead = false, Estavivo;
     bool pendingToDelete = false;
     bool showPath, Giro;
     SDL_Texture* texture;
+    std::string name;
     const char* texturePath;
     int texW, texH, ultimaTile;
     pugi::xml_node parameters;
