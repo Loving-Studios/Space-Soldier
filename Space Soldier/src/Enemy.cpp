@@ -293,7 +293,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 			currentAnimation = &deathR; // Cambia a deathL si corresponde
 			Engine::GetInstance().audio.get()->PlayFx(killMonsterFxId);
 			// Marca para eliminar el cuerpo físico
-			pendingToDelete = true;
+			//pendingToDelete = true;
 		}
 		else{
 			LOG("Player killed by Enemy");
