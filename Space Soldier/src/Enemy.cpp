@@ -300,7 +300,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 			isDead = true;
 			currentAnimation = &deathR; // Cambia a deathL si corresponde
 			Engine::GetInstance().audio.get()->PlayFx(killMonsterFxId);
-
+			//sobreescribir atributo Alive
 			// Marca para eliminar el cuerpo físico
 			pendingToDelete = true;
 		}

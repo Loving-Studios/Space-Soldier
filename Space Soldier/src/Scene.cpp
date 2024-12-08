@@ -101,7 +101,11 @@ void Scene::LoadState()
 	player->SetPosition(playerPos);
 
 	//enemies
-	// ...
+	//mirar si esta vivo o no
+	for (pugi::xml_node enemyNode = configParameters.child("entities").child("enemies").child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
+	{
+		sceneNode.child("entities").child("enemies").child("enemy").attribute("Alive").set_value();
+	}
 }
 
 void Scene::SaveState()
@@ -125,7 +129,12 @@ void Scene::SaveState()
 	sceneNode.child("entities").child("player").attribute("y").set_value(player->GetPosition().getY());
 
 	//enemies
-	// ...
+	//guardar si esta vivo o no
+	for (pugi::xml_node enemyNode = configParameters.child("entities").child("enemies").child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
+	{
+		sceneNode.child("entities").child("enemies").child("enemy").attribute("Alive").set_value();
+	}
+	
 
 	//Saves the modifications to the XML
 	loadFile.save_file("config.xml");
