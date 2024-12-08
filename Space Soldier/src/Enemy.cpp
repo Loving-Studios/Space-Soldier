@@ -36,7 +36,7 @@ bool Enemy::Start() {
 	jump = false;
 	Giro = false;
 	Lado = false;
-	encontrado = false;
+	//encontrado = false;
 	muerto = true;
 
 	//Load animations
@@ -105,26 +105,39 @@ bool Enemy::Update(float dt)
 		pathfinding->ResetPath(tilePos);
 	}
 
+	Vector2D currentPos = GetPosition();
+	Vector2D tilePos = Engine::GetInstance().map.get()->WorldToMap(currentPos.getX(), currentPos.getY());
+
+	Vector2D playerPos = Engine::GetInstance().scene->GetPlayerPosition();
+	Vector2D enemyTilePos = Engine::GetInstance().map->WorldToMap(GetPosition().getX(), GetPosition().getY());//sacar posicion enemigo
+	Vector2D playerTilePos = Engine::GetInstance().map->WorldToMap(playerPos.getX(), playerPos.getY());//sacar posicion player
+
+	int distance = abs(enemyTilePos.getX() - playerTilePos.getX()) + abs(enemyTilePos.getY() - playerTilePos.getY()); //calcular distancia entre enemigo y player
+
+
+
+
+
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
-		encontrado = !encontrado;
+		//encontrado = !encontrado;
 	}
 		while (pathfinding->pathTiles.empty()) {
 			pathfinding->PropagateAStar(SQUARED);
 		}
 
-		if(encontrado == true) {//una vez encontrado el player 
+		if(distance <= 5) {//una vez encontrado el player 
 			patrullando = true;
-			if (position.getX() < ultimaTile){//comparar si la posicion del enemigo es más pequeña que la proxima posicion, moverse hacia esa posicion
-				velocity.x = 0.2 * 8;
+			if (enemyTilePos.getX() < playerTilePos.getX() && suelo == true){//comparar si la posicion del enemigo es más pequeña que la proxima posicion, moverse hacia esa posicion
+				velocity.x = 0.2 * 5;//derecha
 				currentAnimation = &moveR;
-				ResetPath();
+				//ResetPath();
 			}
-			else if (position.getX() > ultimaTile) {//comparar si la posicion del enemigo es más grande que la proxima posicion, moverse hacia esa posicion
-				velocity.x = -0.2 * 8;
+			else if (enemyTilePos.getX() > playerTilePos.getX() && suelo == true) {//comparar si la posicion del enemigo es más grande que la proxima posicion, moverse hacia esa posicion
+				velocity.x = -0.2 * 5;//izquierda
 				currentAnimation = &moveL;
-				ResetPath();
+				//ResetPath();
 			}
-		}
+		}else{ patrullando = false; }
 if (type == EnemyType::VOLADOR) {
 	if (!patrullando && Giro) {
 		if (movimiento == 2) {//si se mete en un switch se vuelve loco
@@ -227,8 +240,6 @@ if (type == EnemyType::VOLADOR) {
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F9) == KEY_DOWN)
 		showPath = !showPath;
 
-	Vector2D currentPos = GetPosition();
-	Vector2D tilePos = Engine::GetInstance().map.get()->WorldToMap(currentPos.getX(), currentPos.getY());
 
 	if (showPath)
 	{
@@ -247,6 +258,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLATFORM:
 		LOG("Enemy Collision PLATFORM");
+		suelo = true;
 		break;
 	case ColliderType::PLAYER: {
 		Vector2D playerPos = ((Player*)physB->listener)->GetPosition();
@@ -296,6 +308,7 @@ void Enemy::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 	{
 	case ColliderType::PLATFORM:
 		LOG("End Enemy Collision PLATFORM");
+		suelo = false;
 		break;
 	case ColliderType::JUMP:
 		LOG("End Enemy Collision JUMP");
