@@ -110,7 +110,7 @@ bool Enemy::Update(float dt)
 	Vector2D tilePos = Engine::GetInstance().map.get()->WorldToMap(currentPos.getX(), currentPos.getY());
 
 	Vector2D playerPos = Engine::GetInstance().scene->GetPlayerPosition();
-	Vector2D enemyTilePos = Engine::GetInstance().map->WorldToMap(GetPosition().getX(), GetPosition().getY());//sacar posicion enemigo
+	enemyTilePos = Engine::GetInstance().map->WorldToMap(GetPosition().getX(), GetPosition().getY());//sacar posicion enemigo
 	Vector2D playerTilePos = Engine::GetInstance().map->WorldToMap(playerPos.getX(), playerPos.getY());//sacar posicion player
 
 	int distance = abs(enemyTilePos.getX() - playerTilePos.getX()) + abs(enemyTilePos.getY() - playerTilePos.getY()); //calcular distancia entre enemigo y player
@@ -197,10 +197,9 @@ bool Enemy::Update(float dt)
 		}
 }
 	if (type == EnemyType::TERRESTRE) {
-		if (position.getY() > 900) {
-			// Reinicio posición del player cuando cae más de 900px
-			//Volver al inicio
-			Engine::GetInstance().scene.get()->LoadState();
+		if (position.getY() > 650) {
+			LOG("entrooooo");
+			Engine::GetInstance().scene.get()->Valoresenemigos();
 		}
 	if (!patrullando && Giro) {
 		Giro = false;
@@ -280,7 +279,13 @@ bool Enemy::Update(float dt)
 
 	return true;
 }
+void Enemy::Secayo(Vector2D posicion) {//No funciona el reseteo de enmigos si se caen
+	Vector2D posicionOr = posicion;
+	enemyTilePos.setX(posicionOr.getX());
+	enemyTilePos.setY(posicionOr.getY());
+	//position = posicionOr;
 
+}
 void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	if (isDead) return;
 	switch (physB->ctype)
