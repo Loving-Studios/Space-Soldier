@@ -126,7 +126,7 @@ bool Enemy::Update(float dt)
 			pathfinding->PropagateAStar(SQUARED);
 		}
 
-		if(distance <= 5) {//una vez encontrado el player 
+		if(distance <= 3) {//una vez encontrado el player 
 			patrullando = true;
 		}else{ patrullando = false; }
 
@@ -199,38 +199,40 @@ bool Enemy::Update(float dt)
 }
 	if (type == EnemyType::TERRESTRE) {
 	if (!patrullando && Giro) {
+		Giro = false;
 		if (movimiento == 2) {//si se mete en un switch se vuelve loco
 			movimiento = 1;
-			Giro = false;
-		}
-		else {
+			
+		}else {
 			movimiento = 2;
-			Giro = false;
 		}	
 	} 
 
 	if (patrullando) {
-		if (suelo) {
+		if (suelo){
 			if (enemyTilePos.getX() < playerTilePos.getX()) {
 				velocity.x = 0.2 * 5;  // Derecha
-				if (jump == true) {//saltar cuando el terreno se eleve
+				if (jump) {//saltar cuando el terreno se eleve
 					velocity.y = -4;
+					velocity.x = 5;
 				}
 				currentAnimation = &moveR;
 			}
 			else if (enemyTilePos.getX() > playerTilePos.getX()) {
 				velocity.x = -0.2 * 5;  // Izquierda
-				if (jump == true) {//saltar cuando el terreno se eleve
+				if (jump) {//saltar cuando el terreno se eleve
 					velocity.y = -4;
+					velocity.x = -1 * 5;
 				}
 				currentAnimation = &moveL;
 			}
 		}
+		//else { patrullando = false; Giro = true; if (movimiento == 2) {movimiento = 1;}else {movimiento = 2;}}
 	}else{
 		switch (movimiento)
 		{
 		case 1:
-			if (jump == true) {//saltar cuando el terreno se eleve
+			if (jump) {//saltar cuando el terreno se eleve
 				velocity.y = -4;
 				velocity.x = 15;
 				currentAnimation = &moveR;
@@ -240,7 +242,7 @@ bool Enemy::Update(float dt)
 			break;
 			
 		case 2:
-			if (jump == true) {//saltar cuando el terreno se eleve
+			if (jump) {//saltar cuando el terreno se eleve
 				velocity.y = -4;
 				velocity.x = -1 * 15;
 				currentAnimation = &moveL;
@@ -277,26 +279,16 @@ bool Enemy::Update(float dt)
 
 	return true;
 }
-void Enemy::OnCollisionStay(PhysBody* physA, PhysBody* physB) {
+
+	
+
+void Enemy::OnCollision(PhysBody* physA, PhysBody* physB){
 	if (isDead) return;
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
 		LOG("Enemy Collision PLATFORM");
 		suelo = true;
-		break;
-	default:
-		break;
-	}
-}
-
-void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
-	if (isDead) return;
-	switch (physB->ctype)
-	{
-	case ColliderType::PLATFORM:
-		LOG("Enemy Collision PLATFORM");
-		//(suelo = true;
 		break;
 	case ColliderType::PLAYER: {
 		Vector2D playerPos = ((Player*)physB->listener)->GetPosition();
@@ -354,6 +346,14 @@ void Enemy::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 		break;
 	case ColliderType::PLAYER:
 		LOG("End Enemy Collision Player");
+		break;
+	case ColliderType::FIN:
+		LOG("Enemy Collision Giro");
+		Giro = false;
+		break;
+	case ColliderType::LADOS:
+		LOG("Enemy volador Giro");
+		Lado = false;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("End Enemy Collision UNKNOWN");

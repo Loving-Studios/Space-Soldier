@@ -187,6 +187,18 @@ void Scene::GotoStart()
 	//Player position
 	Vector2D playerPos = Vector2D(490,450);
 	player->SetPosition(playerPos);
+	pugi::xml_document loadFile;
+	pugi::xml_parse_result result = loadFile.load_file("config.xml");
+	pugi::xml_node sceneNode = loadFile.child("config").child("scene1");
+	for (Enemy* enemy : enemyList)
+	{
+		pugi::xml_node enemyNode = sceneNode.child("entities").child("enemies").find_child_by_attribute("name", enemy->GetName().c_str());
+		float x = enemyNode.attribute("xo").as_float(-1.0f); // Valor por defecto en caso de error
+		float y = enemyNode.attribute("yo").as_float(-1.0f);
+		Vector2D enemyPos(x, y);
+		enemy->SetPosition(enemyPos);
+	}
+	
 	//bool A = true;
 	//enemy->VIVO(A);
 }
