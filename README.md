@@ -38,4 +38,4 @@ by Pablo Sanjose & Víctor González
 - Los paths son visibles desde el estado Debug Mode F9 Show Collisions.
 - Hay varios checkpoints por el mapa, para que cuando el player los atraviese sea como si aprietas el F5 y guardas partida, si te caes al vacío volverás al último checkpoint.
 - Está montado un sistema para los voladores es decir, una cárcel de la que no pueden salir, mientras te persiguen no pueden salir de su zona de patrullaje.
-- Para los enemigos terrestre queríamos implementar un método en el que si se caían del mapa hiciesen respawn en su posición de spawn original, no hemos podido pulirlo para que funcione aún así está en el código, no hace nada.
+- Para los enemigos terrestre si se caen al perseguirte hemos implementado un método para que vuelvan a hacer spawn en su posición de origen.
