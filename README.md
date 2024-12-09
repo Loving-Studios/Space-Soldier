@@ -14,7 +14,7 @@ by Pablo Sanjose & Víctor González
 - F6 Cargar estado del juego
 - F9 Mostrar los colliders del juego
 - F10 God Mode
-- F11 Capar/descapar los fps a 30
+- F11 Capar/descapar los fps a 30 
 
 - ESC cerrar el juego
 
