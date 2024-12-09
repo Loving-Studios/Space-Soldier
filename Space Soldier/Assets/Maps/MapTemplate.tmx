@@ -18039,14 +18039,14 @@
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
-  <object id="125" x="693.833" y="445.917" width="77.5" height="37"/>
+  <object id="125" x="693.833" y="445.917" width="46" height="37"/>
   <object id="139" x="1611" y="471"/>
   <object id="140" x="2198" y="407.333"/>
   <object id="145" x="3001" y="566" width="461" height="26"/>
   <object id="146" x="3011" y="384" width="465" height="28"/>
   <object id="149" x="5148" y="12" width="360" height="50"/>
   <object id="150" x="5107" y="630" width="360" height="64"/>
-  <object id="160" x="1016" y="444.667" width="77.5" height="37"/>
+  <object id="160" x="1053" y="444.667" width="40.5" height="37"/>
  </objectgroup>
  <objectgroup id="19" name="lados">
   <object id="147" x="3042" y="201" width="25" height="388"/>
