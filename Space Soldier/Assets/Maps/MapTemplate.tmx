@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="224" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="155">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="224" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="20" nextobjectid="162">
  <properties>
   <property name="Navigation" type="bool" value="true"/>
  </properties>
@@ -18011,6 +18011,11 @@
   <object id="44" x="5856" y="544" width="32" height="32"/>
   <object id="45" x="6240" y="416" width="32" height="32"/>
   <object id="49" x="6368" y="416" width="800" height="96"/>
+  <object id="155" x="0.357955" y="776.528" width="7167.57" height="6.11767"/>
+  <object id="156" x="3416" y="1440" width="8" height="8"/>
+  <object id="157" x="0.122121" y="0.189776" width="7167.81" height="6.11767"/>
+  <object id="158" x="7164.27" y="6.89065" width="2.81818" height="768.99"/>
+  <object id="159" x="0.515152" y="7.08076" width="2.81818" height="768.99"/>
  </objectgroup>
  <objectgroup id="16" name="Jump">
   <properties>
@@ -27009,11 +27014,12 @@
    <tile/>
   </data>
  </layer>
- <objectgroup id="14" name="Checkpoint" visible="0">
+ <objectgroup id="14" name="Checkpoint">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
   <object id="98" x="3104" y="0" width="32" height="768"/>
   <object id="134" x="4608" y="0" width="32" height="768"/>
+  <object id="160" x="486.667" y="1.375" width="36" height="786.125"/>
  </objectgroup>
 </map>

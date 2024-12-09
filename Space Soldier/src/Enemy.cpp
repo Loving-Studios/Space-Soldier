@@ -126,7 +126,7 @@ bool Enemy::Update(float dt)
 			pathfinding->PropagateAStar(SQUARED);
 		}
 
-		if(distance <= 5) {//una vez encontrado el player 
+		if(distance <= 5 && suelo == true) {//una vez encontrado el player 
 			patrullando = true;
 		}else{ patrullando = false; }
 		if (type == EnemyType::VOLADOR) {
