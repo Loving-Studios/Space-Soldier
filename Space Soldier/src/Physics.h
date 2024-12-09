@@ -31,6 +31,7 @@ enum class ColliderType {
 	JUMP,
 	FIN,
 	LADOS,
+	CARCEL,
 	UNKNOWN
 	// ..
 };

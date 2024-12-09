@@ -186,7 +186,8 @@ bool Map::Load(std::string path, std::string fileName)
             {"Checkpoint", 1},
             {"Jump", 2},
             {"SeAcabo", 3},
-            {"lados", 4}
+            {"lados", 4},
+            {"CarcelVolador", 5}
         };
 
         float x = 0.0f;
@@ -236,6 +237,12 @@ bool Map::Load(std::string path, std::string fileName)
                     rect->ctype = ColliderType::LADOS;
                     std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
                     std::cout << "CREATED LADOS" << std::endl;
+                    break;
+                case 5: // Carcel
+                    rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
+                    rect->ctype = ColliderType::CARCEL;
+                    std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
+                    std::cout << "CREATED Carcel" << std::endl;
                     break;
                 default: // Plataformas
                     rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);
