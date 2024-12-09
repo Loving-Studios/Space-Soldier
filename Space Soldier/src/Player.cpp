@@ -152,7 +152,7 @@ bool Player::Update(float dt)
 	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
 	position.setY(METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2);
 
-	if (position.getY() > 900) {
+	if (position.getY() > 800) {
 		// Reinicio posición del player cuando cae más de 900px
 		//Volver al inicio
 		Engine::GetInstance().scene.get()->LoadState();
