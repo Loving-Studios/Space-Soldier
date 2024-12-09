@@ -279,13 +279,6 @@ bool Enemy::Update(float dt)
 
 	return true;
 }
-void Enemy::Secayo(Vector2D posicion) {//No funciona el reseteo de enmigos si se caen
-	Vector2D posicionOr = posicion;
-	enemyTilePos.setX(posicionOr.getX());
-	enemyTilePos.setY(posicionOr.getY());
-	//position = posicionOr;
-
-}
 void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	if (isDead) return;
 	switch (physB->ctype)

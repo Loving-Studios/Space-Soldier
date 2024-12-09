@@ -206,7 +206,7 @@ void Scene::Valoresenemigos(){
 			continue;
 		}
 		Vector2D enemyPos(x, y);
-		enemy->Secayo(enemyPos);
+		enemy->SetPosition(enemyPos);
 
 	}
 }

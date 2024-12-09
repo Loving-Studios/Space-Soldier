@@ -40,7 +40,6 @@ public:
     void VIVO (bool v);
     bool SetVIVO();
     std::string GetName() const { return name; };
-    void Secayo(Vector2D posicion);
 
     void ResetPath();
 
