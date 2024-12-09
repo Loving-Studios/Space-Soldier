@@ -6,22 +6,23 @@ by Pablo Sanjose & Víctor González
 - A mover hacia la izquierda
 - D mover hacia la derecha
 - Space para saltar
+- H Mostrar el Help Menu
+- F1 / F2 empezar desde el inicio del nivel (Hemos dejado implenetada la posibilidad del segundo nivel ya que lo hemos empezado a desarrollar)
+- F3 Empezar desde e inicio del current level
 - F4 Hacer animación de muerte
-- F9 mostrar los colliders del juego
+- F5 Guardar estado del juego
+- F6 Cargar estado del juego
+- F9 Mostrar los colliders del juego
 - F10 God Mode
 - F11 Capar/descapar los fps a 30
-- H mostrar el Help Menu
+
 - ESC cerrar el juego
 
--Nuestro God Mode otorga al jugador saltos infinitos de tal forma que por mucho que se caiga de las plataformas puede volver realizando varios saltos, hemos optado por esta manera de hacer el God Mode ya que no conseguíamos parar las fuerzas en Y que afectaban al personaje. Por mucho que cambiásemos siempre de manera más lenta el personaje seguía cayendo hacia abajo.
-
--Para esta primera versión hemos implementado la animación de muerte en un botón, ya que por ahora al no haber enemigos no podía morirse el personaje. Además hemos añadido dos animaciones de muerte, una para cada lado con el objetivo de que más adelante sea más fácil de implementar. En estos momentos a la animación le falta un control de errores ya que ahora mismo mientras está muerto como tiene una animación de muerte hacia la izquierda y otro hacia la derecha deja pasar de una a otra en vez de mantener al personaje en una.
-
--Para el HelpMenu hemos decidido mostrar una imagen con los controles del juego. Esta imagen se muestra por pantalla al pulsar la tecla H arriba a la izquierda. En esta imagen se pueden ver tanto los controles de movimiento del personaje como todas las teclas del debugMode. Si se vuelve a pulsar la tecla H la imagen del HelpMenu se esconde.
+-El GodMode sigue como en la primera entrega, son saltos infinitos ya que por tiempo y preferencia de otras características así como mecánicas hemos priorizado el tiempo en perfeccionar otras cosas.
 
 ### *Implemented Features* 
 
-- Hemos añadido una canción en bucle para el Background music
+- Hemos añadido más sonidos al juego, ahora hay: Canción de fondo, sonido al saltar, sonido al morir, sonido al matar enemigo, sonido de pop-up al cargar HelpMenu, sonido de cargar partida, sonido de guardar partida, sonido de checkpoint.
 - Se ha implementado una función para que cuando el personaje caiga en Y al vacío vuelva al inicio del mapa junto a la cámara.
 - Hemos cambiado el ruido que suena cuando el jugador interactúa con el ítem.
 - Para el salto hemos hecho dos animaciones, ya que si saltaba mientras se movía hacia la izquierda, aunque se movía hacia la izquierda saltaba mirando hacia la derecha.
