@@ -129,6 +129,7 @@ bool Enemy::Update(float dt)
 		if(distance <= 5) {//una vez encontrado el player 
 			patrullando = true;
 		}else{ patrullando = false; }
+
 		if (type == EnemyType::VOLADOR) {
 			if (!patrullando && Giro) {//Subir y bajar duranmte el modo patrullar
 				if (movimiento == 2) {//si se mete en un switch se vuelve loco
@@ -209,19 +210,21 @@ bool Enemy::Update(float dt)
 	} 
 
 	if (patrullando) {
-		if (enemyTilePos.getX() < playerTilePos.getX()) {
-			velocity.x = 0.2 * 5;  // Derecha
-			if (jump == true) {//saltar cuando el terreno se eleve
-				velocity.y = -4;
+		if (suelo) {
+			if (enemyTilePos.getX() < playerTilePos.getX()) {
+				velocity.x = 0.2 * 5;  // Derecha
+				if (jump == true) {//saltar cuando el terreno se eleve
+					velocity.y = -4;
+				}
+				currentAnimation = &moveR;
 			}
-			currentAnimation = &moveR;
-		}
-		else if (enemyTilePos.getX() > playerTilePos.getX()) {
-			velocity.x = -0.2 * 5;  // Izquierda
-			if (jump == true) {//saltar cuando el terreno se eleve
-				velocity.y = -4;
+			else if (enemyTilePos.getX() > playerTilePos.getX()) {
+				velocity.x = -0.2 * 5;  // Izquierda
+				if (jump == true) {//saltar cuando el terreno se eleve
+					velocity.y = -4;
+				}
+				currentAnimation = &moveL;
 			}
-			currentAnimation = &moveL;
 		}
 	}else{
 		switch (movimiento)
@@ -274,6 +277,18 @@ bool Enemy::Update(float dt)
 
 	return true;
 }
+void Enemy::OnCollisionStay(PhysBody* physA, PhysBody* physB) {
+	if (isDead) return;
+	switch (physB->ctype)
+	{
+	case ColliderType::PLATFORM:
+		LOG("Enemy Collision PLATFORM");
+		suelo = true;
+		break;
+	default:
+		break;
+	}
+}
 
 void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	if (isDead) return;
@@ -281,7 +296,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLATFORM:
 		LOG("Enemy Collision PLATFORM");
-		suelo = true;
+		//(suelo = true;
 		break;
 	case ColliderType::PLAYER: {
 		Vector2D playerPos = ((Player*)physB->listener)->GetPosition();
