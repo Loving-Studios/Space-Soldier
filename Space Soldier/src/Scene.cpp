@@ -181,14 +181,70 @@ void Scene::SaveState()
 	loadFile.save_file("config.xml");
 
 }
+void Scene::Valoresenemigos(){
+	pugi::xml_document loadFile;
+	pugi::xml_parse_result result = loadFile.load_file("config.xml");
+	pugi::xml_node sceneNode = loadFile.child("config").child("scene1");
+	for (Enemy* enemy : enemyList)
+	{
+		if (!enemy) {
+			LOG("Error: Puntero enemigo nulo en enemyList.");
+			continue;
+		}
+		pugi::xml_node enemyNode = sceneNode.child("entities").child("enemies").find_child_by_attribute("name", enemy->GetName().c_str());
+
+		if (!enemyNode) {
+			LOG("Error: Nodo para enemigo %s no encontrado.", enemy->GetName().c_str());
+			continue;
+		}
+		float x = enemyNode.attribute("xo").as_float(-1.0f); // Valor por defecto en caso de error
+		float y = enemyNode.attribute("yo").as_float(-1.0f);
+		//Vector2D enemyPos(enemyNode.attribute("x").as_float(), enemyNode.attribute("y").as_float());
+
+		if (x < 0 || y < 0) {
+			LOG("Error: Atributos inválidos para enemigo %s.", enemy->GetName().c_str());
+			continue;
+		}
+		Vector2D enemyPos(x, y);
+		enemy->Secayo(enemyPos);
+
+	}
+}
 
 void Scene::GotoStart()
 {
 	//Player position
 	Vector2D playerPos = Vector2D(490,450);
 	player->SetPosition(playerPos);
-	//bool A = true;
-	//enemy->VIVO(A);
+	pugi::xml_document loadFile;
+	pugi::xml_parse_result result = loadFile.load_file("config.xml");
+	pugi::xml_node sceneNode = loadFile.child("config").child("scene1");
+	for (Enemy* enemy : enemyList)
+	{
+		if (!enemy) {
+			LOG("Error: Puntero enemigo nulo en enemyList.");
+			continue;
+		}
+		pugi::xml_node enemyNode = sceneNode.child("entities").child("enemies").find_child_by_attribute("name", enemy->GetName().c_str());
+
+		if (!enemyNode) {
+			LOG("Error: Nodo para enemigo %s no encontrado.", enemy->GetName().c_str());
+			continue;
+		}
+		bool vivo = enemyNode.attribute("Alive").as_bool();
+		float x = enemyNode.attribute("xo").as_float(-1.0f); // Valor por defecto en caso de error
+		float y = enemyNode.attribute("yo").as_float(-1.0f);
+		//Vector2D enemyPos(enemyNode.attribute("x").as_float(), enemyNode.attribute("y").as_float());
+
+		if (x < 0 || y < 0) {
+			LOG("Error: Atributos inválidos para enemigo %s.", enemy->GetName().c_str());
+			continue;
+		}
+		Vector2D enemyPos(x, y);
+		enemy->SetPosition(enemyPos);
+	
+	}
+	
 }
 // Called each loop iteration
 bool Scene::Update(float dt)

@@ -35,16 +35,17 @@ public:
     void SetPosition(Vector2D pos);
 
     Vector2D GetPosition();
+    Vector2D enemyTilePos;
     
     void VIVO (bool v);
     bool SetVIVO();
-    std::string GetName() const { return name; }
+    std::string GetName() const { return name; };
+    void Secayo(Vector2D posicion);
 
     void ResetPath();
 
     void OnCollision(PhysBody* physA, PhysBody* physB);
 
-    void OnCollisionStay(PhysBody* physA, PhysBody* physB);
 
     void OnCollisionEnd(PhysBody* physA, PhysBody* physB);
 

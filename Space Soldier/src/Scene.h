@@ -46,6 +46,8 @@ public:
 	//Called in PostUpdate
 	void GotoStart();
 
+	void Valoresenemigos();
+
 	Vector2D GetPlayerPosition();
 
 	bool helpMenuVisible = false;
