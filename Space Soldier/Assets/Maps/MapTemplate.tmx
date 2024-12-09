@@ -18016,6 +18016,16 @@
   <object id="157" x="7136" y="64" width="32" height="768"/>
   <object id="159" x="8" y="52" width="32" height="768"/>
  </objectgroup>
+ <objectgroup id="20" name="CarcelVolador">
+  <object id="161" x="3008" y="384" width="480" height="32"/>
+  <object id="163" x="3456" y="384" width="32" height="224"/>
+  <object id="165" x="3008" y="576" width="480" height="32"/>
+  <object id="167" x="3008" y="384" width="32" height="224"/>
+  <object id="169" x="5184" y="672" width="192" height="32"/>
+  <object id="171" x="5184" y="32" width="32" height="672"/>
+  <object id="173" x="5344" y="32" width="32" height="640"/>
+  <object id="175" x="5184" y="32" width="192" height="32"/>
+ </objectgroup>
  <objectgroup id="16" name="Jump">
   <properties>
    <property name="Draw" type="bool" value="true"/>
@@ -18037,16 +18047,6 @@
   <object id="149" x="5148" y="12" width="360" height="50"/>
   <object id="150" x="5107" y="630" width="360" height="64"/>
   <object id="160" x="1016" y="444.667" width="77.5" height="37"/>
- </objectgroup>
- <objectgroup id="20" name="CarcelVolador">
-  <object id="161" x="3008" y="384" width="480" height="32"/>
-  <object id="163" x="3456" y="384" width="32" height="224"/>
-  <object id="165" x="3008" y="576" width="480" height="32"/>
-  <object id="167" x="3008" y="384" width="32" height="224"/>
-  <object id="169" x="5184" y="672" width="192" height="32"/>
-  <object id="171" x="5184" y="32" width="32" height="672"/>
-  <object id="173" x="5344" y="32" width="32" height="640"/>
-  <object id="175" x="5184" y="32" width="192" height="32"/>
  </objectgroup>
  <objectgroup id="19" name="lados">
   <object id="147" x="3042" y="201" width="25" height="388"/>

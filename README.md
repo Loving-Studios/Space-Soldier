@@ -22,7 +22,8 @@ by Pablo Sanjose & Víctor González
 
 ### *Implemented Features* 
 
-- Hemos añadido más sonidos al juego, ahora hay: Canción de fondo, sonido al saltar, sonido al morir, sonido al matar enemigo, sonido de pop-up al cargar HelpMenu, sonido de cargar partida, sonido de guardar partida, sonido de checkpoint.
+- Hemos añadido más sonidos al juego, ahora hay: Canción de fondo, sonido al saltar, sonido al morir, sonido al matar enemigo, sonido de pop-up al cargar HelpMenu, sonido de cargar partida, sonido de guardar partida, sonido de checkpoint y sonido de chocar con el item.
+- También está comentado pero no implementado el sonido de andar del PJ, por falta de tiempo y querer priorizar otras cosas del proyecto hemos dejado comentado este apartado ya que nos estaba dando unos problemitas, solo sonada el sonido cuando colisionabas con el suelo pero no constantemente en bucel, es fácil de solucionar y sabemos como hacerlo así que para las siguiente entrega estará.
 - Se ha implementado una función para que cuando el personaje caiga en Y al vacío vuelva al inicio del mapa junto a la cámara.
 - Hemos cambiado el ruido que suena cuando el jugador interactúa con el ítem.
 - Para el salto hemos hecho dos animaciones, ya que si saltaba mientras se movía hacia la izquierda, aunque se movía hacia la izquierda saltaba mirando hacia la derecha.
