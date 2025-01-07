@@ -463,6 +463,11 @@
 					</animations>
 				</enemy>
 			</enemies>
+			<items>
+				<item name="Coin" x="200" y="672" yo="200" xo="672" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="true" Alive="true" vida="false"/>
+				<item name="botiquin" x="200" y="672" yo="200" xo="672" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="true" Alive="true" vida="true"/>
+				<item name="bala" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="false" Alive="true" vida="false"/>
+			</items>
 		</entities>
 	</scene2>
 </config>
