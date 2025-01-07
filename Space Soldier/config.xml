@@ -17,7 +17,7 @@
 	<scene1>
 		<map path="Assets/Maps/" name="MapTemplate.tmx" />
 		<entities>
-			<player x="3079" y="551" w="48" h="32" texture="Assets/Textures/player/PlayerCanvas.png">
+			<player x="3079" y="551" w="48" h="32" vidas="3" texture="Assets/Textures/player/PlayerCanvas.png">
 				<animations>
 					<idle loop="true" speed="0.2">
 						<frame x="0" y="0" w="48" h="48" />
@@ -317,6 +317,11 @@
 					</animations>
 				</enemy>
 			</enemies>
+			<items>
+				<item name="Coin" x="200" y="672" yo="200" xo="672" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="true" Alive="true">
+					
+				</item>
+			</items>
 		</entities>
 	</scene1>
 	<scene2>

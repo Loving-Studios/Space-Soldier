@@ -4,6 +4,7 @@
 #include "SDL2/SDL.h"
 
 struct SDL_Texture;
+enum class ItemType { CURA, MONEDA, BALA };
 
 class Item : public Entity
 {
@@ -11,6 +12,7 @@ public:
 
 	Item();
 	virtual ~Item();
+	ItemType type;
 
 	bool Awake();
 
