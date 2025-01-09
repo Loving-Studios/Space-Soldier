@@ -388,7 +388,7 @@
 				</animations>
 			</player>
 			<enemies>
-				<enemy name="boss" x="5240" y="350" yo="555" xo="5257" w="48" h="38" texture="Assets/Textures/All.png" gravity="false" type="volador" Alive="true">
+				<enemy name="boss" x="5240" y="350" yo="555" xo="5257" w="48" h="38" texture="Assets/Textures/All.png" gravity="true" type="boss" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />

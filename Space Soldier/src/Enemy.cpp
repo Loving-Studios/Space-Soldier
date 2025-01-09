@@ -75,6 +75,9 @@ bool Enemy::Start() {
 	else if (typeStr == "volador") {
 		type = EnemyType::VOLADOR;
 	}
+	else if (typeStr == "boss") {
+		type = EnemyType::BOSS;
+	}
 
 	deathFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Death.wav");
 	killMonsterFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/KillMonster.wav");
@@ -255,6 +258,66 @@ bool Enemy::Update(float dt)
 		}
 	}
 }
+	if (type == EnemyType::BOSS) {
+		if (position.getY() > 650) {
+			LOG("entrooooo");
+			Engine::GetInstance().scene.get()->Valoresenemigos();
+		}
+		if (!patrullando && Giro) {
+			Giro = false;
+			if (movimiento == 2) {//si se mete en un switch se vuelve loco
+				movimiento = 1;
+			}
+			else {
+				movimiento = 2;
+			}
+		}
+
+		if (patrullando) {
+			if (suelo) {
+				if (enemyTilePos.getX() < playerTilePos.getX()) {
+					velocity.x = 0.2 * 5;  // Derecha
+					if (jump) {//saltar cuando el terreno se eleve
+						velocity.y = -4;
+					}
+					currentAnimation = &moveR;
+				}
+				else if (enemyTilePos.getX() > playerTilePos.getX()) {
+					velocity.x = -0.2 * 5;  // Izquierda
+					if (jump) {//saltar cuando el terreno se eleve
+						velocity.y = -4;
+					}
+					currentAnimation = &moveL;
+				}
+			}
+		}
+		else {
+			switch (movimiento)
+			{
+			case 1:
+				if (jump) {//saltar cuando el terreno se eleve
+					velocity.y = -4;
+					velocity.x = 15;
+					currentAnimation = &moveR;
+				}
+				velocity.x = 0.2 * 5;
+				currentAnimation = &moveR;
+				break;
+
+			case 2:
+				if (jump) {//saltar cuando el terreno se eleve
+					velocity.y = -4;
+					velocity.x = -1 * 15;
+					currentAnimation = &moveL;
+				}
+				velocity.x = -0.2 * 5;
+				currentAnimation = &moveL;
+				break;
+			default:
+				break;
+			}
+		}
+	}
 	pbody->body->SetLinearVelocity(velocity);
 
 	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics.  

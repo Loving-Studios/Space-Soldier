@@ -22,7 +22,7 @@ bool Item::Awake() {
 bool Item::Start() {
 
 	//initilize textures
-	texture = Engine::GetInstance().textures.get()->Load("Assets/Textures/goldCoin.png");
+	texture = Engine::GetInstance().textures.get()->Load(parameters.attribute("texture").as_string());
 	
 	// L08 TODO 4: Add a physics to an item - initialize the physics body
 	Engine::GetInstance().textures.get()->GetSize(texture, texW, texH);
@@ -30,6 +30,18 @@ bool Item::Start() {
 
 	// L08 TODO 7: Assign collider type
 	pbody->ctype = ColliderType::ITEM;
+
+	std::string typeStr = parameters.attribute("name").as_string();
+
+	if (typeStr == "Coin") {
+		type = ItemType::MONEDA;
+	}
+	else if (typeStr == "botiquin") {
+		type = ItemType::CURA;
+	}
+	else if (typeStr == "bala") {
+		type = ItemType::BALA;
+	}
 
 	return true;
 }

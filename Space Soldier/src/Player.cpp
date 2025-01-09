@@ -6,6 +6,7 @@
 #include "Render.h"
 #include "Scene.h"
 #include "Log.h"
+#include "Item.h"
 #include "Physics.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
@@ -224,6 +225,7 @@ void Player::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 void Player::Die() {
 
 	vidas--;
+	//actualizar interfaz de vidas
 
 	if(vidas == 0){
 		LOG("Player dies");
@@ -232,6 +234,13 @@ void Player::Die() {
 		// Lógica adicional para reiniciar o mostrar pantalla de fin de juego
 	}
 }
+
+void Player::recVidas() {
+
+	vidas++;
+	//actualizar interfaz de vidas
+}
+
 
 void Player::SetPosition(Vector2D pos) {
 	pos.setX(pos.getX() + texW / 2);

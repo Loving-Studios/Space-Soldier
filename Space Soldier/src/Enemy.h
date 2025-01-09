@@ -7,7 +7,7 @@
 
 struct SDL_Texture;
 
-enum class EnemyType { TERRESTRE, VOLADOR };
+enum class EnemyType { TERRESTRE, VOLADOR, BOSS };
 
 class Enemy : public Entity
 {
@@ -66,7 +66,7 @@ private:
     int texW, texH, ultimaTile;
     pugi::xml_node parameters;
     Animation* currentAnimation = nullptr;
-    Animation idle, jumpR, jumpL, moveR, moveL, deathR, deathL, crouch;
+    Animation idle, jumpR, jumpL, moveR, moveL, deathR, deathL, crouch, awake, cargarR, cargarL, damageR, damageL;
     PhysBody* pbody;
     Pathfinding* pathfinding;
 };

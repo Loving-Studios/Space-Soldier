@@ -35,6 +35,7 @@ public:
 	void SetPosition(Vector2D pos);
 
 	void Die();
+	void recVidas();
 
 	Vector2D GetPosition();
 
