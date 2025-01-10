@@ -7,8 +7,9 @@
 #include "Scene.h"
 #include "Log.h"
 #include "Physics.h"
+#include "Map.h"
 
-Item::Item() : Entity(EntityType::ITEM)
+Item::Item() : Entity(EntityType::ITEM), isPicked(false)
 {
 	name = "item";
 }
@@ -23,6 +24,12 @@ bool Item::Start() {
 
 	//initilize textures
 	texture = Engine::GetInstance().textures.get()->Load(parameters.attribute("texture").as_string());
+	position.setX(parameters.attribute("x").as_int());
+	position.setY(parameters.attribute("y").as_int());
+	texW = parameters.attribute("w").as_int();
+	texH = parameters.attribute("h").as_int();
+	name = parameters.attribute("name").as_string();
+	alive = parameters.attribute("Alive").as_bool();
 	
 	// L08 TODO 4: Add a physics to an item - initialize the physics body
 	Engine::GetInstance().textures.get()->GetSize(texture, texW, texH);
@@ -32,7 +39,6 @@ bool Item::Start() {
 	pbody->ctype = ColliderType::ITEM;
 
 	std::string typeStr = parameters.attribute("name").as_string();
-
 	if (typeStr == "Coin") {
 		type = ItemType::MONEDA;
 	}
@@ -57,6 +63,23 @@ bool Item::Update(float dt)
 	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY());
 
 	return true;
+}
+
+bool Item::IsAlive() { return alive; }
+
+void Item::SetAlive(bool isAlive) { alive = isAlive; }
+
+Vector2D Item::GetPosition()
+{
+	b2Vec2 bodyPos = pbody->body->GetTransform().p;
+	return Vector2D(METERS_TO_PIXELS(bodyPos.x), METERS_TO_PIXELS(bodyPos.y));
+}
+
+void Item::SetPosition(Vector2D pos) {
+	pos.setX(pos.getX() + texW / 2);
+	pos.setY(pos.getY() + texH / 2);
+	b2Vec2 bodyPos = b2Vec2(PIXEL_TO_METERS(pos.getX()), PIXEL_TO_METERS(pos.getY()));
+	pbody->body->SetTransform(bodyPos, 0);
 }
 
 bool Item::CleanUp()

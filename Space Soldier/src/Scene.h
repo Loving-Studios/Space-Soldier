@@ -3,6 +3,7 @@
 #include "Module.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Item.h"
 
 struct SDL_Texture;
 
@@ -61,7 +62,9 @@ private:
 	//L03: TODO 3b: Declare a Player attribute
 	Player* player;
 	Enemy* enemy;
+	Item* item;
 	pugi::xml_document configFile;
 	std::vector<Enemy*> enemyList;
+	std::vector<Item*> itemList;
 	bool once = false;
 };

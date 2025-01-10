@@ -55,6 +55,7 @@ bool EntityManager::CleanUp()
 	{
 		if (entity->active == false) continue;
 		ret = entity->CleanUp();
+		delete entity;
 	}
 
 	entities.clear();

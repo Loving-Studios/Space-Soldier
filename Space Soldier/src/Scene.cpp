@@ -13,6 +13,7 @@
 #include "Item.h"
 
 
+
 Scene::Scene() : Module()
 {
 	name = "scene1";
@@ -36,7 +37,6 @@ bool Scene::Awake()
 	//L08 Create a new item using the entity manager and set the position to (200, 672) to test
 	Item* item = (Item*) Engine::GetInstance().entityManager->CreateEntity(EntityType::ITEM);
 	item->position = Vector2D(200, 672);
-	/*Cargar items como cargar enemigos Falta escribirlo bien
 	
 	for (pugi::xml_node itemNode = configParameters.child("entities").child("items").child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
 	{
@@ -44,7 +44,7 @@ bool Scene::Awake()
 		item->SetParameters(itemNode);
 		itemList.push_back(item);
 	}
-	*/
+
 	for (pugi::xml_node enemyNode = configParameters.child("entities").child("enemies").child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
 	{
 		Enemy* enemy = (Enemy*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY);
@@ -142,6 +142,25 @@ void Scene::LoadState()
 			enemyPos.getY(),
 			vivo ? "true" : "false");
 	}
+
+	for (Item* item : itemList)
+	{
+		if (!item) {
+			LOG("Error: Puntero nulo en itemList.");
+			continue;
+		}
+		pugi::xml_node itemNode = sceneNode.child("entities").child("items").find_child_by_attribute("name", item->GetName().c_str());
+
+		if (!itemNode) {
+			LOG("Error: Nodo para ítem %s no encontrado.", item->GetName().c_str());
+			continue;
+		}
+
+		Vector2D itemPos(itemNode.attribute("x").as_float(), itemNode.attribute("y").as_float());
+		item->SetPosition(itemPos);
+		bool alive = itemNode.attribute("Alive").as_bool();
+		item->SetAlive(alive); // Método para configurar si el ítem está activo
+	}
 }
 
 void Scene::SaveState()
@@ -182,6 +201,24 @@ void Scene::SaveState()
 		enemyNode.attribute("x").set_value(enemy->GetPosition().getX());
 		enemyNode.attribute("y").set_value(enemy->GetPosition().getY());
 		enemyNode.attribute("Alive").set_value(enemy->SetVIVO());
+	}
+
+	for (Item* item : itemList) 
+	{
+		if (!item) {
+			LOG("Error: Puntero nulo en itemList.");
+			continue;
+		}
+		pugi::xml_node itemNode = sceneNode.child("entities").child("items").find_child_by_attribute("name", item->GetName().c_str());
+
+		if (!itemNode) {
+			LOG("Error: Nodo para ítem %s no encontrado.", item->GetName().c_str());
+			continue;
+		}
+
+		itemNode.attribute("x").set_value(item->GetPosition().getX());
+		itemNode.attribute("y").set_value(item->GetPosition().getY());
+		itemNode.attribute("Alive").set_value(item->IsAlive());
 	}
 	
 
@@ -332,11 +369,16 @@ bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
 
-	SDL_DestroyTexture(img);
+	Engine::GetInstance().entityManager->CleanUp();
 
 	if (helpMenuTexture != nullptr) {
 		Engine::GetInstance().textures->UnLoad(helpMenuTexture);
 		helpMenuTexture = nullptr;
+	}
+
+	if (img != nullptr) {
+		SDL_DestroyTexture(img);
+		img = nullptr;
 	}
 
 
