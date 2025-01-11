@@ -87,6 +87,7 @@ bool Enemy::Start() {
 
 bool Enemy::Update(float dt)
 {
+
 	if (Estavivo == true) { isDead = false; }
 	else { isDead = true; }
 	if (isDead) {

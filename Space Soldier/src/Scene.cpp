@@ -156,7 +156,23 @@ void Scene::LoadState()
 			continue;
 		}
 		bool alive = itemNode.attribute("Alive").as_bool();
+		float x = itemNode.attribute("x").as_float(-1.0f); // Valor por defecto en caso de error
+		float y = itemNode.attribute("y").as_float(-1.0f);
+
+		if (x < 0 || y < 0) {
+			LOG("Error: Atributos inválidos para enemigo %s.", item->GetName().c_str());
+			continue;
+		}
+
+		Vector2D itemPos(x, y);
+		item->SetPosition(itemPos);
 		item->SetAlive(alive); // Método para configurar si el ítem está activo
+
+		LOG("Cargando enemigo: %s, Posición: (%f, %f), Vivo: %s",
+			item->GetName().c_str(),
+			itemPos.getX(),
+			itemPos.getY(),
+			alive ? "true" : "false");
 	}
 }
 

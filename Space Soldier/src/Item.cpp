@@ -68,13 +68,19 @@ bool Item::Update(float dt)
 {
 	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics.
 
-	if (pendingToDelete) {
-		if (pbody != nullptr) {
-			Engine::GetInstance().physics->DestroyBody(pbody->body);
-			pbody = nullptr;
+	if (!alive) {
+		// Si está marcado para eliminación, elimina el cuerpo físico
+
+		if (pendingToDelete) {
+			if (pbody != nullptr) {
+				Engine::GetInstance().physics->DestroyBody(pbody->body);
+				pbody = nullptr;
+			}
+			return false; // Detener la ejecución del ítem
 		}
-		return false; // Detener la ejecución del ítem
+		return true; // Salir temprano si el enemigo está muerto
 	}
+
 
 	if (!alive) return false;
 
@@ -101,20 +107,17 @@ void Item::OnCollision(PhysBody* physA, PhysBody* physB)
 			Engine::GetInstance().audio.get()->PlayFx(pickCoinFxId);
 			alive = false;
 			pendingToDelete = true;
-			IsAlive();
 
 		}
 		else if (name == "botiquin") {
 
 			alive = false;
 			pendingToDelete = true;
-			IsAlive();
 		}
 		else if (name == "bala") {
 
 			alive = false;
 			pendingToDelete = true;
-			IsAlive();
 		}
 		break;
 	case ColliderType::UNKNOWN:
