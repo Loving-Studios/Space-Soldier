@@ -38,9 +38,11 @@ bool Item::Start() {
 		Engine::GetInstance().textures.get()->GetSize(texture, texW, texH);
 		if (gravedad == true) {
 			pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX() + texH / 2, (int)position.getY() + texH / 2 - 500, texH / 2, bodyType::DYNAMIC);
+			pbody->listener = this;
 		}
 		else {
 			pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX() + texH / 2, (int)position.getY() + texH / 2 - 500, texH / 2, bodyType::STATIC);
+			pbody->listener = this;
 		}
 
 
@@ -64,7 +66,17 @@ bool Item::Start() {
 
 bool Item::Update(float dt)
 {
-	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics. 
+	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics.
+
+	if (pendingToDelete) {
+		if (pbody != nullptr) {
+			Engine::GetInstance().physics->DestroyBody(pbody->body);
+			pbody = nullptr;
+		}
+		return false; // Detener la ejecución del ítem
+	}
+
+	if (!alive) return false;
 
 	b2Transform pbodyPos = pbody->body->GetTransform();
 
@@ -74,9 +86,6 @@ bool Item::Update(float dt)
 	if (alive == true) {
 		Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY());
 	}
-
-
-
 
 	return true;
 }
@@ -91,16 +100,20 @@ void Item::OnCollision(PhysBody* physA, PhysBody* physB)
 			LOG("---------------------MONEDA-----------------------------------");
 			Engine::GetInstance().audio.get()->PlayFx(pickCoinFxId);
 			alive = false;
+			pendingToDelete = true;
 			IsAlive();
+
 		}
 		else if (name == "botiquin") {
 
 			alive = false;
+			pendingToDelete = true;
 			IsAlive();
 		}
 		else if (name == "bala") {
 
 			alive = false;
+			pendingToDelete = true;
 			IsAlive();
 		}
 		break;
@@ -131,5 +144,16 @@ void Item::SetPosition(Vector2D pos) {
 
 bool Item::CleanUp()
 {
+	if (pbody != nullptr) {
+		Engine::GetInstance().physics->DestroyBody(pbody->body);
+		pbody = nullptr;
+	}
+
+	if (texture != nullptr) {
+		Engine::GetInstance().textures->UnLoad(texture);
+		texture = nullptr;
+	}
+
+	LOG("Item cleaned up: %s", name.c_str());
 	return true;
 }

@@ -35,5 +35,6 @@ public:
 public:
 
 	std::list<Entity*> entities;
+	std::list<Entity*> entitiesToDelete;
 
 };

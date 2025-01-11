@@ -99,6 +99,10 @@ void EntityManager::DestroyEntity(Entity* entity)
 			break; // Exit the loop after removing the entity
 		}
 	}
+
+	if (entity != nullptr) {
+		entitiesToDelete.push_back(entity);
+	}
 }
 
 void EntityManager::AddEntity(Entity* entity)
@@ -114,5 +118,18 @@ bool EntityManager::Update(float dt)
 		if (entity->active == false) continue;
 		ret = entity->Update(dt);
 	}
+
+	for (Entity* entity : entitiesToDelete) {//eliminar entidades
+		auto it = std::find(entities.begin(), entities.end(), entity);
+		if (it != entities.end()) {
+			(*it)->CleanUp();   // Limpia recursos de la entidad
+			delete* it;         // Libera la memoria
+			entities.erase(it); // Elimina de la lista principal
+		}
+	}
+
+	entitiesToDelete.clear(); // Limpia la lista de eliminación
+
+
 	return ret;
 }

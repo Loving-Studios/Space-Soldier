@@ -236,8 +236,9 @@ void Player::Die() {
 }
 
 void Player::recVidas() {
-
-	vidas++;
+	if (vidas > 3) {
+		vidas++;
+	}
 	//actualizar interfaz de vidas
 }
 

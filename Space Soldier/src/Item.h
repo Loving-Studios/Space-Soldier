@@ -45,6 +45,7 @@ public:
 private:
 
 	SDL_Texture* texture;
+	bool pendingToDelete = false;
 	const char* texturePath;
 	int texW, texH;
 	std::string name;
