@@ -35,9 +35,12 @@ public:
 
 	void SetAlive(bool isAlive);
 
+	void OnCollision(PhysBody* physA, PhysBody* physB);
+
 public:
 
-	bool isPicked = false, alive;
+	bool isPicked = false, alive, gravedad;
+	int pickCoinFxId;
 
 private:
 

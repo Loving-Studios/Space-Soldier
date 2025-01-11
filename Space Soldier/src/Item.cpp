@@ -30,15 +30,25 @@ bool Item::Start() {
 	texH = parameters.attribute("h").as_int();
 	name = parameters.attribute("name").as_string();
 	alive = parameters.attribute("Alive").as_bool();
-	
-	// L08 TODO 4: Add a physics to an item - initialize the physics body
-	Engine::GetInstance().textures.get()->GetSize(texture, texW, texH);
-	pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX() + texH / 2, (int)position.getY() + texH / 2 - 500, texH / 2, bodyType::DYNAMIC);
+	gravedad = parameters.attribute("gravity").as_bool();
+
+	pickCoinFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Faro.wav");
+
+		// L08 TODO 4: Add a physics to an item - initialize the physics body
+		Engine::GetInstance().textures.get()->GetSize(texture, texW, texH);
+		if (gravedad == true) {
+			pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX() + texH / 2, (int)position.getY() + texH / 2 - 500, texH / 2, bodyType::DYNAMIC);
+		}
+		else {
+			pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX() + texH / 2, (int)position.getY() + texH / 2 - 500, texH / 2, bodyType::STATIC);
+		}
+
 
 	// L08 TODO 7: Assign collider type
 	pbody->ctype = ColliderType::ITEM;
 
 	std::string typeStr = parameters.attribute("name").as_string();
+
 	if (typeStr == "Coin") {
 		type = ItemType::MONEDA;
 	}
@@ -54,20 +64,57 @@ bool Item::Start() {
 
 bool Item::Update(float dt)
 {
-	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics.  
+	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics. 
 
 	b2Transform pbodyPos = pbody->body->GetTransform();
+
 	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
 	position.setY(METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2);
 
-	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY());
+	if (alive == true) {
+		Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY());
+	}
+
+
+
 
 	return true;
 }
 
-bool Item::IsAlive() { return alive; }
+void Item::OnCollision(PhysBody* physA, PhysBody* physB)
+{
+	switch (physB->ctype)
+	{
+	case ColliderType::PLAYER:
+		LOG("Item Collision Player");
+		if (name == "Coin") {
+			LOG("---------------------MONEDA-----------------------------------");
+			Engine::GetInstance().audio.get()->PlayFx(pickCoinFxId);
+			alive = false;
+			IsAlive();
+		}
+		else if (name == "botiquin") {
 
-void Item::SetAlive(bool isAlive) { alive = isAlive; }
+			alive = false;
+			IsAlive();
+		}
+		else if (name == "bala") {
+
+			alive = false;
+			IsAlive();
+		}
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("End Enemy Collision UNKNOWN");
+		break;
+	default:
+		break;
+	}
+}
+
+bool Item::IsAlive() { return alive; } //Le manda al scene si el el item ha sido cogido o no
+
+void Item::SetAlive(bool isAlive) { alive = isAlive; } //llega desde scene si el item ha sido cogido o no
 
 Vector2D Item::GetPosition()
 {

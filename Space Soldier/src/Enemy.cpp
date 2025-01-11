@@ -201,7 +201,6 @@ bool Enemy::Update(float dt)
 }
 	if (type == EnemyType::TERRESTRE) {
 		if (position.getY() > 650) {
-			LOG("entrooooo");
 			Engine::GetInstance().scene.get()->Valoresenemigos();
 		}
 	if (!patrullando && Giro) {
@@ -347,14 +346,12 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
-		LOG("Enemy Collision PLATFORM");
 		suelo = true;
 		break;
 	case ColliderType::PLAYER: {
 		Vector2D playerPos = ((Player*)physB->listener)->GetPosition();
 
 		if (playerPos.getY() < position.getY()) {
-			LOG("Enemy killed by Player from above");
 			Estavivo = false;
 			isDead = true;
 			currentAnimation = &deathR; // Cambia a deathL si corresponde
@@ -363,7 +360,6 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 			//pendingToDelete = true;
 		}
 		else{
-			LOG("Player killed by Enemy");
 			((Player*)physB->listener)->Die();
 			if (muerto == true) {
 				Engine::GetInstance().audio.get()->PlayFx(deathFxId);
@@ -373,19 +369,15 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	}
 	case ColliderType::JUMP:
-		LOG("Enemy Collision JUMP");
 		jump = true;
 		break;
 	case ColliderType::FIN:
-		LOG("Enemy Collision Giro");
 		Giro = true;
 		break;
 	case ColliderType::LADOS:
-		LOG("Enemy volador Giro");
 		Lado = true;
 		break;
 	case ColliderType::UNKNOWN:
-		LOG("Enemy Collision UNKNOWN");
 		break;
 	default:
 		break;
@@ -397,18 +389,14 @@ void Enemy::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
-		LOG("End Enemy Collision PLATFORM");
 		suelo = false;
 		break;
 	case ColliderType::JUMP:
-		LOG("End Enemy Collision JUMP");
 		jump = false;
 		break;
 	case ColliderType::PLAYER:
-		LOG("End Enemy Collision Player");
 		break;
 	case ColliderType::UNKNOWN:
-		LOG("End Enemy Collision UNKNOWN");
 		break;
 	default:
 		break;

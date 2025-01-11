@@ -155,9 +155,6 @@ void Scene::LoadState()
 			LOG("Error: Nodo para ítem %s no encontrado.", item->GetName().c_str());
 			continue;
 		}
-
-		Vector2D itemPos(itemNode.attribute("x").as_float(), itemNode.attribute("y").as_float());
-		item->SetPosition(itemPos);
 		bool alive = itemNode.attribute("Alive").as_bool();
 		item->SetAlive(alive); // Método para configurar si el ítem está activo
 	}
@@ -202,7 +199,8 @@ void Scene::SaveState()
 		enemyNode.attribute("y").set_value(enemy->GetPosition().getY());
 		enemyNode.attribute("Alive").set_value(enemy->SetVIVO());
 	}
-
+	//Items
+	//Guardar si se han cogido o estan en el mapa
 	for (Item* item : itemList) 
 	{
 		if (!item) {
@@ -216,8 +214,6 @@ void Scene::SaveState()
 			continue;
 		}
 
-		itemNode.attribute("x").set_value(item->GetPosition().getX());
-		itemNode.attribute("y").set_value(item->GetPosition().getY());
 		itemNode.attribute("Alive").set_value(item->IsAlive());
 	}
 	

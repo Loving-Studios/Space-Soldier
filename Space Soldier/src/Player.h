@@ -47,7 +47,6 @@ public:
 	int texW, texH, vidas;
 
 	//Audio fx
-	int pickCoinFxId;
 	int saveFxId;
 	int loadFxId;
 	int deathFxId;

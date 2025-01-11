@@ -318,8 +318,8 @@
 				</enemy>
 			</enemies>
 			<items>
-				<item name="Coin" x="200" y="672" yo="200" xo="672" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="true" Alive="true" vida="false"/>
-				<item name="botiquin" x="200" y="672" yo="200" xo="672" w="48" h="38" texture="Assets/Textures/CorazonLLeno.png" gravity="true" Alive="true" vida="true"/>
+				<item name="Coin" x="200" y="900" yo="900" xo="200" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="false" Alive="true" vida="false"/>
+				<item name="botiquin" x="2000" y="700" yo="700" xo="2000" w="32" h="32" texture="Assets/Textures/CorazonLLeno.png" gravity="false" Alive="true" vida="true"/>
 				<item name="bala" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="false" Alive="true" vida="false"/>
 			</items>
 		</entities>
