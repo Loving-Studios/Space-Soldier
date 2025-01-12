@@ -325,6 +325,11 @@ bool Physics::PostUpdate()
 		}
 	}
 
+	// Process bodies to delete after the world step
+	for (PhysBody* physBody : bodiesToDelete) {
+		world->DestroyBody(physBody->body);
+	}
+	bodiesToDelete.clear();
 
 	return ret;
 }
@@ -418,6 +423,22 @@ void Physics::DestroyBody(b2Body* body) {
 	if (world != nullptr && body != nullptr) {
 		world->DestroyBody(body); // Llama al metodo de Box2D para eliminar el cuerpo
 	}
+}
+
+void Physics::DeletePhysBody(PhysBody* physBody) {
+	bodiesToDelete.push_back(physBody);
+}
+
+bool Physics::IsPendingToDelete(PhysBody* physBody) {
+	bool pendingToDelete = false;
+	for (PhysBody* _physBody : bodiesToDelete) {
+		if (_physBody == physBody) {
+			pendingToDelete = true;
+			break;
+		}
+	}
+
+	return pendingToDelete;
 }
 
 

@@ -93,6 +93,20 @@ bool Map::CleanUp()
 {
     LOG("Unloading map");
 
+    for (PhysBody* colliders : colliders) {
+        Engine::GetInstance().physics.get()->DeletePhysBody(colliders);
+        LOG("Deleting map collisions");
+        //delete collider;
+    }
+    colliders.clear();
+
+    //for (PhysBody* sensores : sensores) {
+    //    Engine::GetInstance().physics.get()->DeletePhysBody(sensores);
+    //    LOG("Deleting map sensors");
+    //    //delete collider;
+    //}
+    //sensores.clear();
+
     // L06: TODO 2: Make sure you clean up any memory allocated from tilesets/map
     for (const auto& tileset : mapData.tilesets) {
         delete tileset;
@@ -105,6 +119,8 @@ bool Map::CleanUp()
         delete layer;
     }
     mapData.layers.clear();
+
+    LOG("Map unloaded");
 
     return true;
 }
@@ -219,34 +235,40 @@ bool Map::Load(std::string path, std::string fileName)
                 case 1: // Checkpoint
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::CHECKPOINT;
+                    //sensores.push_back(rect);
                     break;
 
                 case 2: // Jump
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::JUMP;
+                    //sensores.push_back(rect);
                     break;
 
                 case 3: // SeAcabo
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::FIN;
-                    std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
-                    std::cout << "CREATED FIN" << std::endl;
+                    //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
+                    //std::cout << "CREATED FIN" << std::endl;
+                    //sensores.push_back(rect);
                     break;
                 case 4: // SeAcabo
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::LADOS;
-                    std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
-                    std::cout << "CREATED LADOS" << std::endl;
+                    //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
+                    //std::cout << "CREATED LADOS" << std::endl;
+                    //sensores.push_back(rect);
                     break;
                 case 5: // Carcel
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::CARCEL;
-                    std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
-                    std::cout << "CREATED Carcel" << std::endl;
+                    //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
+                    //std::cout << "CREATED Carcel" << std::endl;
+                    //sensores.push_back(rect);
                     break;
                 default: // Plataformas
                     rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::PLATFORM;
+                    colliders.push_back(rect);
                     break;
                 }
             }

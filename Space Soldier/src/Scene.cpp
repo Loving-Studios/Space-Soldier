@@ -9,6 +9,7 @@
 #include "Entity.h"
 #include "EntityManager.h"
 #include "Player.h"
+#include "Physics.h"
 #include "Map.h"
 #include "Item.h"
 
@@ -303,6 +304,55 @@ void Scene::GotoStart()
 	}
 	
 }
+
+void Scene::GotoScene2()
+{
+	LOG("Iniciando GotoScene2");
+	//LOG("Limpiando entidades");
+	//Engine::GetInstance().entityManager->CleanUp();
+	LOG("Limpiando mapa");
+	Engine::GetInstance().map->CleanUp();
+	//LOG("Limpiando fisica");
+	//Engine::GetInstance().physics->CleanUp();
+
+	// Cargar la configuracion para scene2
+	LOG("Cargando configuracion de scene2");
+	pugi::xml_document loadFile;
+	pugi::xml_parse_result result = loadFile.load_file("config.xml");
+
+	if (!result) {
+		LOG("Error al cargar config.xml: %s", result.description());
+		return;
+	}
+
+	pugi::xml_node sceneNode = loadFile.child("config").child("scene2");
+	if (!sceneNode) {
+		LOG("Error: Nodo scene2 no encontrado en config.xml");
+		return;
+	}
+
+	// Cargar el mapa
+	std::string mapPath = sceneNode.child("map").attribute("path").as_string();
+	std::string mapName = sceneNode.child("map").attribute("name").as_string();
+	Engine::GetInstance().map->Load(mapPath, mapName);
+
+	// Configurar jugador
+	Vector2D playerPos(sceneNode.child("entities").child("player").attribute("x").as_int(),
+		sceneNode.child("entities").child("player").attribute("y").as_int());
+	player->SetPosition(playerPos);
+
+	// Configurar enemigos
+	for (pugi::xml_node enemyNode = sceneNode.child("entities").child("enemies").child("enemy");
+		enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
+	{
+		Enemy* enemy = (Enemy*)Engine::GetInstance().entityManager->CreateEntity(EntityType::ENEMY);
+		enemy->SetParameters(enemyNode);
+		enemyList.push_back(enemy);
+	}
+
+	LOG("Scene 2 cargada correctamente.");
+}
+
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
@@ -350,7 +400,7 @@ bool Scene::PostUpdate()
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
 		//Proximamente aqui hara que te mande al inicio del segundo nivel
-		GotoStart();
+		GotoScene2();
 		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {

@@ -47,6 +47,9 @@ public:
 	//Called in PostUpdate
 	void GotoStart();
 
+	// Called in PostUpdate
+	void GotoScene2();
+
 	void Valoresenemigos();
 
 	Vector2D GetPlayerPosition();

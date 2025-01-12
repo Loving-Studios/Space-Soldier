@@ -2,6 +2,7 @@
 #include "Module.h"
 #include "Entity.h"
 #include "box2d/box2d.h"
+#include <list>
 
 #define GRAVITY_X 0.0f
 #define GRAVITY_Y -10.0f
@@ -84,6 +85,8 @@ public:
 	void EndContact(b2Contact* contact);
 
 	void DestroyBody(b2Body* body);
+	void DeletePhysBody(PhysBody* physBody);
+	bool IsPendingToDelete(PhysBody* physBody);
 	bool IsDebug() const { return debug; }
 
 private:
@@ -95,4 +98,7 @@ private:
 
 	// Box2D World
 	b2World* world;
+
+	// List of physics bodies
+	std::list<PhysBody*> bodiesToDelete;
 };

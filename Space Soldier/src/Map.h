@@ -90,6 +90,8 @@ struct MapData
     std::list<MapLayer*> layers;
 };
 
+class PhysBody;
+
 class Map : public Module
 {
 public:
@@ -147,6 +149,8 @@ public:
 public: 
     std::string mapFileName;
     std::string mapPath;
+    std::vector<PhysBody*> colliders;
+    std::vector<PhysBody*> sensores;
 
 private:
     bool mapLoaded;
