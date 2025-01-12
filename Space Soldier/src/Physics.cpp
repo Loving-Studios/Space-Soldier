@@ -416,7 +416,7 @@ bool PhysBody::Contains(int x, int y) const
 
 void Physics::DestroyBody(b2Body* body) {
 	if (world != nullptr && body != nullptr) {
-		world->DestroyBody(body); // Llama al método de Box2D para eliminar el cuerpo
+		world->DestroyBody(body); // Llama al metodo de Box2D para eliminar el cuerpo
 	}
 }
 

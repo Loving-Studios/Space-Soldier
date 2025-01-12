@@ -129,14 +129,14 @@ void Scene::LoadState()
 		//Vector2D enemyPos(enemyNode.attribute("x").as_float(), enemyNode.attribute("y").as_float());
 
 		if (x < 0 || y < 0) {
-			LOG("Error: Atributos inválidos para enemigo %s.", enemy->GetName().c_str());
+			LOG("Error: Atributos invalidos para enemigo %s.", enemy->GetName().c_str());
 			continue;
 		}
 		Vector2D enemyPos(x, y);
 		enemy->SetPosition(enemyPos);
 		enemy->VIVO(vivo);
 
-		LOG("Cargando enemigo: %s, Posición: (%f, %f), Vivo: %s",
+		LOG("Cargando enemigo: %s, Posicion: (%f, %f), Vivo: %s",
 			enemy->GetName().c_str(),
 			enemyPos.getX(),
 			enemyPos.getY(),
@@ -152,7 +152,7 @@ void Scene::LoadState()
 		pugi::xml_node itemNode = sceneNode.child("entities").child("items").find_child_by_attribute("name", item->GetName().c_str());
 
 		if (!itemNode) {
-			LOG("Error: Nodo para ítem %s no encontrado.", item->GetName().c_str());
+			LOG("Error: Nodo para item %s no encontrado.", item->GetName().c_str());
 			continue;
 		}
 		bool alive = itemNode.attribute("Alive").as_bool();
@@ -160,15 +160,15 @@ void Scene::LoadState()
 		float y = itemNode.attribute("y").as_float(-1.0f);
 
 		if (x < 0 || y < 0) {
-			LOG("Error: Atributos inválidos para enemigo %s.", item->GetName().c_str());
+			LOG("Error: Atributos invalidos para enemigo %s.", item->GetName().c_str());
 			continue;
 		}
 
 		Vector2D itemPos(x, y);
 		item->SetPosition(itemPos);
-		item->SetAlive(alive); // Método para configurar si el ítem está activo
+		item->SetAlive(alive); // Metodo para configurar si el item esta activo
 
-		LOG("Cargando enemigo: %s, Posición: (%f, %f), Vivo: %s",
+		LOG("Cargando enemigo: %s, Posicion: (%f, %f), Vivo: %s",
 			item->GetName().c_str(),
 			itemPos.getX(),
 			itemPos.getY(),
@@ -226,7 +226,7 @@ void Scene::SaveState()
 		pugi::xml_node itemNode = sceneNode.child("entities").child("items").find_child_by_attribute("name", item->GetName().c_str());
 
 		if (!itemNode) {
-			LOG("Error: Nodo para ítem %s no encontrado.", item->GetName().c_str());
+			LOG("Error: Nodo para item %s no encontrado.", item->GetName().c_str());
 			continue;
 		}
 
@@ -259,7 +259,7 @@ void Scene::Valoresenemigos(){
 		//Vector2D enemyPos(enemyNode.attribute("x").as_float(), enemyNode.attribute("y").as_float());
 
 		if (x < 0 || y < 0) {
-			LOG("Error: Atributos inválidos para enemigo %s.", enemy->GetName().c_str());
+			LOG("Error: Atributos invalidos para enemigo %s.", enemy->GetName().c_str());
 			continue;
 		}
 		Vector2D enemyPos(x, y);
@@ -294,7 +294,7 @@ void Scene::GotoStart()
 		//Vector2D enemyPos(enemyNode.attribute("x").as_float(), enemyNode.attribute("y").as_float());
 
 		if (x < 0 || y < 0) {
-			LOG("Error: Atributos inválidos para enemigo %s.", enemy->GetName().c_str());
+			LOG("Error: Atributos invalidos para enemigo %s.", enemy->GetName().c_str());
 			continue;
 		}
 		Vector2D enemyPos(x, y);
@@ -310,10 +310,10 @@ bool Scene::Update(float dt)
 	float camSpeed = 1;
 	float casimitad = 400.0f;
 
-	// Obtener la posición del jugador
+	// Obtener la posicion del jugador
 	float playerPosX = player->position.getX();
 
-	// Calcular la nueva posición de la cámara
+	// Calcular la nueva posicion de la camara
 	Engine::GetInstance().render.get()->camera.x = playerPosX * -1.0f + casimitad;
 
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_H) == KEY_DOWN) {
@@ -344,12 +344,12 @@ bool Scene::PostUpdate()
 		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F1) == KEY_DOWN) {
-		//Proximamente aquí hará que te mandé al inicio del primer nivel
+		//Proximamente aqui hara que te mande al inicio del primer nivel
 		GotoStart();
 		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
-		//Proximamente aquí hará que te mandé al inicio del segundo nivel
+		//Proximamente aqui hara que te mande al inicio del segundo nivel
 		GotoStart();
 		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
 	}

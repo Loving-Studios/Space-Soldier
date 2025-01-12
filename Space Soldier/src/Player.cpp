@@ -127,7 +127,7 @@ bool Player::Update(float dt)
 		if (isJumping == true)
 		{
 			velocity.y = pbody->body->GetLinearVelocity().y;
-			// Compruebo si se está moviendo hacia la izquierda mientras saltas
+			// Compruebo si se esta moviendo hacia la izquierda mientras saltas
 			if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 				currentAnimation = &jumpL;
 			}
@@ -155,7 +155,7 @@ bool Player::Update(float dt)
 	position.setY(METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2);
 
 	if (position.getY() > 900) {
-		// Reinicio posición del player cuando cae más de 900px
+		// Reinicio posicion del player cuando cae mas de 900px
 		//Volver al inicio
 		Engine::GetInstance().scene.get()->LoadState();
 		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
@@ -180,7 +180,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
-		// Resetea isJumping solo si no está en GodMode
+		// Resetea isJumping solo si no esta en GodMode
 		if (!GodMode) isJumping = false;
 		//Engine::GetInstance().audio.get()->PlayFx(walkFxId);
 		break;
@@ -230,8 +230,8 @@ void Player::Die() {
 	if(vidas == 0){
 		LOG("Player dies");
 		death = true;
-		currentAnimation = (position.getX() < 0) ? &deathL : &deathR; // Ajustar dirección
-		// Lógica adicional para reiniciar o mostrar pantalla de fin de juego
+		currentAnimation = (position.getX() < 0) ? &deathL : &deathR; // Ajustar direccion
+		// Logica adicional para reiniciar o mostrar pantalla de fin de juego
 	}
 }
 

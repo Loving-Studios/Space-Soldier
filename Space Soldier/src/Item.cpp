@@ -69,16 +69,16 @@ bool Item::Update(float dt)
 	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics.
 
 	if (!alive) {
-		// Si está marcado para eliminación, elimina el cuerpo físico
+		// Si esta marcado para eliminacion, elimina el cuerpo fisico
 
 		if (pendingToDelete) {
 			if (pbody != nullptr) {
 				Engine::GetInstance().physics->DestroyBody(pbody->body);
 				pbody = nullptr;
 			}
-			return false; // Detener la ejecución del ítem
+			return false; // Detener la ejecucion del item
 		}
-		return true; // Salir temprano si el enemigo está muerto
+		return true; // Salir temprano si el enemigo esta muerto
 	}
 
 

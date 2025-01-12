@@ -128,7 +128,7 @@ bool EntityManager::Update(float dt)
 		}
 	}
 
-	entitiesToDelete.clear(); // Limpia la lista de eliminación
+	entitiesToDelete.clear(); // Limpia la lista de eliminacion
 
 
 	return ret;

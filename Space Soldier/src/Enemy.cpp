@@ -94,12 +94,12 @@ bool Enemy::Update(float dt)
 		currentAnimation->Update();
 		Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
 
-		// Si está marcado para eliminación, elimina el cuerpo físico
+		// Si esta marcado para eliminacion, elimina el cuerpo fisico
 		if (pendingToDelete && pbody != nullptr) {
 			Engine::GetInstance().physics->DestroyBody(pbody->body);
 			pbody = nullptr;
 		}
-		return true; // Salir temprano si el enemigo está muerto
+		return true; // Salir temprano si el enemigo esta muerto
 	}
 
 	b2Vec2 velocity = b2Vec2(0, pbody->body->GetLinearVelocity().y);
@@ -155,21 +155,21 @@ bool Enemy::Update(float dt)
 				}
 			}
 			if (patrullando){
-					if (enemyTilePos.getY() < playerTilePos.getY()) {//mirar si la posicion del player es más alta que la del enemigo
+					if (enemyTilePos.getY() < playerTilePos.getY()) {//mirar si la posicion del player es mas alta que la del enemigo
 						velocity.y = 2;  // Abajo
-						currentAnimation = &moveR;  // Cambiar si tienes animaciones específicas
+						currentAnimation = &moveR;  // Cambiar si tienes animaciones especificas
 					}
-					else if (enemyTilePos.getY() > playerTilePos.getY()) {//mirar si la posicion del player es más baja que la del enemigo
+					else if (enemyTilePos.getY() > playerTilePos.getY()) {//mirar si la posicion del player es mas baja que la del enemigo
 						velocity.y = -2;  // Arriba
-						currentAnimation = &moveL;  // Cambiar si tienes animaciones específicas
+						currentAnimation = &moveL;  // Cambiar si tienes animaciones especificas
 					}
-					if (enemyTilePos.getX() < playerTilePos.getX()) {//mirar si la posicion del player es más alta que la del enemigo
+					if (enemyTilePos.getX() < playerTilePos.getX()) {//mirar si la posicion del player es mas alta que la del enemigo
 						velocity.x = 0.2 * 5;  // derecha
-						currentAnimation = &moveR;  // Cambiar si tienes animaciones específicas
+						currentAnimation = &moveR;  // Cambiar si tienes animaciones especificas
 					}
-					else if (enemyTilePos.getX() > playerTilePos.getX()) {//mirar si la posicion del player es más baja que la del enemigo
+					else if (enemyTilePos.getX() > playerTilePos.getX()) {//mirar si la posicion del player es mas baja que la del enemigo
 						velocity.x = -0.2 * 5; // Izquierda
-						currentAnimation = &moveL;  // Cambiar si tienes animaciones específicas
+						currentAnimation = &moveL;  // Cambiar si tienes animaciones especificas
 					}
 			}else{
 				switch (movimiento)//movimiento enemigo volador en modo patrullar
@@ -357,7 +357,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 			isDead = true;
 			currentAnimation = &deathR; // Cambia a deathL si corresponde
 			Engine::GetInstance().audio.get()->PlayFx(killMonsterFxId);
-			// Marca para eliminar el cuerpo físico
+			// Marca para eliminar el cuerpo fisico
 			//pendingToDelete = true;
 		}
 		else{
