@@ -4,6 +4,8 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Item.h"
+#include <vector>
+#include "GuiControlButton.h"
 
 struct SDL_Texture;
 
@@ -47,6 +49,9 @@ public:
 	//Called in PostUpdate
 	void GotoStart();
 
+	// Called in PostUpdate
+	void GotoStartLevel2();
+
 	void Valoresenemigos();
 
 	Vector2D GetPlayerPosition();
@@ -55,6 +60,9 @@ public:
 	SDL_Texture* helpMenuTexture = nullptr;
 
 	Vector2D GuardarPosicion;
+
+	// Handles multiple Gui Event methods
+	bool OnGuiMouseClickEvent(GuiControl* control);
 
 private:
 	SDL_Texture* img;
@@ -67,4 +75,5 @@ private:
 	std::vector<Enemy*> enemyList;
 	std::vector<Item*> itemList;
 	bool once = false;
+	GuiControlButton* guiBt = nullptr;
 };

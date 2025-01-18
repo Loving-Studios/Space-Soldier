@@ -11,7 +11,9 @@
 #include "Player.h"
 #include "Map.h"
 #include "Item.h"
-
+#include "Enemy.h"
+#include "GuiControl.h"
+#include "GuiManager.h"
 
 
 Scene::Scene() : Module()
@@ -51,6 +53,10 @@ bool Scene::Awake()
 		enemy->SetParameters(enemyNode);
 		enemyList.push_back(enemy);
 	}
+
+	SDL_Rect btPos = { 520, 350, 120,20 };
+	//guiBt = (GuiControlButton*)Engine::GetInstance().guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
+	// El 1 es el id del boton
 
 	return ret;
 }
@@ -301,7 +307,41 @@ void Scene::GotoStart()
 		enemy->SetPosition(enemyPos);
 	
 	}
-	
+}
+
+void Scene::GotoStartLevel2()
+{
+	//Player position del inicio del segundo nivel
+	Vector2D playerPos = Vector2D(9125, 513);
+	player->SetPosition(playerPos);
+	pugi::xml_document loadFile;
+	pugi::xml_parse_result result = loadFile.load_file("config.xml");
+	pugi::xml_node sceneNode = loadFile.child("config").child("scene1");
+	for (Enemy* enemy : enemyList)
+	{
+		if (!enemy) {
+			LOG("Error: Puntero enemigo nulo en enemyList.");
+			continue;
+		}
+		pugi::xml_node enemyNode = sceneNode.child("entities").child("enemies").find_child_by_attribute("name", enemy->GetName().c_str());
+
+		if (!enemyNode) {
+			LOG("Error: Nodo para enemigo %s no encontrado.", enemy->GetName().c_str());
+			continue;
+		}
+		bool vivo = enemyNode.attribute("Alive").as_bool();
+		float x = enemyNode.attribute("xo").as_float(-1.0f); // Valor por defecto en caso de error
+		float y = enemyNode.attribute("yo").as_float(-1.0f);
+		//Vector2D enemyPos(enemyNode.attribute("x").as_float(), enemyNode.attribute("y").as_float());
+
+		if (x < 0 || y < 0) {
+			LOG("Error: Atributos invalidos para enemigo %s.", enemy->GetName().c_str());
+			continue;
+		}
+		Vector2D enemyPos(x, y);
+		enemy->SetPosition(enemyPos);
+
+	}
 }
 // Called each loop iteration
 bool Scene::Update(float dt)
@@ -350,7 +390,7 @@ bool Scene::PostUpdate()
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) {
 		//Proximamente aqui hara que te mande al inicio del segundo nivel
-		GotoStart();
+		GotoStartLevel2();
 		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
@@ -394,5 +434,13 @@ bool Scene::CleanUp()
 	}
 
 
+	return true;
+}
+
+bool Scene::OnGuiMouseClickEvent(GuiControl* control)
+{
+	// L15: DONE 5: Implement the OnGuiMouseClickEvent method
+	LOG("Press Gui Control: %d", control->id);
+	//Aquí hacer un switch con el control->id para saber que boton se ha pulsado y se hace cada caso, segun botones
 	return true;
 }
