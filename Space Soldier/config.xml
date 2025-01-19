@@ -17,7 +17,7 @@
 	<scene1>
 		<map path="Assets/Maps/" name="MapTemplate.tmx" />
 		<entities>
-			<player x="14508" y="359" w="48" h="32" vidas="3" texture="Assets/Textures/player/PlayerCanvas.png">
+			<player x="14512" y="167" w="48" h="32" vidas="3" texture="Assets/Textures/player/PlayerCanvas.png">
 				<animations>
 					<idle loop="true" speed="0.2">
 						<frame x="0" y="0" w="48" h="48" />
@@ -78,7 +78,7 @@
 				</animations>
 			</player>
 			<enemies>
-				<enemy name="Paco" x="824" y="398" xo="893" yo="420" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+				<enemy name="Paco" x="339" y="524" xo="893" yo="420" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="false">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -138,7 +138,7 @@
 						</crouch>
 					</animations>
 				</enemy>
-				<enemy name="Manolo" x="1768" y="460" yo="456" xo="1661" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+				<enemy name="Manolo" x="-4592" y="510096" yo="456" xo="1661" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="false">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -198,7 +198,7 @@
 						</crouch>
 					</animations>
 				</enemy>
-				<enemy name="Rocoso" x="3272" y="508" yo="509" xo="3243" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador" Alive="true">
+				<enemy name="Rocoso" x="4909" y="844" yo="509" xo="3243" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador" Alive="false">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -257,7 +257,7 @@
 						</deathL>
 					</animations>
 				</enemy>
-				<enemy name="Rocoso2" x="5255" y="205" yo="555" xo="5257" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador" Alive="true">
+				<enemy name="Rocoso2" x="5123" y="844" yo="555" xo="5257" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador" Alive="false">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
