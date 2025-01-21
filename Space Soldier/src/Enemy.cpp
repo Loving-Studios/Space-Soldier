@@ -87,6 +87,10 @@ bool Enemy::Start() {
 
 bool Enemy::Update(float dt)
 {
+	if (Engine::GetInstance().scene->GetCurrentState() != SceneState::GAMEPLAY)
+	{
+		return true;
+	}
 
 	if (Estavivo == true) { isDead = false; }
 	else { isDead = true; }

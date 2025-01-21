@@ -8,6 +8,7 @@
 #include "Render.h"
 #include "Player.h"
 #include "Window.h"
+#include "Scene.h"
 #include "box2D/box2d.h"
 
 Physics::Physics() : Module()
@@ -41,6 +42,11 @@ bool Physics::Start()
 // 
 bool Physics::PreUpdate()
 {
+	if (Engine::GetInstance().scene->GetCurrentState() != SceneState::GAMEPLAY)
+	{
+		return true;
+	}
+
 	bool ret = true;
 
 	// Step (update) the World
@@ -332,10 +338,19 @@ bool Physics::PostUpdate()
 // Called before quitting
 bool Physics::CleanUp()
 {
-	LOG("Destroying physics world");
+	LOG("Cleaning up physics world...");
 
-	// Delete the whole physics world!
+	for (b2Body* body = world->GetBodyList(); body != nullptr; )
+	{
+		b2Body* next = body->GetNext();
+		world->DestroyBody(body);
+		body = next;
+	}
+
+	LOG("Destroying physics world...");
 	delete world;
+	world = nullptr;
+	LOG("Physics world cleaned up.");
 
 	return true;
 }

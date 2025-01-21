@@ -68,6 +68,10 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+	if (Engine::GetInstance().scene->GetCurrentState() != SceneState::GAMEPLAY)
+	{
+		return true;
+	}
 	// L08 TODO 5: Add physics to the player - updated player position using physics
 	b2Vec2 velocity = b2Vec2(0, pbody->body->GetLinearVelocity().y);
 
@@ -154,7 +158,7 @@ bool Player::Update(float dt)
 	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
 	position.setY(METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2);
 
-	if (position.getY() > 900) {
+	if (position.getY() > 800) {
 		// Reinicio posicion del player cuando cae mas de 900px
 		//Volver al inicio
 		Engine::GetInstance().scene.get()->LoadState();
@@ -192,6 +196,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision CHECKPOINT");
 		Engine::GetInstance().scene.get()->SaveState();
 		Engine::GetInstance().audio.get()->PlayFx(saveFxId);
+		break;
+	case ColliderType::WIN:
+		LOG("Collision WIN SENSOR");
+		// Comprobar si se ha derrotado también al boss final
+		//if (true)
+		//{
+			// Cambiar a estado de pantalla de victoria
+			Engine::GetInstance().scene.get()->SetCurrentState(SceneState::END_SCREEN);
+		//}
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
@@ -231,6 +244,8 @@ void Player::Die() {
 		LOG("Player dies");
 		death = true;
 		currentAnimation = (position.getX() < 0) ? &deathL : &deathR; // Ajustar direccion
+		Engine::GetInstance().scene->SetCurrentState(SceneState::DIE_SCREEN);
+
 		// Logica adicional para reiniciar o mostrar pantalla de fin de juego
 	}
 }

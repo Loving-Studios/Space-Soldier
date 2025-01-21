@@ -71,7 +71,7 @@ public:
 	{
 		observer->OnGuiMouseClickEvent(this);
 	}
-
+	int GetId() const { return id; }
 public:
 
 	int id;
