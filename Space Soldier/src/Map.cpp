@@ -187,7 +187,8 @@ bool Map::Load(std::string path, std::string fileName)
             {"Jump", 2},
             {"SeAcabo", 3},
             {"lados", 4},
-            {"CarcelVolador", 5}
+            {"CarcelVolador", 5},
+            {"Win", 6}
         };
 
         float x = 0.0f;
@@ -229,20 +230,26 @@ bool Map::Load(std::string path, std::string fileName)
                 case 3: // SeAcabo
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::FIN;
-                    std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
-                    std::cout << "CREATED FIN" << std::endl;
+                    //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
+                    //std::cout << "CREATED FIN" << std::endl;
                     break;
                 case 4: // SeAcabo
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::LADOS;
-                    std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
-                    std::cout << "CREATED LADOS" << std::endl;
+                    //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
+                    //std::cout << "CREATED LADOS" << std::endl;
                     break;
                 case 5: // Carcel
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::CARCEL;
-                    std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
-                    std::cout << "CREATED Carcel" << std::endl;
+                    //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
+                    //std::cout << "CREATED Carcel" << std::endl;
+                    break;
+                case 6: // WIN CONDITION
+                    rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
+                    rect->ctype = ColliderType::WIN;
+                    //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
+                    //std::cout << "CREATED Carcel" << std::endl;
                     break;
                 default: // Plataformas
                     rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);
