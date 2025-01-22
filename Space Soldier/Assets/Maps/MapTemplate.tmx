@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< Updated upstream
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="498" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="22" nextobjectid="269">
-=======
-<<<<<<< Updated upstream
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="498" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="21" nextobjectid="268">
-=======
 <map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="498" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="24" nextobjectid="270">
->>>>>>> Stashed changes
->>>>>>> Stashed changes
  <properties>
   <property name="Navigation" type="bool" value="true"/>
  </properties>
@@ -39889,7 +39881,7 @@
    <tile/>
   </data>
  </layer>
- <objectgroup id="7" name="Colisione" visible="0">
+ <objectgroup id="7" name="Colisione">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -59971,25 +59963,16 @@
   <object id="181" x="11997" y="44" width="32" height="768"/>
   <object id="182" x="14534.5" y="39.25" width="32" height="768"/>
  </objectgroup>
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
  <objectgroup id="21" name="Win" visible="0">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
   <object id="268" x="15552" y="64" width="64" height="775"/>
  </objectgroup>
-<<<<<<< Updated upstream
-=======
  <objectgroup id="23" name="Tp" visible="0">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
-  <object id="269" x="6944" y="64" width="32" height="832"/>
+  <object id="269" x="6944" y="51.625" width="32" height="356.375"/>
  </objectgroup>
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 </map>

@@ -200,18 +200,9 @@ bool Map::Load(std::string path, std::string fileName)
             {"Jump", 2},
             {"SeAcabo", 3},
             {"lados", 4},
-<<<<<<< Updated upstream
-            {"CarcelVolador", 5},
-            {"Win", 6}
-=======
-<<<<<<< Updated upstream
-            {"CarcelVolador", 5}
-=======
             {"CarcelVolador", 5},
             {"Win", 6},
             {"Tp", 7 }
->>>>>>> Stashed changes
->>>>>>> Stashed changes
         };
 
         float x = 0.0f;
@@ -265,13 +256,6 @@ bool Map::Load(std::string path, std::string fileName)
                 case 5: // Carcel
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::CARCEL;
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-                    std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
-                    std::cout << "CREATED Carcel" << std::endl;
-=======
->>>>>>> Stashed changes
                     //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
                     //std::cout << "CREATED Carcel" << std::endl;
                     break;
@@ -279,9 +263,6 @@ bool Map::Load(std::string path, std::string fileName)
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::WIN;
                     //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
-<<<<<<< Updated upstream
-                    //std::cout << "CREATED Carcel" << std::endl;
-=======
                     //std::cout << "CREATED Win" << std::endl;
                     break;
                 case 7: // TP TO LEVEL 2
@@ -289,8 +270,6 @@ bool Map::Load(std::string path, std::string fileName)
                     rect->ctype = ColliderType::TEPE;
                     //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
                     //std::cout << "CREATED Tp" << std::endl;
->>>>>>> Stashed changes
->>>>>>> Stashed changes
                     break;
                 default: // Plataformas
                     rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);

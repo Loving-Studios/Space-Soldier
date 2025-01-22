@@ -27,15 +27,8 @@ enum class ColliderType {
 	ITEM,
 	PLATFORM,
 	CHECKPOINT,
-<<<<<<< Updated upstream
-	WIN,
-=======
-<<<<<<< Updated upstream
-=======
 	WIN,
 	TEPE,
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 	ENEMY,
 	JUMP,
 	FIN,
