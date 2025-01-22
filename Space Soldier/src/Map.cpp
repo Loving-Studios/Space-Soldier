@@ -44,8 +44,21 @@ bool Map::Update(float dt)
         for (const auto& mapLayer : mapData.layers) {
             //Check if the property Draw exist get the value, if it's true draw the lawyer
             if (mapLayer->properties.GetProperty("Draw") != NULL && mapLayer->properties.GetProperty("Draw")->value == true) {
-                for (int i = 0; i < mapData.width; i++) {
-                    for (int j = 0; j < mapData.height; j++) {
+
+                Vector2D camPos = Vector2D(Engine::GetInstance().render->camera.x * -1, Engine::GetInstance().render->camera.y * -1);
+                if (camPos.getX() < 0) camPos.setX(0);
+                if (camPos.getY() < 0) camPos.setY(0);
+                Vector2D camPosTile = WorldToMap(camPos.getX(), camPos.getY());
+
+                Vector2D camSize = Vector2D(Engine::GetInstance().render->camera.w, Engine::GetInstance().render->camera.h);
+                Vector2D camSizeTile = WorldToMap(camSize.getX(), camSize.getY());
+
+                Vector2D limits = Vector2D(camPosTile.getX() + camSizeTile.getX(), camPosTile.getY() + camSizeTile.getY());
+                if (limits.getX() > mapData.width) limits.setX(mapData.width);
+                if (limits.getY() > mapData.height) limits.setY(mapData.height);
+
+                for (int i = camPosTile.getX(); i < limits.getX(); i++) {
+                    for (int j = camPosTile.getY(); j < limits.getY(); j++) {
 
                         // L07 TODO 9: Complete the draw function
 
@@ -187,8 +200,18 @@ bool Map::Load(std::string path, std::string fileName)
             {"Jump", 2},
             {"SeAcabo", 3},
             {"lados", 4},
+<<<<<<< Updated upstream
             {"CarcelVolador", 5},
             {"Win", 6}
+=======
+<<<<<<< Updated upstream
+            {"CarcelVolador", 5}
+=======
+            {"CarcelVolador", 5},
+            {"Win", 6},
+            {"Tp", 7 }
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         };
 
         float x = 0.0f;
@@ -242,6 +265,13 @@ bool Map::Load(std::string path, std::string fileName)
                 case 5: // Carcel
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::CARCEL;
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+                    std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
+                    std::cout << "CREATED Carcel" << std::endl;
+=======
+>>>>>>> Stashed changes
                     //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
                     //std::cout << "CREATED Carcel" << std::endl;
                     break;
@@ -249,7 +279,18 @@ bool Map::Load(std::string path, std::string fileName)
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::WIN;
                     //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
+<<<<<<< Updated upstream
                     //std::cout << "CREATED Carcel" << std::endl;
+=======
+                    //std::cout << "CREATED Win" << std::endl;
+                    break;
+                case 7: // TP TO LEVEL 2
+                    rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
+                    rect->ctype = ColliderType::TEPE;
+                    //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
+                    //std::cout << "CREATED Tp" << std::endl;
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
                     break;
                 default: // Plataformas
                     rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);

@@ -23,11 +23,19 @@ enum bodyType {
 };
 
 enum class ColliderType {
-	PLAYER, 
+	PLAYER,
 	ITEM,
 	PLATFORM,
 	CHECKPOINT,
+<<<<<<< Updated upstream
 	WIN,
+=======
+<<<<<<< Updated upstream
+=======
+	WIN,
+	TEPE,
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 	ENEMY,
 	JUMP,
 	FIN,

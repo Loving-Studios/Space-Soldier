@@ -98,6 +98,11 @@ bool Scene::PreUpdate()
 	return true;
 }
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
@@ -235,6 +240,13 @@ bool Scene::PostUpdate()
 		GotoStartLevel2();
 		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
 	}
+<<<<<<< Updated upstream
+=======
+	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_M) == KEY_DOWN) {
+		GotoEndLevel1();
+		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
+	}
+>>>>>>> Stashed changes
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
 		GotoStart();
 		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
@@ -298,10 +310,21 @@ void Scene::GotoStart()
 
 	}
 }
+<<<<<<< Updated upstream
+=======
+void Scene::GotoEndLevel1()
+{
+	//Player position casi al final del primer nivel
+	//Modo Debug
+	Vector2D playerPos = Vector2D(6435, 360);
+	player->SetPosition(playerPos);
+}
+>>>>>>> Stashed changes
 
 void Scene::GotoStartLevel2()
 {
 	//Player position del inicio del segundo nivel
+<<<<<<< Updated upstream
 	Vector2D playerPos = Vector2D(9125, 513);
 	player->SetPosition(playerPos);
 	pugi::xml_document loadFile;
@@ -334,6 +357,13 @@ void Scene::GotoStartLevel2()
 	}
 }
 
+=======
+	Vector2D playerPos = Vector2D(9125, 450);
+	player->SetPosition(playerPos);
+}
+
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 void Scene::LoadState()
 {
 	//coger posicion del xml

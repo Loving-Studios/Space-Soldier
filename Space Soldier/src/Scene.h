@@ -59,6 +59,8 @@ public:
 	//Called in PostUpdate
 	void GotoStart();
 
+	void GotoEndLevel1();
+
 	// Called in PostUpdate
 	void GotoStartLevel2();
 

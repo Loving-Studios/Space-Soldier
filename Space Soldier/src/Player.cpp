@@ -197,6 +197,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		Engine::GetInstance().scene.get()->SaveState();
 		Engine::GetInstance().audio.get()->PlayFx(saveFxId);
 		break;
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
 	case ColliderType::WIN:
 		LOG("Collision WIN SENSOR");
 		// Comprobar si se ha derrotado también al boss final
@@ -206,6 +211,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			Engine::GetInstance().scene.get()->SetCurrentState(SceneState::END_SCREEN);
 		//}
 		break;
+<<<<<<< Updated upstream
+=======
+	case ColliderType::TEPE:
+		LOG("Collision TP");
+		// Tp al segundo nivel
+		Engine::GetInstance().scene.get()->GotoStartLevel2();
+		break;
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
