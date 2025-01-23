@@ -96,6 +96,7 @@ public:
 	//Buttons Lists
 	std::vector<GuiControlButton*> TitleButtons;
 	std::vector<GuiControlButton*> PauseButtons;
+	std::vector<GuiControlButton*> ContinueButton;
 	std::vector<GuiControlButton*> SettingsButtons;
 
 private:

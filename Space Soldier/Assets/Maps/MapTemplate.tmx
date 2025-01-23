@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="498" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="24" nextobjectid="290">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="498" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="24" nextobjectid="291">
  <properties>
   <property name="Navigation" type="bool" value="true"/>
  </properties>
@@ -59978,6 +59978,7 @@
   <object id="134" x="4609" y="44" width="32" height="768"/>
   <object id="181" x="11997" y="44" width="32" height="768"/>
   <object id="182" x="14534.5" y="39.25" width="32" height="768"/>
+  <object id="290" x="9132" y="53.6667" width="32" height="768"/>
  </objectgroup>
  <objectgroup id="21" name="Win" visible="0">
   <properties>

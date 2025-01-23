@@ -159,10 +159,16 @@ bool Player::Update(float dt)
 	position.setY(METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2);
 
 	if (position.getY() > 800) {
-		// Reinicio posicion del player cuando cae mas de 900px
-		//Volver al inicio
-		Engine::GetInstance().scene.get()->LoadState();
-		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
+		if (position.getX() < 8050)
+		{
+			Engine::GetInstance().scene.get()->LoadState();
+			Engine::GetInstance().audio.get()->PlayFx(loadFxId);
+		}
+		else
+		{
+			Engine::GetInstance().scene.get()->LoadState();
+			Engine::GetInstance().audio.get()->PlayFx(loadFxId);
+		}
 	}
 
 	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
