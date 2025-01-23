@@ -141,7 +141,7 @@ bool Scene::Update(float dt)
 			TitleButtons.push_back(exitTitleBt);
 			if (!isTitleScreenMusicPlaying)
 			{
-				Engine::GetInstance().audio.get()->PlayMusic("Assets/Audio/Fx/TitleScreenMusic2.ogg", -1);
+				Engine::GetInstance().audio.get()->PlayMusic("Assets/Audio/Fx/TitleScreenMusic.ogg", -1);
 				isTitleScreenMusicPlaying = true;
 			}
 		}
