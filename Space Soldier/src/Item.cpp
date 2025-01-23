@@ -10,7 +10,7 @@
 #include "Physics.h"
 #include "Map.h"
 
-Item::Item() : Entity(EntityType::ITEM), isDead(false)
+Item::Item() : Entity(EntityType::ITEM)
 {
 	name = "item";
 }
@@ -60,9 +60,6 @@ bool Item::Start() {
 	else if (typeStr == "bot") {
 		type = ItemType::CURA;
 	}
-	else if (typeStr == "bala") {
-		type = ItemType::BALA;
-	}
 
 	return true;
 }
@@ -111,12 +108,6 @@ void Item::OnCollision(PhysBody* physA, PhysBody* physB)
 			isDead = true;
 			//pendingToDelete = true;
 		}
-		else if (type == ItemType::BALA) {
-			LOG("---------------------Bala-----------------------------------");
-			alive = false;
-			isDead = true;
-			//pendingToDelete = true;
-		}
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("End Enemy Collision UNKNOWN");
@@ -126,29 +117,7 @@ void Item::OnCollision(PhysBody* physA, PhysBody* physB)
 	}
 }
 
-void Item::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
-{
-	switch (physB->ctype)
-	{
-	case ColliderType::PLAYER:
-		LOG("Item Collision Player");
-		if (name == "Coin") {
-			LOG("---------------------MONEDA-----------------------------------");
 
-		}
-		else if (name == "botiquin") {
-			LOG("---------------------Botiquin-----------------------------------");
-		}
-		else if (name == "bala") {
-		}
-		break;
-	case ColliderType::UNKNOWN:
-		LOG("End Enemy Collision UNKNOWN");
-		break;
-	default:
-		break;
-	}
-}
 
 bool Item::IsAlive() { return alive; } //Le manda al scene si el el item ha sido cogido o no
 

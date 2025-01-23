@@ -135,11 +135,15 @@ bool Enemy::Update(float dt)
 			pathfinding->PropagateAStar(SQUARED);
 		}
 
-		if(distance <= 4) {//una vez encontrado el player 
-			patrullando = true;
-		}else{ patrullando = false; }
+		
 
 		if (type == EnemyType::VOLADOR) {
+
+			if (distance <= 6) {//una vez encontrado el player 
+				patrullando = true;
+			}
+			else { patrullando = false; }
+
 			if (!patrullando && Giro) {//Subir y bajar duranmte el modo patrullar
 				Giro = false;
 				if (movimiento == 2) {//si se mete en un switch se vuelve loco
@@ -206,6 +210,12 @@ bool Enemy::Update(float dt)
 		}
 }
 	if (type == EnemyType::TERRESTRE) {
+
+		if (distance <= 4) {//una vez encontrado el player 
+			patrullando = true;
+		}
+		else { patrullando = false; }
+
 		if (position.getY() > 650) {
 			Engine::GetInstance().scene.get()->Valoresenemigos();
 		}
@@ -264,22 +274,27 @@ bool Enemy::Update(float dt)
 	}
 }
 	if (type == EnemyType::BOSS) {
-		if (position.getY() > 650) {
-			LOG("entrooooo");
-			//Engine::GetInstance().scene.get()->Valoresenemigos();
+		if (distance <= 10) {//una vez encontrado el player 
+			patrullando = true;
 		}
-		if (!patrullando && Giro) {
-			Giro = false;
-			if (movimiento == 2) {//si se mete en un switch se vuelve loco
-				movimiento = 1;
-			}
-			else {
-				movimiento = 2;
-			}
+		else { patrullando = false; }
+		if (!patrullando ) {
+
+			currentAnimation = &idle;
+			
 		}
 
 		if (patrullando) {
-			if (suelo) {
+			if (distance <= 5) {
+				/*if () {
+					currentAnimation = &cargarR;
+				}
+				else {
+					currentAnimation = &cargarL;
+				}
+
+
+
 				if (enemyTilePos.getX() < playerTilePos.getX()) {
 					velocity.x = 0.2 * 5;  // Derecha
 					if (jump) {//saltar cuando el terreno se eleve
@@ -293,35 +308,13 @@ bool Enemy::Update(float dt)
 						velocity.y = -4;
 					}
 					currentAnimation = &moveL;
-				}
+				}*/
+			}
+			else {
+				
 			}
 		}
-		else {
-			switch (movimiento)
-			{
-			case 1:
-				if (jump) {//saltar cuando el terreno se eleve
-					velocity.y = -4;
-					velocity.x = 15;
-					currentAnimation = &moveR;
-				}
-				velocity.x = 0.2 * 5;
-				currentAnimation = &moveR;
-				break;
-
-			case 2:
-				if (jump) {//saltar cuando el terreno se eleve
-					velocity.y = -4;
-					velocity.x = -1 * 15;
-					currentAnimation = &moveL;
-				}
-				velocity.x = -0.2 * 5;
-				currentAnimation = &moveL;
-				break;
-			default:
-				break;
-			}
-		}
+		
 	}
 	pbody->body->SetLinearVelocity(velocity);
 
