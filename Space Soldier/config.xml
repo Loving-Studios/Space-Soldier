@@ -17,7 +17,7 @@
 	<scene1>
 		<map path="Assets/Maps/" name="MapTemplate.tmx" />
 		<entities>
-			<player x="514" y="519" w="48" h="32" vidas="3" texture="Assets/Textures/player/PlayerCanvas.png">
+			<player x="14527" y="359" w="48" h="32" vidas="3" texture="Assets/Textures/player/PlayerCanvas.png">
 				<animations>
 					<idle loop="true" speed="0.2">
 						<frame x="0" y="0" w="48" h="48" />
@@ -78,7 +78,7 @@
 				</animations>
 			</player>
 			<enemies>
-				<enemy name="Paco" x="842" y="391" xo="893" yo="420" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+				<enemy name="Paco" x="839" y="389" xo="893" yo="420" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -138,7 +138,7 @@
 						</crouch>
 					</animations>
 				</enemy>
-				<enemy name="Manolo" x="1641" y="460" yo="456" xo="1661" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+				<enemy name="Manolo" x="2168" y="396" yo="456" xo="1661" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -198,7 +198,7 @@
 						</crouch>
 					</animations>
 				</enemy>
-				<enemy name="Rocoso" x="3191" y="438" yo="509" xo="3243" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador" Alive="true">
+				<enemy name="Rocoso" x="3163" y="447" yo="509" xo="3243" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -257,7 +257,7 @@
 						</deathL>
 					</animations>
 				</enemy>
-				<enemy name="Rocoso2" x="5274" y="500" yo="555" xo="5257" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador" Alive="true">
+				<enemy name="Rocoso2" x="5250" y="255" yo="555" xo="5257" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -316,7 +316,7 @@
 						</deathL>
 					</animations>
 				</enemy>
-				<enemy name="Carlos" x="11985" y="236" yo="233" xo="12036" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+				<enemy name="Carlos" x="12265" y="236" yo="233" xo="12036" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -376,7 +376,7 @@
 						</crouch>
 					</animations>
 				</enemy>
-				<enemy name="Duki" x="9484" y="300" yo="305" xo="9535" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+				<enemy name="Duki" x="9333" y="300" yo="305" xo="9535" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -436,7 +436,7 @@
 						</crouch>
 					</animations>
 				</enemy>
-				<enemy name="Ernesto" x="10414" y="326" yo="363" xo="10465" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+				<enemy name="Ernesto" x="16781" y="8892" yo="363" xo="10465" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="false">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -496,77 +496,77 @@
 						</crouch>
 					</animations>
 				</enemy>
-				<enemy name="Jose" x="15048" y="588" yo="587" xo="15025" w="48" h="38" texture="Assets/Textures/All.png" gravity="true" type="boss" Alive="true">
+				<enemy name="Jose" x="15041" y="591" yo="587" xo="15025" w="32" h="32" texture="Assets/Textures/All2.png" gravity="true" type="boss" Alive="true">
 					<animations>
-						<idle loop="true" speed="0.2">
-							<frame x="0" y="0" w="48" h="48" />
+						<idle loop="false" speed="0.2">
+							<frame x="0" y="0" w="32" h="32" />
 						</idle>
-						<awake loop="true" speed="0.2">
-							<frame x="0" y="48" w="48" h="48" />
-							<frame x="48" y="48" w="48" h="48" />
-							<frame x="96" y="48" w="48" h="48" />
-							<frame x="144" y="48" w="48" h="48" />
-							<frame x="192" y="48" w="48" h="48" />
+						<awake loop="false" speed="0.2">
+							<frame x="0" y="32" w="32" h="32" />
+							<frame x="32" y="32" w="32" h="32" />
+							<frame x="64" y="32" w="32" h="32" />
+							<frame x="96" y="32" w="32" h="32" />
+							<frame x="128" y="32" w="32" h="32" />
 						</awake>
 						<moveR loop="true" speed="0.2">
-							<frame x="0" y="48" w="48" h="48" />
-							<frame x="48" y="48" w="48" h="48" />
-							<frame x="96" y="48" w="48" h="48" />
-							<frame x="144" y="48" w="48" h="48" />
-							<frame x="192" y="48" w="48" h="48" />
+							<frame x="0" y="64" w="32" h="32" />
+							<frame x="32" y="64" w="32" h="32" />
+							<frame x="64" y="64" w="32" h="32" />
+							<frame x="96" y="64" w="32" h="32" />
+							<frame x="128" y="64" w="32" h="32" />
 						</moveR>
 						<moveL loop="true" speed="0.2">
-							<frame x="0" y="48" w="48" h="48" />
-							<frame x="48" y="48" w="48" h="48" />
-							<frame x="96" y="48" w="48" h="48" />
-							<frame x="144" y="48" w="48" h="48" />
-							<frame x="192" y="48" w="48" h="48" />
+							<frame x="0" y="96" w="32" h="32" />
+							<frame x="32" y="96" w="32" h="32" />
+							<frame x="64" y="96" w="32" h="32" />
+							<frame x="96" y="96" w="32" h="32" />
+							<frame x="128" y="96" w="32" h="32" />
 						</moveL>
 						<cargarR loop="true" speed="0.2">
-							<frame x="0" y="48" w="48" h="48" />
-							<frame x="48" y="48" w="48" h="48" />
-							<frame x="96" y="48" w="48" h="48" />
-							<frame x="144" y="48" w="48" h="48" />
-							<frame x="192" y="48" w="48" h="48" />
+							<frame x="0" y="128" w="32" h="32" />
+							<frame x="32" y="128" w="32" h="32" />
+							<frame x="64" y="128" w="32" h="32" />
+							<frame x="96" y="128" w="32" h="32" />
+							<frame x="128" y="128" w="32" h="32" />
 						</cargarR>
 						<cargarL loop="true" speed="0.2">
-							<frame x="0" y="48" w="48" h="48" />
-							<frame x="48" y="48" w="48" h="48" />
-							<frame x="96" y="48" w="48" h="48" />
-							<frame x="144" y="48" w="48" h="48" />
-							<frame x="192" y="48" w="48" h="48" />
+							<frame x="0" y="160" w="32" h="32" />
+							<frame x="32" y="160" w="32" h="32" />
+							<frame x="64" y="160" w="32" h="32" />
+							<frame x="96" y="160" w="32" h="32" />
+							<frame x="128" y="160" w="32" h="32" />
 						</cargarL>
 						<damageR loop="true" speed="0.2">
-							<frame x="0" y="48" w="48" h="48" />
-							<frame x="48" y="48" w="48" h="48" />
-							<frame x="96" y="48" w="48" h="48" />
+							<frame x="0" y="192" w="32" h="32" />
+							<frame x="32" y="192" w="32" h="32" />
+							<frame x="64" y="192" w="32" h="32" />
 						</damageR>
 						<damageL loop="true" speed="0.2">
-							<frame x="0" y="48" w="48" h="48" />
-							<frame x="48" y="48" w="48" h="48" />
-							<frame x="96" y="48" w="48" h="48" />
+							<frame x="0" y="224" w="32" h="32" />
+							<frame x="32" y="224" w="32" h="32" />
+							<frame x="64" y="224" w="32" h="32" />
 						</damageL>
 						<deathR loop="false" speed="0.05">
-							<frame x="0" y="144" w="48" h="48" />
-							<frame x="48" y="144" w="48" h="48" />
-							<frame x="96" y="144" w="48" h="48" />
-							<frame x="144" y="144" w="48" h="48" />
-							<frame x="192" y="144" w="48" h="48" />
-							<frame x="240" y="144" w="48" h="48" />
-							<frame x="288" y="144" w="48" h="48" />
-							<frame x="336" y="144" w="48" h="48" />
-							<frame x="384" y="144" w="48" h="48" />
+							<frame x="0" y="256" w="32" h="32" />
+							<frame x="32" y="256" w="32" h="32" />
+							<frame x="64" y="256" w="32" h="32" />
+							<frame x="96" y="256" w="32" h="32" />
+							<frame x="128" y="256" w="32" h="32" />
+							<frame x="160" y="256" w="32" h="32" />
+							<frame x="192" y="256" w="32" h="32" />
+							<frame x="224" y="256" w="32" h="32" />
+							<frame x="256" y="256" w="32" h="32" />
 						</deathR>
 						<deathL loop="false" speed="0.05">
-							<frame x="0" y="192" w="48" h="48" />
-							<frame x="48" y="192" w="48" h="48" />
-							<frame x="96" y="192" w="48" h="48" />
-							<frame x="144" y="192" w="48" h="48" />
-							<frame x="192" y="192" w="48" h="48" />
-							<frame x="240" y="192" w="48" h="48" />
-							<frame x="288" y="192" w="48" h="48" />
-							<frame x="336" y="192" w="48" h="48" />
-							<frame x="384" y="192" w="48" h="48" />
+							<frame x="0" y="288" w="32" h="32" />
+							<frame x="32" y="288" w="32" h="32" />
+							<frame x="64" y="288" w="32" h="32" />
+							<frame x="96" y="288" w="32" h="32" />
+							<frame x="128" y="288" w="32" h="32" />
+							<frame x="160" y="288" w="32" h="32" />
+							<frame x="192" y="288" w="32" h="32" />
+							<frame x="224" y="288" w="32" h="32" />
+							<frame x="256" y="288" w="32" h="32" />
 						</deathL>
 					</animations>
 				</enemy>

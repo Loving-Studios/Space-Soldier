@@ -285,33 +285,48 @@ bool Enemy::Update(float dt)
 		}
 
 		if (patrullando) {
-			if (distance <= 5) {
-				/*if () {
-					currentAnimation = &cargarR;
-				}
-				else {
-					currentAnimation = &cargarL;
-				}
-
-
-
-				if (enemyTilePos.getX() < playerTilePos.getX()) {
-					velocity.x = 0.2 * 5;  // Derecha
-					if (jump) {//saltar cuando el terreno se eleve
-						velocity.y = -4;
-					}
-					currentAnimation = &moveR;
-				}
-				else if (enemyTilePos.getX() > playerTilePos.getX()) {
-					velocity.x = -0.2 * 5;  // Izquierda
-					if (jump) {//saltar cuando el terreno se eleve
-						velocity.y = -4;
-					}
-					currentAnimation = &moveL;
-				}*/
+			if (distance <= 10) {//una vez encontrado el player 
+				patrullando = true;
 			}
-			else {
-				
+			else { patrullando = false; }
+			if (!patrullando) {
+
+				currentAnimation = &idle;
+
+			}
+
+			if (patrullando) {
+				if (distance <= 10) {//una vez encontrado el player 
+					currentAnimation = &awake;
+					patrullando = true;
+				}
+				else { patrullando = false; }
+				if (!patrullando) {
+
+					currentAnimation = &idle;
+
+				}
+
+				if (patrullando) {
+					if (distance <= 5) {
+						if (enemyTilePos.getX() < playerTilePos.getX()) {
+							currentAnimation = &cargarR;
+						}
+						else if (enemyTilePos.getX() > playerTilePos.getX()) {
+							currentAnimation = &cargarL;
+						}
+					}
+					else {
+						if (enemyTilePos.getX() < playerTilePos.getX()) {
+							velocity.x = 0.2 * 5;  // Derecha
+							currentAnimation = &moveR;
+						}
+						else if (enemyTilePos.getX() > playerTilePos.getX()) {
+							velocity.x = -0.2 * 5;  // Izquierda
+							currentAnimation = &moveL;
+						}
+					}
+				}
 			}
 		}
 		
