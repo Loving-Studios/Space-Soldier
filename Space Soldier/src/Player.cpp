@@ -188,10 +188,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (!GodMode) isJumping = false;
 		//Engine::GetInstance().audio.get()->PlayFx(walkFxId);
 		break;
-	case ColliderType::ITEM:
+	/*case ColliderType::ITEM:
 		LOG("Collision ITEM");
 
-		break;
+		break;*/
 	case ColliderType::CHECKPOINT:
 		LOG("Collision CHECKPOINT");
 		Engine::GetInstance().scene.get()->SaveState();
@@ -229,9 +229,9 @@ void Player::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 	case ColliderType::CHECKPOINT:
 		LOG("End Collision CHECKPOINT");
 		break;
-	case ColliderType::ITEM:
+	/*case ColliderType::ITEM:
 		LOG("End Collision ITEM");
-		break;
+		break;*/
 	case ColliderType::UNKNOWN:
 		LOG("End Collision UNKNOWN");
 		break;
@@ -256,7 +256,7 @@ void Player::Die() {
 }
 
 void Player::recVidas() {
-	if (vidas > 3) {
+	if (vidas < 3) {
 		vidas++;
 	}
 	//actualizar interfaz de vidas

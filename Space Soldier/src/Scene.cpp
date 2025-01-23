@@ -79,7 +79,7 @@ bool Scene::Start()
 	helpMenuTexture = Engine::GetInstance().textures->Load("Assets/Textures/HelpMenu.png");
 
 	introScreenTexture = Engine::GetInstance().textures->Load("Assets/Textures/IntroScreen.png");
-	titleScreenTexture = Engine::GetInstance().textures->Load("Assets/Textures/TitleScreen.png");
+	titleScreenTexture = Engine::GetInstance().textures->Load("Assets/Textures/TitleScreen2.png");
 	pauseMenuTexture = Engine::GetInstance().textures->Load("Assets/Textures/PauseScreen.png");
 	dieScreenTexture = Engine::GetInstance().textures->Load("Assets/Textures/DieScreen.png");
 	winScreenTexture = Engine::GetInstance().textures->Load("Assets/Textures/WinScreen.png");
@@ -301,6 +301,32 @@ void Scene::GotoStart()
 		enemy->SetPosition(enemyPos);
 
 	}
+
+	/*for (Item* item : itemList) //reiniciar los items
+	{
+		if (!item) {
+			LOG("Error: Puntero enemigo nulo en itemList.");
+			continue;
+		}
+		pugi::xml_node itemNode = sceneNode.child("entities").child("items").find_child_by_attribute("name", item->GetName().c_str());
+
+		if (!itemNode) {
+			LOG("Error: Nodo para item %s no encontrado.", enemy->GetName().c_str());
+			continue;
+		}
+		bool vivo = itemNode.attribute("Alive").as_bool();
+		float x = itemNode.attribute("xo").as_float(-1.0f); // Valor por defecto en caso de error
+		float y = itemNode.attribute("yo").as_float(-1.0f);
+		//Vector2D enemyPos(enemyNode.attribute("x").as_float(), enemyNode.attribute("y").as_float());
+
+		if (x < 0 || y < 0) {
+			LOG("Error: Atributos invalidos para item %s.", item->GetName().c_str());
+			continue;
+		}
+		Vector2D itemPos(x, y);
+		item->SetPosition(itemPos);
+
+	}*/
 }
 void Scene::GotoEndLevel1()
 {
@@ -460,7 +486,8 @@ void Scene::SaveState()
 			LOG("Error: Nodo para item %s no encontrado.", item->GetName().c_str());
 			continue;
 		}
-
+		itemNode.attribute("x").set_value(item->GetPosition().getX());
+		itemNode.attribute("y").set_value(item->GetPosition().getY());
 		itemNode.attribute("Alive").set_value(item->IsAlive());
 	}
 
