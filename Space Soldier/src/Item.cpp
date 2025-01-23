@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "Scene.h"
+#include "Player.h"
 #include "Log.h"
 #include "Physics.h"
 #include "Map.h"
@@ -32,7 +33,8 @@ bool Item::Start() {
 	alive = parameters.attribute("Alive").as_bool();
 	gravedad = parameters.attribute("gravity").as_bool();
 
-	pickCoinFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Faro.wav");
+	pickCoinFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Faro.wav"); 
+	pickHealFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/bot.wav");
 
 		// L08 TODO 4: Add a physics to an item - initialize the physics body
 		Engine::GetInstance().textures.get()->GetSize(texture, texW, texH);
@@ -49,12 +51,12 @@ bool Item::Start() {
 	// L08 TODO 7: Assign collider type
 	pbody->ctype = ColliderType::ITEM;
 
-	std::string typeStr = parameters.attribute("name").as_string();
+	std::string typeStr = name; //parameters.attribute("name").as_string();
 
 	if (typeStr == "Coin") {
 		type = ItemType::MONEDA;
 	}
-	else if (typeStr == "botiquin") {
+	else if (typeStr == "bot") {
 		type = ItemType::CURA;
 	}
 	else if (typeStr == "bala") {
@@ -66,36 +68,7 @@ bool Item::Start() {
 
 bool Item::Update(float dt)
 {
-	if (Engine::GetInstance().scene->GetCurrentState() != SceneState::GAMEPLAY)
-	{
-		return true;
-	}
-	// L08 TODO 4: Add a physics to an item - update the position of the object from the physics.
-
-	if (!alive) {
-		// Si esta marcado para eliminacion, elimina el cuerpo fisico
-
-		if (pendingToDelete) {
-			if (pbody != nullptr) {
-				Engine::GetInstance().physics->DestroyBody(pbody->body);
-				pbody = nullptr;
-			}
-			return false; // Detener la ejecucion del item
-		}
-		return true; // Salir temprano si el enemigo esta muerto
-	}
-
-
-	if (!alive) return false;
-
-	b2Transform pbodyPos = pbody->body->GetTransform();
-
-	position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
-	position.setY(METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2);
-
-	if (alive == true) {
-		Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY());
-	}
+	
 
 	return true;
 }
@@ -110,18 +83,40 @@ void Item::OnCollision(PhysBody* physA, PhysBody* physB)
 			LOG("---------------------MONEDA-----------------------------------");
 			Engine::GetInstance().audio.get()->PlayFx(pickCoinFxId);
 			alive = false;
-			pendingToDelete = true;
+
+		}
+		else if (name == "bot") {
+			LOG("---------------------Botiquin-----------------------------------");
+			((Player*)physB->listener)->recVidas();
+			Engine::GetInstance().audio.get()->PlayFx(pickHealFxId);
+			alive = false;
+		}
+		else if (name == "bala") {
+			alive = false;
+		}
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("End Enemy Collision UNKNOWN");
+		break;
+	default:
+		break;
+	}
+}
+
+void Item::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
+{
+	switch (physB->ctype)
+	{
+	case ColliderType::PLAYER:
+		LOG("Item Collision Player");
+		if (name == "Coin") {
+			LOG("---------------------MONEDA-----------------------------------");
 
 		}
 		else if (name == "botiquin") {
-
-			alive = false;
-			pendingToDelete = true;
+			LOG("---------------------Botiquin-----------------------------------");
 		}
 		else if (name == "bala") {
-
-			alive = false;
-			pendingToDelete = true;
 		}
 		break;
 	case ColliderType::UNKNOWN:

@@ -265,7 +265,7 @@ bool Enemy::Update(float dt)
 	if (type == EnemyType::BOSS) {
 		if (position.getY() > 650) {
 			LOG("entrooooo");
-			Engine::GetInstance().scene.get()->Valoresenemigos();
+			//Engine::GetInstance().scene.get()->Valoresenemigos();
 		}
 		if (!patrullando && Giro) {
 			Giro = false;
