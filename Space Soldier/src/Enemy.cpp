@@ -273,64 +273,34 @@ bool Enemy::Update(float dt)
 		}
 	}
 }
-	if (type == EnemyType::BOSS) {
-
-		if (vidasB == 0) { Estavivo = false; isDead = true; return true; }
-		if (distance <= 10) {//una vez encontrado el player 
-			patrullando = true;
-		}
-		else { patrullando = false; }
-		if (!patrullando ) {
-
-			currentAnimation = &idle;
-			
-		}
-
-		if (patrullando) {
-			if (distance <= 10) {//una vez encontrado el player 
-				patrullando = true;
-			}
-			else { patrullando = false; }
-			if (!patrullando) {
-
-				currentAnimation = &idle;
-
-			}
-
-			if (patrullando) {
-				if (distance <= 10) {//una vez encontrado el player 
-					currentAnimation = &awake;
-					patrullando = true;
+	if (type == EnemyType::BOSS) {//si se descomenta al cerrar el juego no deja volverlo a abrir, peta por todos lados
+		/*if (vidasB == 0) { Estavivo = false; isDead = true; currentAnimation = &deathR; }
+		if (distance <= 10) { patrullando = true; }else { patrullando = false; }
+		if(patrullando){
+			if (distance <= 5) {
+				if (enemyTilePos.getX() < playerTilePos.getX()) {
+					currentAnimation = &cargarR;
+					//crear bala
+					// llamar a la funcion que inicializa la entity bala añadiendole velocidad hacia la derecha y cuerpo dinamico, si colisiona con le jugador llama a la funcion del jugador que le baja la vida
 				}
-				else { patrullando = false; }
-				if (!patrullando) {
-
-					currentAnimation = &idle;
-
+				else if (enemyTilePos.getX() > playerTilePos.getX()) {
+					currentAnimation = &cargarL;
+					//temporizador drante la animacion antes del disparo de la bala
+					//crear bala
+					//llamar a la funcion que inicializa la entity bala añadiendole velocidad hacia la izquierda y cuerpo dinamico, si colisiona con le jugador llama a la funcion del jugador que le baja la vida
 				}
+			}else{
+				if (enemyTilePos.getX() < playerTilePos.getX()) {//perseguir al player
+					velocity.x = 0.2 * 5;  // Derecha
+					currentAnimation = &moveR;
+				}
+				else if (enemyTilePos.getX() > playerTilePos.getX()) {
+					velocity.x = -0.2 * 5;  // Izquierda
 
-				if (patrullando) {
-					if (distance <= 5) {
-						if (enemyTilePos.getX() < playerTilePos.getX()) {
-							currentAnimation = &cargarR;
-						}
-						else if (enemyTilePos.getX() > playerTilePos.getX()) {
-							currentAnimation = &cargarL;
-						}
-					}
-					else {
-						if (enemyTilePos.getX() < playerTilePos.getX()) {
-							velocity.x = 0.2 * 5;  // Derecha
-							currentAnimation = &moveR;
-						}
-						else if (enemyTilePos.getX() > playerTilePos.getX()) {
-							velocity.x = -0.2 * 5;  // Izquierda
-							currentAnimation = &moveL;
-						}
-					}
+					currentAnimation = &moveL;
 				}
 			}
-		}
+		}*/
 		
 	}
 	pbody->body->SetLinearVelocity(velocity);
@@ -372,9 +342,9 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (playerPos.getY() < position.getY()) {
 			
 
-			if(type == EnemyType::TERRESTRE){ Estavivo = false; isDead = true; currentAnimation = &deathR; /* Cambia a deathL si corresponde */ }
-			if (type == EnemyType::VOLADOR) { Estavivo = false; isDead = true; currentAnimation = &deathR; /* Cambia a deathL si corresponde */ }
-			if (type == EnemyType::BOSS) { vidasB--;/* Cambia a deathL si corresponde */ }
+			if(type == EnemyType::TERRESTRE){ Estavivo = false; isDead = true; currentAnimation = &deathR; }
+			if (type == EnemyType::VOLADOR) { Estavivo = false; isDead = true; currentAnimation = &deathR; }
+			if (type == EnemyType::BOSS) { vidasB--;/* quitarle una de las vidas al boss final*/ }
 			
 			Engine::GetInstance().audio.get()->PlayFx(killMonsterFxId);
 			// Marca para eliminar el cuerpo fisico
