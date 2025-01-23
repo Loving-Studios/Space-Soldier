@@ -50,6 +50,11 @@ bool Enemy::Start() {
 	deathR.LoadAnimations(parameters.child("animations").child("deathR"));
 	deathL.LoadAnimations(parameters.child("animations").child("deathL"));
 	crouch.LoadAnimations(parameters.child("animations").child("crouch"));
+	awake.LoadAnimations(parameters.child("animations").child("awake"));
+	cargarR.LoadAnimations(parameters.child("animations").child("cargarR"));
+	cargarL.LoadAnimations(parameters.child("animations").child("cargarL"));
+	damageR.LoadAnimations(parameters.child("animations").child("damageR"));
+	damageL.LoadAnimations(parameters.child("animations").child("damageL"));
 	currentAnimation = &idle;
 
 	//Add a physics to an item - initialize the physics body

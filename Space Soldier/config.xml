@@ -17,7 +17,7 @@
 	<scene1>
 		<map path="Assets/Maps/" name="MapTemplate.tmx" />
 		<entities>
-			<player x="306" y="423" w="48" h="32" vidas="3" texture="Assets/Textures/player/PlayerCanvas.png">
+			<player x="14542" y="375" w="48" h="32" vidas="3" texture="Assets/Textures/player/PlayerCanvas.png">
 				<animations>
 					<idle loop="true" speed="0.2">
 						<frame x="0" y="0" w="48" h="48" />
@@ -78,7 +78,7 @@
 				</animations>
 			</player>
 			<enemies>
-				<enemy name="Paco" x="908" y="425" xo="893" yo="420" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+				<enemy name="Paco" x="876" y="450" xo="893" yo="420" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -138,7 +138,7 @@
 						</crouch>
 					</animations>
 				</enemy>
-				<enemy name="Manolo" x="2084" y="396" yo="456" xo="1661" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+				<enemy name="Manolo" x="1902" y="479" yo="456" xo="1661" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -198,7 +198,7 @@
 						</crouch>
 					</animations>
 				</enemy>
-				<enemy name="Rocoso" x="3312" y="556" yo="509" xo="3243" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador" Alive="true">
+				<enemy name="Rocoso" x="3153" y="531" yo="509" xo="3243" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -257,7 +257,7 @@
 						</deathL>
 					</animations>
 				</enemy>
-				<enemy name="Rocoso2" x="5243" y="108" yo="555" xo="5257" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador" Alive="true">
+				<enemy name="Rocoso2" x="5274" y="158" yo="555" xo="5257" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -316,78 +316,187 @@
 						</deathL>
 					</animations>
 				</enemy>
-			</enemies>
-			<items>
-				<item name="Coinu" type="Coin" x="242" y="438" yo="900" xo="200" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="false" Alive="true" />
-				<item name="botu" type="bot" x="253" y="438" yo="910" xo="200" w="48" h="38" texture="Assets/Textures/CorazonLLeno.png" gravity="false" Alive="false" />
-			</items>
-		</entities>
-	</scene1>
-	<scene2>
-		<map path="Assets/Maps/" name="MapTemplateLevel2.tmx" />
-		<entities>
-			<player x="490" y="450" w="48" h="32" texture="Assets/Textures/player/PlayerCanvas.png">
-				<animations>
-					<idle loop="true" speed="0.2">
-						<frame x="0" y="0" w="48" h="48" />
-						<frame x="48" y="0" w="48" h="48" />
-						<frame x="96" y="0" w="48" h="48" />
-						<frame x="144" y="0" w="48" h="48" />
-						<frame x="192" y="0" w="48" h="48" />
-					</idle>
-					<moveR loop="true" speed="0.2">
-						<frame x="0" y="48" w="48" h="48" />
-						<frame x="48" y="48" w="48" h="48" />
-						<frame x="96" y="48" w="48" h="48" />
-						<frame x="144" y="48" w="48" h="48" />
-						<frame x="192" y="48" w="48" h="48" />
-						<frame x="240" y="48" w="48" h="48" />
-					</moveR>
-					<moveL loop="true" speed="0.2">
-						<frame x="0" y="96" w="48" h="48" />
-						<frame x="48" y="96" w="48" h="48" />
-						<frame x="96" y="96" w="48" h="48" />
-						<frame x="144" y="96" w="48" h="48" />
-						<frame x="192" y="96" w="48" h="48" />
-						<frame x="240" y="96" w="48" h="48" />
-					</moveL>
-					<jumpR loop="true" speed="0.02">
-						<frame x="0" y="144" w="48" h="48" />
-						<frame x="48" y="144" w="48" h="48" />
-					</jumpR>
-					<jumpL loop="true" speed="0.02">
-						<frame x="0" y="192" w="48" h="48" />
-						<frame x="48" y="192" w="48" h="48" />
-					</jumpL>
-					<deathR loop="false" speed="0.05">
-						<frame x="0" y="240" w="48" h="48" />
-						<frame x="48" y="240" w="48" h="48" />
-						<frame x="96" y="240" w="48" h="48" />
-						<frame x="144" y="240" w="48" h="48" />
-						<frame x="192" y="240" w="48" h="48" />
-						<frame x="240" y="240" w="48" h="48" />
-						<frame x="288" y="240" w="48" h="48" />
-						<frame x="336" y="240" w="48" h="48" />
-					</deathR>
-					<deathL loop="false" speed="0.05">
-						<frame x="0" y="288" w="48" h="48" />
-						<frame x="48" y="288" w="48" h="48" />
-						<frame x="96" y="288" w="48" h="48" />
-						<frame x="144" y="288" w="48" h="48" />
-						<frame x="192" y="288" w="48" h="48" />
-						<frame x="240" y="288" w="48" h="48" />
-						<frame x="288" y="288" w="48" h="48" />
-						<frame x="336" y="288" w="48" h="48" />
-					</deathL>
-					<crouch loop="false" speed="0.02">
-						<frame x="0" y="336" w="48" h="48" />
-						<frame x="48" y="336" w="48" h="48" />
-						<frame x="96" y="336" w="48" h="48" />
-					</crouch>
-				</animations>
-			</player>
-			<enemies>
-				<enemy name="boss" x="5240" y="350" yo="555" xo="5257" w="48" h="38" texture="Assets/Textures/All.png" gravity="true" type="boss" Alive="true">
+				<enemy name="Carlos" x="12060" y="252" yo="233" xo="12036" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+					<animations>
+						<idle loop="true" speed="0.2">
+							<frame x="0" y="0" w="48" h="48" />
+							<frame x="48" y="0" w="48" h="48" />
+							<frame x="96" y="0" w="48" h="48" />
+							<frame x="144" y="0" w="48" h="48" />
+							<frame x="192" y="0" w="48" h="48" />
+						</idle>
+						<moveR loop="true" speed="0.2">
+							<frame x="0" y="48" w="48" h="48" />
+							<frame x="48" y="48" w="48" h="48" />
+							<frame x="96" y="48" w="48" h="48" />
+							<frame x="144" y="48" w="48" h="48" />
+							<frame x="192" y="48" w="48" h="48" />
+							<frame x="240" y="48" w="48" h="48" />
+						</moveR>
+						<moveL loop="true" speed="0.2">
+							<frame x="0" y="96" w="48" h="48" />
+							<frame x="48" y="96" w="48" h="48" />
+							<frame x="96" y="96" w="48" h="48" />
+							<frame x="144" y="96" w="48" h="48" />
+							<frame x="192" y="96" w="48" h="48" />
+							<frame x="240" y="96" w="48" h="48" />
+						</moveL>
+						<jumpR loop="true" speed="0.02">
+							<frame x="0" y="144" w="48" h="48" />
+							<frame x="48" y="144" w="48" h="48" />
+						</jumpR>
+						<jumpL loop="true" speed="0.02">
+							<frame x="0" y="192" w="48" h="48" />
+							<frame x="48" y="192" w="48" h="48" />
+						</jumpL>
+						<deathR loop="false" speed="0.05">
+							<frame x="0" y="240" w="48" h="48" />
+							<frame x="48" y="240" w="48" h="48" />
+							<frame x="96" y="240" w="48" h="48" />
+							<frame x="144" y="240" w="48" h="48" />
+							<frame x="192" y="240" w="48" h="48" />
+							<frame x="240" y="240" w="48" h="48" />
+							<frame x="288" y="240" w="48" h="48" />
+							<frame x="336" y="240" w="48" h="48" />
+						</deathR>
+						<deathL loop="false" speed="0.05">
+							<frame x="0" y="288" w="48" h="48" />
+							<frame x="48" y="288" w="48" h="48" />
+							<frame x="96" y="288" w="48" h="48" />
+							<frame x="144" y="288" w="48" h="48" />
+							<frame x="192" y="288" w="48" h="48" />
+							<frame x="240" y="288" w="48" h="48" />
+							<frame x="288" y="288" w="48" h="48" />
+							<frame x="336" y="288" w="48" h="48" />
+						</deathL>
+						<crouch loop="false" speed="0.02">
+							<frame x="0" y="336" w="48" h="48" />
+							<frame x="48" y="336" w="48" h="48" />
+							<frame x="96" y="336" w="48" h="48" />
+						</crouch>
+					</animations>
+				</enemy>
+				<enemy name="Duki" x="9559" y="324" yo="305" xo="9535" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+					<animations>
+						<idle loop="true" speed="0.2">
+							<frame x="0" y="0" w="48" h="48" />
+							<frame x="48" y="0" w="48" h="48" />
+							<frame x="96" y="0" w="48" h="48" />
+							<frame x="144" y="0" w="48" h="48" />
+							<frame x="192" y="0" w="48" h="48" />
+						</idle>
+						<moveR loop="true" speed="0.2">
+							<frame x="0" y="48" w="48" h="48" />
+							<frame x="48" y="48" w="48" h="48" />
+							<frame x="96" y="48" w="48" h="48" />
+							<frame x="144" y="48" w="48" h="48" />
+							<frame x="192" y="48" w="48" h="48" />
+							<frame x="240" y="48" w="48" h="48" />
+						</moveR>
+						<moveL loop="true" speed="0.2">
+							<frame x="0" y="96" w="48" h="48" />
+							<frame x="48" y="96" w="48" h="48" />
+							<frame x="96" y="96" w="48" h="48" />
+							<frame x="144" y="96" w="48" h="48" />
+							<frame x="192" y="96" w="48" h="48" />
+							<frame x="240" y="96" w="48" h="48" />
+						</moveL>
+						<jumpR loop="true" speed="0.02">
+							<frame x="0" y="144" w="48" h="48" />
+							<frame x="48" y="144" w="48" h="48" />
+						</jumpR>
+						<jumpL loop="true" speed="0.02">
+							<frame x="0" y="192" w="48" h="48" />
+							<frame x="48" y="192" w="48" h="48" />
+						</jumpL>
+						<deathR loop="false" speed="0.05">
+							<frame x="0" y="240" w="48" h="48" />
+							<frame x="48" y="240" w="48" h="48" />
+							<frame x="96" y="240" w="48" h="48" />
+							<frame x="144" y="240" w="48" h="48" />
+							<frame x="192" y="240" w="48" h="48" />
+							<frame x="240" y="240" w="48" h="48" />
+							<frame x="288" y="240" w="48" h="48" />
+							<frame x="336" y="240" w="48" h="48" />
+						</deathR>
+						<deathL loop="false" speed="0.05">
+							<frame x="0" y="288" w="48" h="48" />
+							<frame x="48" y="288" w="48" h="48" />
+							<frame x="96" y="288" w="48" h="48" />
+							<frame x="144" y="288" w="48" h="48" />
+							<frame x="192" y="288" w="48" h="48" />
+							<frame x="240" y="288" w="48" h="48" />
+							<frame x="288" y="288" w="48" h="48" />
+							<frame x="336" y="288" w="48" h="48" />
+						</deathL>
+						<crouch loop="false" speed="0.02">
+							<frame x="0" y="336" w="48" h="48" />
+							<frame x="48" y="336" w="48" h="48" />
+							<frame x="96" y="336" w="48" h="48" />
+						</crouch>
+					</animations>
+				</enemy>
+				<enemy name="Ernesto" x="10465" y="363" yo="363" xo="10465" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+					<animations>
+						<idle loop="true" speed="0.2">
+							<frame x="0" y="0" w="48" h="48" />
+							<frame x="48" y="0" w="48" h="48" />
+							<frame x="96" y="0" w="48" h="48" />
+							<frame x="144" y="0" w="48" h="48" />
+							<frame x="192" y="0" w="48" h="48" />
+						</idle>
+						<moveR loop="true" speed="0.2">
+							<frame x="0" y="48" w="48" h="48" />
+							<frame x="48" y="48" w="48" h="48" />
+							<frame x="96" y="48" w="48" h="48" />
+							<frame x="144" y="48" w="48" h="48" />
+							<frame x="192" y="48" w="48" h="48" />
+							<frame x="240" y="48" w="48" h="48" />
+						</moveR>
+						<moveL loop="true" speed="0.2">
+							<frame x="0" y="96" w="48" h="48" />
+							<frame x="48" y="96" w="48" h="48" />
+							<frame x="96" y="96" w="48" h="48" />
+							<frame x="144" y="96" w="48" h="48" />
+							<frame x="192" y="96" w="48" h="48" />
+							<frame x="240" y="96" w="48" h="48" />
+						</moveL>
+						<jumpR loop="true" speed="0.02">
+							<frame x="0" y="144" w="48" h="48" />
+							<frame x="48" y="144" w="48" h="48" />
+						</jumpR>
+						<jumpL loop="true" speed="0.02">
+							<frame x="0" y="192" w="48" h="48" />
+							<frame x="48" y="192" w="48" h="48" />
+						</jumpL>
+						<deathR loop="false" speed="0.05">
+							<frame x="0" y="240" w="48" h="48" />
+							<frame x="48" y="240" w="48" h="48" />
+							<frame x="96" y="240" w="48" h="48" />
+							<frame x="144" y="240" w="48" h="48" />
+							<frame x="192" y="240" w="48" h="48" />
+							<frame x="240" y="240" w="48" h="48" />
+							<frame x="288" y="240" w="48" h="48" />
+							<frame x="336" y="240" w="48" h="48" />
+						</deathR>
+						<deathL loop="false" speed="0.05">
+							<frame x="0" y="288" w="48" h="48" />
+							<frame x="48" y="288" w="48" h="48" />
+							<frame x="96" y="288" w="48" h="48" />
+							<frame x="144" y="288" w="48" h="48" />
+							<frame x="192" y="288" w="48" h="48" />
+							<frame x="240" y="288" w="48" h="48" />
+							<frame x="288" y="288" w="48" h="48" />
+							<frame x="336" y="288" w="48" h="48" />
+						</deathL>
+						<crouch loop="false" speed="0.02">
+							<frame x="0" y="336" w="48" h="48" />
+							<frame x="48" y="336" w="48" h="48" />
+							<frame x="96" y="336" w="48" h="48" />
+						</crouch>
+					</animations>
+				</enemy>
+				<enemy name="Jose" x="15025" y="587" yo="587" xo="15025" w="48" h="38" texture="Assets/Textures/All.png" gravity="true" type="boss" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -461,6 +570,20 @@
 						</deathL>
 					</animations>
 				</enemy>
+			</enemies>
+			<items>
+				<item name="Coinu" type="Coin" x="306" y="471" yo="414" xo="234" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="false" Alive="true" />
+				<item name="botu" type="bot" x="1821" y="805" yo="750" xo="1750" w="48" h="38" texture="Assets/Textures/CorazonLLeno.png" gravity="false" Alive="true" />
+				<item name="Coind" type="Coin" x="9318" y="513" yo="494" xo="9294" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="true" Alive="true" vida="false" />
+				<item name="botd" type="bot" x="12118" y="79" yo="60" xo="12095" w="48" h="38" texture="Assets/Textures/CorazonLLeno.png" gravity="true" Alive="true" vida="true" />
+			</items>
+		</entities>
+	</scene1>
+	<scene2>
+		<map path="Assets/Maps/" name="MapTemplateLevel2.tmx" />
+		<entities>
+			<enemies>
+				
 			</enemies>
 			<items>
 				<item name="Coind" type="Coin" x="200" y="672" yo="200" xo="672" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="true" Alive="true" vida="false" />

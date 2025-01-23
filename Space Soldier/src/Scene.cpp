@@ -327,7 +327,7 @@ void Scene::GotoStart()
 		enemy->SetPosition(enemyPos);
 
 	}
-	/*for (Item* item : itemList) //reiniciar los items
+	for (Item* item : itemList) //reiniciar los items
 	{
 		if (!item) {
 			LOG("Error: Puntero enemigo nulo en itemList.");
@@ -351,7 +351,7 @@ void Scene::GotoStart()
 		Vector2D itemPos(x, y);
 		item->SetPosition(itemPos);
 
-	}*/
+	}
 }
 void Scene::GotoEndLevel1()
 {

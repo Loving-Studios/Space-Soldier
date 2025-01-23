@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="498" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="24" nextobjectid="270">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="498" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="24" nextobjectid="290">
  <properties>
   <property name="Navigation" type="bool" value="true"/>
  </properties>
@@ -40005,6 +40005,14 @@
   <object id="122" x="855.216" y="449.313" width="19.5682" height="32"/>
   <object id="123" x="918.511" y="449.448" width="19.5682" height="32"/>
   <object id="138" x="1972.67" y="418" width="37.6667" height="65"/>
+  <object id="276" x="10382" y="385" width="27" height="59"/>
+  <object id="277" x="10400" y="379" width="17" height="21"/>
+  <object id="278" x="10513" y="289" width="22" height="90"/>
+  <object id="279" x="10533" y="293"/>
+  <object id="280" x="10577" y="220" width="18" height="71"/>
+  <object id="282" x="10598" y="228"/>
+  <object id="288" x="14641" y="376" width="36" height="244"/>
+  <object id="289" x="15350" y="539" width="28" height="75"/>
  </objectgroup>
  <objectgroup id="17" name="SeAcabo">
   <properties>
@@ -40018,6 +40026,14 @@
   <object id="149" x="5148" y="12" width="360" height="50"/>
   <object id="150" x="5107" y="630" width="360" height="64"/>
   <object id="160" x="1053" y="444.667" width="40.5" height="37"/>
+  <object id="270" x="11744" y="236" width="25.3333" height="24"/>
+  <object id="271" x="12332" y="226.667" width="28" height="38.6667"/>
+  <object id="272" x="9318" y="310"/>
+  <object id="273" x="9783" y="309.5"/>
+  <object id="274" x="10248.7" y="437.333"/>
+  <object id="275" x="10754" y="213.333"/>
+  <object id="286" x="15752" y="493" width="32" height="52"/>
+  <object id="287" x="14589" y="347" width="39" height="41"/>
  </objectgroup>
  <objectgroup id="19" name="lados">
   <object id="147" x="3042" y="201" width="25" height="388"/>
