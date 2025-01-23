@@ -7,35 +7,48 @@ by Pablo Sanjose & Víctor González
 - D mover hacia la derecha
 - Space para saltar
 - H Mostrar el Help Menu
-- F1 / F2 empezar desde el inicio del nivel (Hemos dejado implenetada la posibilidad del segundo nivel ya que lo hemos empezado a desarrollar)
-- F3 Empezar desde e inicio del current level
+- F1 Ir al inicio del nivel 1
+- F2 Ir al inicio del nivel 2
+- F3 Empezar desde e inicio del nivel actual
 - F4 Hacer animación de muerte
 - F5 Guardar estado del juego
 - F6 Cargar estado del juego
 - F9 Mostrar los colliders del juego
 - F10 God Mode
-- F11 Capar/descapar los fps a 30 
+- F11 Capar/descapar los fps a 30
+- ESC Menú de Pausa
 
 - ESC cerrar el juego
 
--El GodMode sigue como en la primera entrega, son saltos infinitos ya que por tiempo y preferencia de otras características así como mecánicas hemos priorizado el tiempo en perfeccionar otras cosas.
-
 ### *Implemented Features* 
 
-- Hemos añadido más sonidos al juego, ahora hay: Canción de fondo, sonido al saltar, sonido al morir, sonido al matar enemigo, sonido de pop-up al cargar HelpMenu, sonido de cargar partida, sonido de guardar partida, sonido de checkpoint y sonido de chocar con el item.
-- También está comentado pero no implementado el sonido de andar del PJ, por falta de tiempo y querer priorizar otras cosas del proyecto hemos dejado comentado este apartado ya que nos estaba dando unos problemitas, solo sonada el sonido cuando colisionabas con el suelo pero no constantemente en bucle, es fácil de solucionar y sabemos como hacerlo así que para las siguiente entrega estará.
-- Hemos creado el segundo nivel ya que al principio pensamos que debíamos hacerlo y está en el proyecto, pero no está activo para jugar. 
-- Hemos dejado implementada la textura en el código de lo que será en un futuro la animación de agacharse, aunque de momento no está implementada en el juego.
-- El player tiene su canvas, el enemigo terrestre tiene su canvas y el enemigo volador tiene su canvas.
-- Hemos implementado los métodos de Load and Save, donde guardan el estado del juego y lo puedes cargar. Cuando el juego inicia por primera vez empezarás desde el inicio del nivel pero podrás cargar con el F6 tu estado del juego.
-- Hemos añadido en el config.xml a cada enemigo un atributo de posición original, ya que el load and save sobreescribe posiciones y puede dar problemitas.
-- Hemos implementado dos enemigos terrestres en el nivel.
+- Sonidos: Canción de fondo, sonido al saltar, sonido al morir, sonido al matar enemigo, sonido de pop-up al cargar HelpMenu, sonido de cargar partida, sonido de guardar partida, sonido de checkpoint y sonido de chocar con el item.
+- También está comentado pero no implementado el sonido de andar del PJ, por falta de tiempo y querer priorizar otras cosas del proyecto hemos dejado comentado este apartado ya que nos estaba dando unos problemitas, solo sonaba el sonido cuando colisionabas con el suelo pero constantemente en bucle.
+- Segundo Nivel.
+- Items para recuperar vida.
+- Colleccionables.
+- Pickups.
+- Tp al final del primer nivel para ir al segundo nivel.
+- Boss final con mecánica diferente.
+- GUI en cada estado del juego.
+- Intro screen de 4 segundos
+- Title screen con Botón de Play, Continue, Settings, Credits y Exit.
+- Botón de Continue sólo activo cuando hay una partida en curso.
+- Botón de Settings funcional pero por falta de tiempo no hemos podido implementar las GuiSlider y el GuiCheckBox.
+- Gameplay HUD a medias, con funciones comentadas por fallos y falta de tiempo.
+- Screen pause menu al pulsar el botón ESCAPE.
+- Die screen cuando te quedas sin vidas.
+- End screen / Level completed cuando llegas al final del segundo nivel.
+- Técnica Frustrum culling implementada.
+- Técnica restrict pathfinding search implementada.
+- Tracy.
+- Casi implementada animación de afk, Player agachandose.
+- Hemos implementado los métodos de Load and Save.
+- Enemigos terrestres y voladores en los dos niveles.
 - El enemigo terrestre es capaz de saltar obstáculos.
-- Hemos implementado dos enemigos voladores en el nivel.
 - Cada enemigo tiene su walkable area, su zona de patrullaje y su zona de ataque, cuando te acercas lo suficiente a ellos van a por ti.
 - Para matar a los enemigos debes pisarles por encima.
 - Para que los enemigos te maten debes dejar que te choquen por el lado o arriba.
 - Los paths son visibles desde el estado Debug Mode F9 Show Collisions.
-- Hay varios checkpoints por el mapa, para que cuando el player los atraviese sea como si aprietas el F5 y guardas partida, si te caes al vacío volverás al último checkpoint.
-- Está montado un sistema para los voladores es decir, una cárcel de la que no pueden salir, mientras te persiguen no pueden salir de su zona de patrullaje.
+- Checkpoints.
 - Para los enemigos terrestre si se caen al perseguirte hemos implementado un método para que vuelvan a hacer spawn en su posición de origen.
