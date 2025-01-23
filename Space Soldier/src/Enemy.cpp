@@ -128,10 +128,6 @@ bool Enemy::Update(float dt)
 
 	int distance = abs(enemyTilePos.getX() - playerTilePos.getX()) + abs(enemyTilePos.getY() - playerTilePos.getY()); //calcular distancia entre enemigo y player
 
-
-
-
-
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_L) == KEY_DOWN) {
 		//encontrado = !encontrado;
 	}
@@ -347,8 +343,10 @@ bool Enemy::Update(float dt)
 		pathfinding->DrawPath();
 	}
 
-	pathfinding->ResetPath(tilePos);
-
+	if (distance <= 200)
+	{
+		pathfinding->ResetPath(tilePos);
+	}
 	return true;
 }
 void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
