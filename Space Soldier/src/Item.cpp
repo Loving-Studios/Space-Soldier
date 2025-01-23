@@ -52,7 +52,7 @@ bool Item::Start() {
 	// L08 TODO 7: Assign collider type
 	pbody->ctype = ColliderType::ITEM;
 
-	std::string typeStr = name; 
+	std::string typeStr = parameters.attribute("type").as_string();
 
 	if (typeStr == "Coin") {
 		type = ItemType::MONEDA;
