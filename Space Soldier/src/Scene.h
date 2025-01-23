@@ -16,6 +16,7 @@ enum class SceneState
 	CREDITS,
 	GAMEPLAY,
 	PAUSE_MENU,
+	SETTINGS,
 	DIE_SCREEN,
 	END_SCREEN
 };
@@ -82,6 +83,7 @@ public:
 	SDL_Texture* dieScreenTexture = nullptr;
 	SDL_Texture* winScreenTexture = nullptr;
 	SDL_Texture* creditsScreenTexture = nullptr;
+	SDL_Texture* settingsScreenTexture = nullptr;
 
 	Vector2D GuardarPosicion;
 
@@ -123,25 +125,25 @@ private:
 
 	// Title Screen Main Menu:
 	GuiControlButton* playBt = nullptr;
-	SDL_Rect playBtPos = { 540, 60, 200, 40 };
+	SDL_Rect playBtPos = { 370, 270, 240, 50 };
 	GuiControlButton* continueBt = nullptr;
-	SDL_Rect continueBtPos = { 540, 120, 200, 40 };
+	SDL_Rect continueBtPos = { 675, 270, 240, 50 };
 	GuiControlButton* settingsBt = nullptr;
-	SDL_Rect settingsBtPos = { 540, 180, 200, 40 };
+	SDL_Rect settingsBtPos = { 370, 350, 240, 50 };
 	GuiControlButton* creditsBt = nullptr;
-	SDL_Rect creditsBtPos = { 540, 240, 200, 40 };
+	SDL_Rect creditsBtPos = { 675, 350, 240, 50 };
 	GuiControlButton* exitTitleBt = nullptr;
-	SDL_Rect exitTitleBtPos = { 540, 300, 200, 40 };
+	SDL_Rect exitTitleBtPos = { 1020, 650, 240, 50 };
 	//Settings:
 
 	//Pause Menu:
 	GuiControlButton* resumeBt = nullptr;
-	SDL_Rect resumeBtPos = { 540, 60, 200, 40 };
+	SDL_Rect resumeBtPos = { 540, 200, 240, 50 };
 	GuiControlButton* settingsPauseBt = nullptr;
-	SDL_Rect settingsPauseBtPos = { 540, 120, 200, 40 };
+	SDL_Rect settingsPauseBtPos = { 540, 290, 240, 50 };
 	GuiControlButton* backtoTitleBt = nullptr;
-	SDL_Rect backtoTitleBtPos = { 540, 180, 200, 40 };
+	SDL_Rect backtoTitleBtPos = { 540, 380, 240, 50 };
 	GuiControlButton* exitBt = nullptr;
-	SDL_Rect exitBtPos = { 540, 240, 200, 40 };
+	SDL_Rect exitBtPos = { 540, 470, 240, 50 };
 
 };

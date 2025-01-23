@@ -58,6 +58,3 @@ bool GuiManager::CleanUp()
 
 	return true;
 }
-
-
-
