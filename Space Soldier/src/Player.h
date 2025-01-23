@@ -53,6 +53,7 @@ public:
 	int jumpFxId;
 	int walkFxId;
 	bool muerto;
+	bool pendingtomakeTEPE = false;
 
 
 	// L08 TODO 5: Add physics to the player - declare a Physics body

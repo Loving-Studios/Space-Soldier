@@ -167,6 +167,14 @@ bool Player::Update(float dt)
 
 	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY(), &currentAnimation->GetCurrentFrame());
 	currentAnimation->Update();
+
+	if (pendingtomakeTEPE) {
+		pendingtomakeTEPE = false;
+		if (Engine::GetInstance().scene.get())
+		{
+			Engine::GetInstance().scene.get()->GotoStartLevel2();
+		}
+	}
 	return true;
 
 }
@@ -209,7 +217,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::TEPE:
 		LOG("Collision TP");
 		// Tp al segundo nivel
-		Engine::GetInstance().scene.get()->GotoStartLevel2();
+		pendingtomakeTEPE = true;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");

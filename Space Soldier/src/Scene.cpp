@@ -206,6 +206,10 @@ bool Scene::Update(float dt)
 		}
 		break;
 
+	case SceneState::SETTINGS:
+
+		break;
+
 	case SceneState::DIE_SCREEN:
 		isTitleScreenMusicPlaying = false;
 		if (dieScreenTexture != nullptr)
