@@ -75,24 +75,17 @@ bool Item::Update(float dt)
 	}
 	if (alive == true) { isDead = false; }
 	else { isDead = true; }
-	if (isDead) {
-		//Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY());
-		//Engine::GetInstance().textures.get()->GetSize(texture, texW, texH);
-		// Si esta marcado para eliminacion, elimina el cuerpo fisico
-		if (pendingToDelete && pbody != nullptr) {
-			Engine::GetInstance().physics->DestroyBody(pbody->body);
-			pbody = nullptr;
-		}
-		
-		return true; // Salir temprano si el item ha sido cogido
-	}
+	if (!isDead) {
 		b2Transform pbodyPos = pbody->body->GetTransform();
 		position.setX(METERS_TO_PIXELS(pbodyPos.p.x) - texH / 2);
 		position.setY(METERS_TO_PIXELS(pbodyPos.p.y) - texH / 2);
 		Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY());
+		
+		return true; // Salir temprano si el item ha sido cogido
+	}
+		//Engine::GetInstance().textures.get()->GetSize(texture, texW, texH);
 
-	
-	//Engine::GetInstance().textures.get()->GetSize(texture, texW, texH);
+
 	return true;
 }
 
@@ -108,7 +101,7 @@ void Item::OnCollision(PhysBody* physA, PhysBody* physB)
 			Engine::GetInstance().audio.get()->PlayFx(pickCoinFxId);
 			alive = false;
 			isDead = true;
-			pendingToDelete = true;
+			//pendingToDelete = true;
 		}
 		else if (type == ItemType::CURA) {
 			LOG("---------------------Botiquin-----------------------------------");
@@ -116,13 +109,13 @@ void Item::OnCollision(PhysBody* physA, PhysBody* physB)
 			Engine::GetInstance().audio.get()->PlayFx(pickHealFxId);
 			alive = false;
 			isDead = true;
-			pendingToDelete = true;
+			//pendingToDelete = true;
 		}
 		else if (type == ItemType::BALA) {
 			LOG("---------------------Bala-----------------------------------");
 			alive = false;
 			isDead = true;
-			pendingToDelete = true;
+			//pendingToDelete = true;
 		}
 		break;
 	case ColliderType::UNKNOWN:

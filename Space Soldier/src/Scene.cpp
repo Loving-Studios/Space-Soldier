@@ -39,7 +39,7 @@ bool Scene::Awake()
 	
 	//L08 Create a new item using the entity manager and set the position to (200, 672) to test
 	Item* item = (Item*) Engine::GetInstance().entityManager->CreateEntity(EntityType::ITEM);
-	item->position = Vector2D(200, 672);
+	//item->position = Vector2D(200, 672);
 	
 	for (pugi::xml_node itemNode = configParameters.child("entities").child("items").child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
 	{
@@ -327,7 +327,6 @@ void Scene::GotoStart()
 		enemy->SetPosition(enemyPos);
 
 	}
-
 	/*for (Item* item : itemList) //reiniciar los items
 	{
 		if (!item) {
