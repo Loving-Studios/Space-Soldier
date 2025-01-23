@@ -60,6 +60,9 @@ bool Item::Start() {
 	else if (typeStr == "bot") {
 		type = ItemType::CURA;
 	}
+	else if (typeStr == "Bala") {
+		type = ItemType::BALA; // item para darle municion al pj principal no esta ya en el config por falta de tiempo el personaje no dispara
+	}
 
 	return true;
 }
