@@ -79,7 +79,7 @@ bool Scene::Start()
 	helpMenuTexture = Engine::GetInstance().textures->Load("Assets/Textures/HelpMenu.png");
 
 	introScreenTexture = Engine::GetInstance().textures->Load("Assets/Textures/IntroScreen.png");
-	titleScreenTexture = Engine::GetInstance().textures->Load("Assets/Textures/TitleScreen2.png");
+	titleScreenTexture = Engine::GetInstance().textures->Load("Assets/Textures/TitleScreen.png");
 	pauseMenuTexture = Engine::GetInstance().textures->Load("Assets/Textures/PauseScreen.png");
 	dieScreenTexture = Engine::GetInstance().textures->Load("Assets/Textures/DieScreen.png");
 	winScreenTexture = Engine::GetInstance().textures->Load("Assets/Textures/WinScreen.png");

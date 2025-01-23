@@ -42,7 +42,7 @@ public:
 
 public:
 
-	bool isPicked = false, alive, gravedad;
+	bool alive, gravedad, isDead = false;
 	int pickCoinFxId, pickHealFxId;
 
 private:

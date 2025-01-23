@@ -10,7 +10,7 @@
 #include "Physics.h"
 #include "Map.h"
 
-Item::Item() : Entity(EntityType::ITEM), isPicked(false)
+Item::Item() : Entity(EntityType::ITEM), isDead(false)
 {
 	name = "item";
 }
@@ -30,22 +30,23 @@ bool Item::Start() {
 	texW = parameters.attribute("w").as_int();
 	texH = parameters.attribute("h").as_int();
 	name = parameters.attribute("name").as_string();
-	alive = parameters.attribute("Alive").as_bool();
+	alive = true;
 	gravedad = parameters.attribute("gravity").as_bool();
 
 	pickCoinFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/Faro.wav"); 
 	pickHealFxId = Engine::GetInstance().audio.get()->LoadFx("Assets/Audio/Fx/bot.wav");
 
 		// L08 TODO 4: Add a physics to an item - initialize the physics body
-		Engine::GetInstance().textures.get()->GetSize(texture, texW, texH);
+		//Engine::GetInstance().textures.get()->GetSize(texture, texW, texH);
 		if (gravedad == true) {
 			pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX() + texH / 2, (int)position.getY() + texH / 2 - 500, texH / 2, bodyType::DYNAMIC);
-			pbody->listener = this;
+			
 		}
 		else {
 			pbody = Engine::GetInstance().physics.get()->CreateCircle((int)position.getX() + texH / 2, (int)position.getY() + texH / 2 - 500, texH / 2, bodyType::STATIC);
-			pbody->listener = this;
+			
 		}
+		pbody->listener = this;
 
 
 	// L08 TODO 7: Assign collider type
@@ -66,33 +67,51 @@ bool Item::Start() {
 	return true;
 }
 
-bool Item::Update(float dt)
+bool Item::Update(float dt) 
 {
-	
-
+	if (Engine::GetInstance().scene->GetCurrentState() != SceneState::GAMEPLAY)
+	{
+		return true;
+	}
+	if (alive == true) { isDead = false; }
+	else { isDead = true; }
+	if (isDead) {
+		Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY());
+		// Si esta marcado para eliminacion, elimina el cuerpo fisico
+		if (pendingToDelete && pbody != nullptr) {
+			Engine::GetInstance().physics->DestroyBody(pbody->body);
+			pbody = nullptr;
+		}
+		return true; // Salir temprano si el item ha sido cogido
+	}
+	Engine::GetInstance().render.get()->DrawTexture(texture, (int)position.getX(), (int)position.getY());
 	return true;
 }
 
 void Item::OnCollision(PhysBody* physA, PhysBody* physB)
 {
+	if (isDead) return;
 	switch (physB->ctype)
 	{
 	case ColliderType::PLAYER:
 		LOG("Item Collision Player");
-		if (name == "Coin") {
+		if (type == ItemType::MONEDA) {
 			LOG("---------------------MONEDA-----------------------------------");
 			Engine::GetInstance().audio.get()->PlayFx(pickCoinFxId);
 			alive = false;
-
+			isDead = true;
 		}
-		else if (name == "bot") {
+		else if (type == ItemType::CURA) {
 			LOG("---------------------Botiquin-----------------------------------");
 			((Player*)physB->listener)->recVidas();
 			Engine::GetInstance().audio.get()->PlayFx(pickHealFxId);
 			alive = false;
+			isDead = true;
 		}
-		else if (name == "bala") {
+		else if (type == ItemType::BALA) {
+			LOG("---------------------Bala-----------------------------------");
 			alive = false;
+			isDead = true;
 		}
 		break;
 	case ColliderType::UNKNOWN:
