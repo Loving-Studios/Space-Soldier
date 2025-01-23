@@ -274,6 +274,8 @@ bool Enemy::Update(float dt)
 	}
 }
 	if (type == EnemyType::BOSS) {
+
+		if (vidasB == 0) { Estavivo = false; isDead = true; return true; }
 		if (distance <= 10) {//una vez encontrado el player 
 			patrullando = true;
 		}
@@ -368,9 +370,12 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		Vector2D playerPos = ((Player*)physB->listener)->GetPosition();
 
 		if (playerPos.getY() < position.getY()) {
-			Estavivo = false;
-			isDead = true;
-			currentAnimation = &deathR; // Cambia a deathL si corresponde
+			
+
+			if(type == EnemyType::TERRESTRE){ Estavivo = false; isDead = true; currentAnimation = &deathR; /* Cambia a deathL si corresponde */ }
+			if (type == EnemyType::VOLADOR) { Estavivo = false; isDead = true; currentAnimation = &deathR; /* Cambia a deathL si corresponde */ }
+			if (type == EnemyType::BOSS) { vidasB--;/* Cambia a deathL si corresponde */ }
+			
 			Engine::GetInstance().audio.get()->PlayFx(killMonsterFxId);
 			// Marca para eliminar el cuerpo fisico
 			//pendingToDelete = true;

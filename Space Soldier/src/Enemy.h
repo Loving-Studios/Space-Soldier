@@ -26,7 +26,7 @@ public:
     bool CleanUp();
 
     bool patrullando = true, suelo = false, jump = false, Lado = false;
-    int movimiento = 0, lados = 0;
+    int movimiento = 0, lados = 0, vidasB = 3;
 
     void SetParameters(pugi::xml_node parameters) {
         this->parameters = parameters;
