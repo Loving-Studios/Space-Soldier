@@ -318,9 +318,9 @@
 				</enemy>
 			</enemies>
 			<items>
-				<item name="Coin" x="200" y="900" yo="900" xo="200" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="false" Alive="true" vida="false" />
-				<item name="bot" x="300" y="900" yo="700" xo="2000" w="48" h="48" texture="Assets/Textures/CorazonLLeno.png" gravity="false" Alive="false" vida="true" />
-				<item name="bala" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="false" Alive="true" vida="false" />
+				<item name="Coin" x="200" y="900" yo="900" xo="200" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="false" Alive="true"/>
+				<item name="bot" x="300" y="900" yo="700" xo="2000" w="48" h="38" texture="Assets/Textures/CorazonLLeno.png" gravity="false" Alive="false"/>
+				<item name="bala" x="" y="" w="48" h="38" texture="Assets/Textures/CorazonLLeno.png" gravity="true" Alive="true" />
 			</items>
 		</entities>
 	</scene1>
@@ -466,7 +466,7 @@
 			<items>
 				<item name="Coin" x="200" y="672" yo="200" xo="672" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="true" Alive="true" vida="false" />
 				<item name="bot" x="200" y="672" yo="200" xo="672" w="48" h="38" texture="Assets/Textures/CorazonLLeno.png" gravity="true" Alive="true" vida="true" />
-				<item name="bala" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="false" Alive="true" vida="false" />
+				<item name="bala"  x="" y="" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="true" Alive="true" vida="false" />
 			</items>
 		</entities>
 	</scene2>
