@@ -83,6 +83,7 @@ bool Scene::Start()
 	pauseMenuTexture = Engine::GetInstance().textures->Load("Assets/Textures/PauseScreen.png");
 	dieScreenTexture = Engine::GetInstance().textures->Load("Assets/Textures/DieScreen.png");
 	winScreenTexture = Engine::GetInstance().textures->Load("Assets/Textures/WinScreen.png");
+	creditsScreenTexture = Engine::GetInstance().textures->Load("Assets/Textures/CreditsScreen.png");
 
 	return true;
 }
@@ -120,22 +121,51 @@ bool Scene::Update(float dt)
 	case SceneState::TITLE_SCREEN:
 		if (titleScreenTexture != nullptr)
 		{
-			Engine::GetInstance().render->DrawTexture(titleScreenTexture, 0, 0);
+			if (firsttimeopening == false)
+			{
+				Engine::GetInstance().render->DrawTexture(titleScreenTexture, 0, 0);
+			}
+			else {
+				Engine::GetInstance().render->DrawTexture(titleScreenTexture, player->position.getX() - 400.0f, 0);
+			}
+			//Buttons
+			playBt = (GuiControlButton*)Engine::GetInstance().guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "PLAY", playBtPos, this);
+			TitleButtons.push_back(playBt);
+			continueBt = (GuiControlButton*)Engine::GetInstance().guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "CONTINUE", continueBtPos, this);
+			TitleButtons.push_back(continueBt);
+			settingsBt = (GuiControlButton*)Engine::GetInstance().guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "SETTINGS", settingsBtPos, this);
+			TitleButtons.push_back(settingsBt);
+			creditsBt = (GuiControlButton*)Engine::GetInstance().guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "CREDITS", creditsBtPos, this);
+			TitleButtons.push_back(creditsBt);
+			exitTitleBt = (GuiControlButton*)Engine::GetInstance().guiManager->CreateGuiControl(GuiControlType::BUTTON, 9, "EXIT", exitTitleBtPos, this);
+			TitleButtons.push_back(exitTitleBt);
 			if (!isTitleScreenMusicPlaying)
 			{
 				Engine::GetInstance().audio.get()->PlayMusic("Assets/Audio/Fx/TitleScreenMusic2.ogg", -1);
 				isTitleScreenMusicPlaying = true;
 			}
 		}
+		break;
+
+	case SceneState::CREDITS:
+		if (creditsScreenTexture != nullptr)
+		{
+			if (firsttimeopening == false)
+			{
+				Engine::GetInstance().render->DrawTexture(creditsScreenTexture, 0, 0);
+			}
+			else {
+				Engine::GetInstance().render->DrawTexture(creditsScreenTexture, player->position.getX() - 400.0f, 0);
+			}
+		}
 		if (Engine::GetInstance().input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
-			Engine::GetInstance().audio.get()->StopMusic();
-			isTitleScreenMusicPlaying = false;
-			currentState = SceneState::GAMEPLAY; // Cambiar a gameplayD
+			currentState = SceneState::TITLE_SCREEN;
 		}
 		break;
 
 	case SceneState::GAMEPLAY:
+		firsttimeopening = true;
 		isTitleScreenMusicPlaying = false;
 		//Move camera to the player position
 		Engine::GetInstance().render.get()->camera.x = player->position.getX() * -1.0f + 400.0f;
@@ -173,17 +203,6 @@ bool Scene::Update(float dt)
 			exitBt = (GuiControlButton*)Engine::GetInstance().guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "EXIT", exitBtPos, this);
 			PauseButtons.push_back(exitBt);
 		}
-		if (Engine::GetInstance().input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		{
-			for (auto button : PauseButtons)
-			{
-				if (button != nullptr)
-				{
-					button->state = GuiControlState::DISABLED;
-				}
-			}
-			currentState = SceneState::GAMEPLAY; // Salir del menú de pausa
-		}
 		break;
 
 	case SceneState::DIE_SCREEN:
@@ -217,8 +236,6 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if(Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
-		ret = false;
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) {
 		SaveState();
 		Engine::GetInstance().audio.get()->PlayFx(saveFxId);
@@ -240,8 +257,16 @@ bool Scene::PostUpdate()
 		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_F3) == KEY_DOWN) {
-		GotoStart();
-		Engine::GetInstance().audio.get()->PlayFx(loadFxId);
+		if (player->position.getX() < 8050)
+		{
+			GotoStart();
+			Engine::GetInstance().audio.get()->PlayFx(loadFxId);
+		}
+		else
+		{
+			GotoStartLevel2();
+			Engine::GetInstance().audio.get()->PlayFx(loadFxId);
+		}
 	}
 	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
 		Engine::GetInstance().audio.get()->PlayFx(PopOut);
@@ -327,9 +352,7 @@ void Scene::LoadState()
 		LOG("error loading config.xml", result.description());
 		return;
 	}
-	/*HACER CODIGO PARA DETECTAR EN QUE ESCENA ESTAS Y SUSTITUIRLO POR scene1 ES DECIR METER UNA VARIABLE
-	sceneplaying = name
-	*/
+
 	pugi::xml_node sceneNode = loadFile.child("config").child("scene1");
 
 	//Read XML and restore information
@@ -339,8 +362,7 @@ void Scene::LoadState()
 		sceneNode.child("entities").child("player").attribute("y").as_int());
 	player->SetPosition(playerPos);
 
-	//enemies
-	//mirar si esta vivo o no
+	//Enemies comprobar si está vivo o no
 	for (Enemy* enemy : enemyList)
 	{
 		if (!enemy) {
@@ -416,9 +438,7 @@ void Scene::SaveState()
 		LOG("error loading config.xml", result.description());
 		return;
 	}
-	/*HACER CODIGO PARA DETECTAR EN QUE ESCENA ESTAS Y SUSTITUIRLO POR scene1 ES DECIR METER UNA VARIABLE
-	sceneplaying = name
-	*/
+
 	pugi::xml_node sceneNode = loadFile.child("config").child("scene1");
 
 	//Save info to XML 
@@ -427,8 +447,7 @@ void Scene::SaveState()
 	sceneNode.child("entities").child("player").attribute("x").set_value(player->GetPosition().getX());
 	sceneNode.child("entities").child("player").attribute("y").set_value(player->GetPosition().getY());
 
-	//enemies
-	//guardar si esta vivo o no
+	//Enemies comprobar si está vivo o no
 	for (Enemy* enemy : enemyList)
 	{
 		if (!enemy) {
@@ -554,35 +573,86 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		return false;
 	}
 	LOG("Press Gui Control: %d", control->id);
-	//Aquí hacer un switch con el control->id para saber que boton se ha pulsado y se hace cada caso, segun botones
 	switch (control->id)
 	{
 	case 1:
-
+		//Resume Button
+		for (auto button : PauseButtons)
+		{
+			if (button != nullptr)
+			{
+				button->state = GuiControlState::DISABLED;
+			}
+		}
+		currentState = SceneState::GAMEPLAY;
 		break;
 
 	case 2:
-
+		//Settings Button
 		break;
 
 	case 3:
-
+		//Back to Title Button
+		for (auto button : PauseButtons)
+		{
+			if (button != nullptr)
+			{
+				button->state = GuiControlState::DISABLED;
+			}
+		}
+		currentState = SceneState::TITLE_SCREEN;
 		break;
+	
 	case 4:
+		//Exit Pause Button
 		LOG("Closing application by Exit Button...");
 		exit(0);
 		break;
+	
 	case 5:
+		//Play Button
+		Engine::GetInstance().audio.get()->StopMusic();
+		isTitleScreenMusicPlaying = false;
+		for (auto button : TitleButtons)
+		{
+			if (button != nullptr)
+			{
+				button->state = GuiControlState::DISABLED;
+			}
+		}
+		currentState = SceneState::GAMEPLAY;
 
 	case 6:
-
+		//Continue Button
+		Engine::GetInstance().audio.get()->StopMusic();
+		isTitleScreenMusicPlaying = false;
+		for (auto button : TitleButtons)
+		{
+			if (button != nullptr)
+			{
+				button->state = GuiControlState::DISABLED;
+			}
+		}
+		currentState = SceneState::GAMEPLAY;
+	
 	case 7:
-
+		//SETTINGS
+		break;
 	case 8:
-
+		//Credits Button
+		for (auto button : TitleButtons)
+		{
+			if (button != nullptr)
+			{
+				button->state = GuiControlState::DISABLED;
+			}
+		}
+		currentState = SceneState::CREDITS;
 		break;
 	case 9:
-
+		//Exit Title Button
+		LOG("Closing application by Exit Button...");
+		exit(0);
 		break;
 	case 10:
 
@@ -591,30 +661,6 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 
 		break;
 	case 12:
-
-		break;
-	case 13:
-
-		break;
-	case 14:
-
-		break;
-	case 15:
-
-		break;
-	case 16:
-
-		break;
-	case 17:
-
-		break;
-	case 18:
-
-		break;
-	case 19:
-
-		break;
-	case 20:
 
 		break;
 	}

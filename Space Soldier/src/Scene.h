@@ -13,6 +13,7 @@ enum class SceneState
 {
 	INTRO_SCREEN,
 	TITLE_SCREEN,
+	CREDITS,
 	GAMEPLAY,
 	PAUSE_MENU,
 	DIE_SCREEN,
@@ -80,6 +81,7 @@ public:
 	SDL_Texture* pauseMenuTexture = nullptr;
 	SDL_Texture* dieScreenTexture = nullptr;
 	SDL_Texture* winScreenTexture = nullptr;
+	SDL_Texture* creditsScreenTexture = nullptr;
 
 	Vector2D GuardarPosicion;
 
@@ -106,6 +108,7 @@ private:
 	std::vector<Enemy*> enemyList;
 	std::vector<Item*> itemList;
 	bool once = false;
+	bool firsttimeopening = false;
 	SceneState currentState = SceneState::INTRO_SCREEN;
 	float introTimer = 0.0f;
 
