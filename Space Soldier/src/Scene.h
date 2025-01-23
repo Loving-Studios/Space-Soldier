@@ -84,6 +84,9 @@ public:
 	SDL_Texture* winScreenTexture = nullptr;
 	SDL_Texture* creditsScreenTexture = nullptr;
 	SDL_Texture* settingsScreenTexture = nullptr;
+	SDL_Texture* tresVidasTexture = nullptr;
+	SDL_Texture* dosVidasTexture = nullptr;
+	SDL_Texture* unaVidaTexture = nullptr;
 
 	Vector2D GuardarPosicion;
 
@@ -105,6 +108,7 @@ private:
 
 	//L03: TODO 3b: Declare a Player attribute
 	Player* player;
+	int vidas;
 	Enemy* enemy;
 	Item* item;
 	pugi::xml_document configFile;

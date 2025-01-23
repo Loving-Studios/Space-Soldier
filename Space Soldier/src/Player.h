@@ -40,6 +40,10 @@ public:
 	Vector2D GetPosition();
 
 public:
+	int GetVidas() const { return vidas; }
+
+
+public:
 
 	//Declare player parameters
 	float speed = 5.0f;

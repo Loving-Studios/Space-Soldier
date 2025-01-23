@@ -125,7 +125,6 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 		}
 	}
 
-	LOG("Successfully playing %s", path);
 	return ret;
 }
 
@@ -175,9 +174,8 @@ void Audio::StopMusic()
 	if (!active || music == nullptr)
 		return;
 
-	Mix_HaltMusic(); // Detener la música
-	LOG("Music stopped.");
+	Mix_HaltMusic();
 
-	Mix_FreeMusic(music); // Liberar el recurso de la música
+	Mix_FreeMusic(music);
 	music = nullptr;
 }

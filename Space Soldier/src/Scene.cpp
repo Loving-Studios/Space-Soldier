@@ -85,6 +85,9 @@ bool Scene::Start()
 	winScreenTexture = Engine::GetInstance().textures->Load("Assets/Textures/WinScreen.png");
 	creditsScreenTexture = Engine::GetInstance().textures->Load("Assets/Textures/CreditsScreen.png");
 	settingsScreenTexture = Engine::GetInstance().textures->Load("Assets/Textures/SettingsScreen.png");
+	tresVidasTexture = Engine::GetInstance().textures->Load("Assets/Textures/FullVida.png");
+	dosVidasTexture = Engine::GetInstance().textures->Load("Assets/Textures/2Vidas.png");
+	unaVidaTexture = Engine::GetInstance().textures->Load("Assets/Textures/1Vida.png");
 
 	return true;
 }
@@ -182,6 +185,22 @@ bool Scene::Update(float dt)
 		//Gameplay directions
 		Engine::GetInstance().map->Update(dt);
 		Engine::GetInstance().entityManager->Update(dt);
+
+		vidas = player->GetVidas();
+		switch (vidas)
+		{
+		case 3:
+			Engine::GetInstance().render->DrawTexture(tresVidasTexture, player->position.getX() - 400, 0);
+			break;
+		case 2:
+			Engine::GetInstance().render->DrawTexture(dosVidasTexture, player->position.getX() - 400, 0);
+			break;
+		case 1:
+			Engine::GetInstance().render->DrawTexture(unaVidaTexture, player->position.getX() - 400, 0);
+			break;
+		default:
+			break;
+		}
 
 		if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_H) == KEY_DOWN) {
 			helpMenuVisible = !helpMenuVisible;
@@ -293,9 +312,6 @@ bool Scene::PostUpdate()
 			GotoStartLevel2();
 			Engine::GetInstance().audio.get()->PlayFx(loadFxId);
 		}
-	}
-	if (Engine::GetInstance().input.get()->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
-		Engine::GetInstance().audio.get()->PlayFx(PopOut);
 	}
 	if (helpMenuVisible && helpMenuTexture != nullptr) {
 		int width, height;
@@ -624,7 +640,6 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		LOG("Control is nullptr");
 		return false;
 	}
-	LOG("Press Gui Control: %d", control->id);
 	switch (control->id)
 	{
 	case 1:
@@ -640,7 +655,29 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 		break;
 
 	case 2:
-		//Settings Button
+		//SETTINGS
+		for (auto button : TitleButtons)
+		{
+			if (button != nullptr)
+			{
+				button->state = GuiControlState::DISABLED;
+			}
+		}
+		for (auto button : ContinueButton)
+		{
+			if (button != nullptr)
+			{
+				button->state = GuiControlState::DISABLED;
+			}
+		}
+		for (auto button : PauseButtons)
+		{
+			if (button != nullptr)
+			{
+				button->state = GuiControlState::DISABLED;
+			}
+		}
+		currentState = SceneState::SETTINGS;
 		break;
 
 	case 3:

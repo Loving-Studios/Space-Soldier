@@ -17,7 +17,7 @@
 	<scene1>
 		<map path="Assets/Maps/" name="MapTemplate.tmx" />
 		<entities>
-			<player x="458" y="519" w="48" h="32" vidas="3" texture="Assets/Textures/player/PlayerCanvas.png">
+			<player x="361" y="519" w="48" h="32" vidas="3" texture="Assets/Textures/player/PlayerCanvas.png">
 				<animations>
 					<idle loop="true" speed="0.2">
 						<frame x="0" y="0" w="48" h="48" />
@@ -78,7 +78,7 @@
 				</animations>
 			</player>
 			<enemies>
-				<enemy name="Paco" x="787" y="460" xo="893" yo="420" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+				<enemy name="Paco" x="901" y="428" xo="893" yo="420" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -138,7 +138,7 @@
 						</crouch>
 					</animations>
 				</enemy>
-				<enemy name="Manolo" x="1694" y="460" yo="456" xo="1661" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+				<enemy name="Manolo" x="1955" y="457" yo="456" xo="1661" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -198,7 +198,7 @@
 						</crouch>
 					</animations>
 				</enemy>
-				<enemy name="Rocoso" x="3137" y="547" yo="509" xo="3243" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador" Alive="true">
+				<enemy name="Rocoso" x="3244" y="532" yo="509" xo="3243" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -257,7 +257,7 @@
 						</deathL>
 					</animations>
 				</enemy>
-				<enemy name="Rocoso2" x="5241" y="393" yo="555" xo="5257" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador" Alive="true">
+				<enemy name="Rocoso2" x="5245" y="97" yo="555" xo="5257" w="48" h="38" texture="Assets/Textures/GuardianCanvas.png" gravity="false" type="volador" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -316,7 +316,7 @@
 						</deathL>
 					</animations>
 				</enemy>
-				<enemy name="Carlos" x="11931" y="236" yo="233" xo="12036" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+				<enemy name="Carlos" x="12313" y="236" yo="233" xo="12036" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -376,7 +376,7 @@
 						</crouch>
 					</animations>
 				</enemy>
-				<enemy name="Duki" x="9430" y="300" yo="305" xo="9535" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+				<enemy name="Duki" x="9721" y="300" yo="305" xo="9535" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -436,7 +436,7 @@
 						</crouch>
 					</animations>
 				</enemy>
-				<enemy name="Ernesto" x="10360" y="330" yo="363" xo="10465" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
+				<enemy name="Ernesto" x="10734" y="204" yo="363" xo="10465" w="48" h="38" texture="Assets/Textures/RedCanvas.png" gravity="true" type="terrestre" Alive="true">
 					<animations>
 						<idle loop="true" speed="0.2">
 							<frame x="0" y="0" w="48" h="48" />
@@ -496,7 +496,7 @@
 						</crouch>
 					</animations>
 				</enemy>
-				<enemy name="Jose" x="15041" y="591" yo="587" xo="15025" w="32" h="32" texture="Assets/Textures/All2.png" gravity="true" type="boss" Alive="true">
+				<enemy name="Jose" x="15056" y="591" yo="587" xo="15025" w="32" h="32" texture="Assets/Textures/All2.png" gravity="true" type="boss" Alive="true">
 					<animations>
 						<idle loop="false" speed="0.2">
 							<frame x="0" y="0" w="32" h="32" />
@@ -572,10 +572,10 @@
 				</enemy>
 			</enemies>
 			<items>
-				<item name="Coinu" type="Coin" x="258" y="433" yo="414" xo="234" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="false" Alive="true" />
-				<item name="botu" type="bot" x="1774" y="769" yo="750" xo="1750" w="48" h="38" texture="Assets/Textures/CorazonLLeno.png" gravity="false" Alive="true" />
-				<item name="Coind" type="Coin" x="9292" y="524" yo="494" xo="9294" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="true" Alive="true" vida="false" />
-				<item name="botd" type="bot" x="12118" y="140" yo="60" xo="12095" w="48" h="38" texture="Assets/Textures/CorazonLLeno.png" gravity="true" Alive="true" vida="true" />
+				<item name="Coinu" type="Coin" x="282" y="452" yo="414" xo="234" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="false" Alive="false" />
+				<item name="botu" type="bot" x="1798" y="787" yo="750" xo="1750" w="48" h="38" texture="Assets/Textures/CorazonLLeno.png" gravity="false" Alive="true" />
+				<item name="Coind" type="Coin" x="9316" y="543" yo="494" xo="9294" w="48" h="38" texture="Assets/Textures/goldCoin.png" gravity="true" Alive="true" vida="false" />
+				<item name="botd" type="bot" x="12142" y="158" yo="60" xo="12095" w="48" h="38" texture="Assets/Textures/CorazonLLeno.png" gravity="true" Alive="true" vida="true" />
 			</items>
 		</entities>
 	</scene1>

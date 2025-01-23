@@ -197,7 +197,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
-		LOG("Collision PLATFORM");
 		// Resetea isJumping solo si no esta en GodMode
 		if (!GodMode) isJumping = false;
 		//Engine::GetInstance().audio.get()->PlayFx(walkFxId);
@@ -207,12 +206,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 		break;*/
 	case ColliderType::CHECKPOINT:
-		LOG("Collision CHECKPOINT");
 		Engine::GetInstance().scene.get()->SaveState();
 		Engine::GetInstance().audio.get()->PlayFx(saveFxId);
 		break;
 	case ColliderType::WIN:
-		LOG("Collision WIN SENSOR");
 		// Comprobar si se ha derrotado también al boss final
 		//if (true)
 		//{
@@ -221,12 +218,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		//}
 		break;
 	case ColliderType::TEPE:
-		LOG("Collision TP");
 		// Tp al segundo nivel
 		pendingtomakeTEPE = true;
 		break;
 	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
 		break;
 	default:
 		break;
@@ -238,16 +233,12 @@ void Player::OnCollisionEnd(PhysBody* physA, PhysBody* physB)
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
-		LOG("End Collision PLATFORM");
 		break;
 	case ColliderType::CHECKPOINT:
-		LOG("End Collision CHECKPOINT");
 		break;
 	/*case ColliderType::ITEM:
-		LOG("End Collision ITEM");
 		break;*/
 	case ColliderType::UNKNOWN:
-		LOG("End Collision UNKNOWN");
 		break;
 	default:
 		break;
@@ -260,7 +251,6 @@ void Player::Die() {
 	//actualizar interfaz de vidas
 
 	if(vidas == 0){
-		LOG("Player dies");
 		death = true;
 		currentAnimation = (position.getX() < 0) ? &deathL : &deathR; // Ajustar direccion
 		Engine::GetInstance().scene->SetCurrentState(SceneState::DIE_SCREEN);

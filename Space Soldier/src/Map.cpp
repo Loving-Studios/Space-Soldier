@@ -244,32 +244,22 @@ bool Map::Load(std::string path, std::string fileName)
                 case 3: // SeAcabo
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::FIN;
-                    //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
-                    //std::cout << "CREATED FIN" << std::endl;
                     break;
                 case 4: // SeAcabo
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::LADOS;
-                    //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
-                    //std::cout << "CREATED LADOS" << std::endl;
                     break;
                 case 5: // Carcel
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::CARCEL;
-                    //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
-                    //std::cout << "CREATED Carcel" << std::endl;
                     break;
                 case 6: // WIN CONDITION
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::WIN;
-                    //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
-                    //std::cout << "CREATED Win" << std::endl;
                     break;
                 case 7: // TP TO LEVEL 2
                     rect = Engine::GetInstance().physics.get()->CreateRectangleSensor(x + width / 2, y + height / 2, width, height, STATIC);
                     rect->ctype = ColliderType::TEPE;
-                    //std::cout << "x: " << x << ", y: " << y << ", width: " << width << ", height: " << height << std::endl;
-                    //std::cout << "CREATED Tp" << std::endl;
                     break;
                 default: // Plataformas
                     rect = Engine::GetInstance().physics.get()->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);
@@ -279,33 +269,6 @@ bool Map::Load(std::string path, std::string fileName)
             }
         }
         ret = true;
-
-        // L06: TODO 5: LOG all the data loaded iterate all tilesetsand LOG everything
-        if (ret == true)
-        {
-            LOG("Successfully parsed map XML file :%s", fileName.c_str());
-            LOG("width : %d height : %d", mapData.width, mapData.height);
-            LOG("tile_width : %d tile_height : %d", mapData.tileWidth, mapData.tileHeight);
-
-            LOG("Tilesets----");
-
-            //iterate the tilesets
-            for (const auto& tileset : mapData.tilesets) {
-                LOG("name : %s firstgid : %d", tileset->name.c_str(), tileset->firstGid);
-                LOG("tile width : %d tile height : %d", tileset->tileWidth, tileset->tileHeight);
-                LOG("spacing : %d margin : %d", tileset->spacing, tileset->margin);
-            }
-            			
-            LOG("Layers----");
-
-            for (const auto& layer : mapData.layers) {
-                LOG("id : %d name : %s", layer->id, layer->name.c_str());
-				LOG("Layer width : %d Layer height : %d", layer->width, layer->height);
-            }   
-        }
-        else {
-            LOG("Error while parsing map file: %s", mapPathName.c_str());
-        }
 
         if (mapFileXML) mapFileXML.reset();
 

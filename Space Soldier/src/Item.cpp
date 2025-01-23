@@ -95,16 +95,13 @@ void Item::OnCollision(PhysBody* physA, PhysBody* physB)
 	switch (physB->ctype)
 	{
 	case ColliderType::PLAYER:
-		LOG("Item Collision Player");
 		if (type == ItemType::MONEDA) {
-			LOG("---------------------MONEDA-----------------------------------");
 			Engine::GetInstance().audio.get()->PlayFx(pickCoinFxId);
 			alive = false;
 			isDead = true;
 			//pendingToDelete = true;
 		}
 		else if (type == ItemType::CURA) {
-			LOG("---------------------Botiquin-----------------------------------");
 			((Player*)physB->listener)->recVidas();
 			Engine::GetInstance().audio.get()->PlayFx(pickHealFxId);
 			alive = false;
@@ -113,7 +110,6 @@ void Item::OnCollision(PhysBody* physA, PhysBody* physB)
 		}
 		break;
 	case ColliderType::UNKNOWN:
-		LOG("End Enemy Collision UNKNOWN");
 		break;
 	default:
 		break;
